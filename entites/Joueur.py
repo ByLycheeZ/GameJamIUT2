@@ -40,9 +40,12 @@ class Joueur:
                 self.deplacement[0] -= 1
 
     def maj(self, delta):
-        self.anim_accroupi.ajouter_temps(delta)
+        self.anim_deplacement.ajouter_temps(delta)
         self.rect = self.rect.move(self.vitesse * self.deplacement[0] * delta,
                                    self.vitesse * self.deplacement[1] * delta)
 
     def affichage(self, ecran):
-        ecran.blit(self.sprite, self.rect, self.anim_accroupi.recuperer_image())
+        sous_sprite = self.sprite.subsurface(self.anim_deplacement.recuperer_image())
+        sous_sprite_rect = sous_sprite.get_rect()
+        sous_sprite_rect.x, sous_sprite_rect.y = self.rect.x, self.rect.y
+        ecran.blit(pygame.transform.flip(sous_sprite, self.deplacement[0] < 0, False), sous_sprite_rect)

@@ -1,3 +1,8 @@
+"""
+classe Vecteur pour gerer les deplacements
+"""
+
+
 import math
 
 

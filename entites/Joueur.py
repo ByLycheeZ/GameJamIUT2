@@ -3,6 +3,7 @@ from gestionnaires.Affichage import *
 from gestionnaires.Maj import *
 from gestionnaires.Evenement import *
 from utils.Animation import Animation
+from decorations.Parallax import Parallax
 
 
 class Joueur:
@@ -49,6 +50,8 @@ class Joueur:
         self.anim_active.ajouter_temps(delta)
         self.rect = self.rect.move(self.vitesse * self.deplacement[0] * delta,
                                    self.vitesse * self.deplacement[1] * delta)
+
+        Parallax().deplacement_joueur(self.deplacement[0], delta)
 
     def affichage(self, ecran):
         sous_sprite = self.sprite.subsurface(self.anim_active.recuperer_image())

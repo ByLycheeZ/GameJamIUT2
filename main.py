@@ -5,6 +5,7 @@ from gestionnaires.Evenement import *
 from gestionnaires.Maj import *
 from gestionnaires.Affichage import *
 from entites.Joueur import Joueur
+from decorations.Parallax import Parallax
 
 from utils.Constantes import *
 
@@ -17,6 +18,7 @@ gestionnaire_evenements = Evenement()
 maj = Maj()
 affichage = Affichage()
 
+parallax = Parallax()
 joueur = Joueur()
 
 while 1:

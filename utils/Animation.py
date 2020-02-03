@@ -26,7 +26,5 @@ class Animation:
         if self.__temps >= self.__temps_animation:
             self.__temps -= self.__temps_animation
             self.__image = (self.__image + 1) % self.__nb_images
-
             if self.__image == 0 and not self.__loop:
                 self.__fin = True
-

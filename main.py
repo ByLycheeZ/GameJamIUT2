@@ -4,7 +4,7 @@ import pygame.time as time
 from gestionnaires.Evenement import *
 from gestionnaires.Maj import *
 from gestionnaires.Affichage import *
-from exemple.Balle import Balle
+from entites.Joueur import Joueur
 
 from utils.Constantes import *
 
@@ -17,8 +17,7 @@ gestionnaire_evenements = Evenement()
 maj = Maj()
 affichage = Affichage()
 
-balle = Balle()
-
+joueur = Joueur()
 
 while 1:
     for evenement in pygame.event.get():

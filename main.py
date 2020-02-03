@@ -11,6 +11,9 @@ from utils.Constantes import *
 pygame.init()
 
 ecran = pygame.display.set_mode(TAILLE)
+icon = pygame.image.load("res/icon.png")
+pygame.display.set_caption("Dino Tempest")
+pygame.display.set_icon(icon)
 
 menu = MenuPrincipal(ecran)
 

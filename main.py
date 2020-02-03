@@ -4,7 +4,7 @@ import pygame.time as time
 from gestionnaires.Evenement import *
 from gestionnaires.Maj import *
 from gestionnaires.Affichage import *
-from exemple.Balle import Balle
+from interfaces.MenuPrincipal import MenuPrincipal
 
 from utils.Constantes import *
 
@@ -12,12 +12,12 @@ pygame.init()
 
 ecran = pygame.display.set_mode(TAILLE)
 
+menu = MenuPrincipal(ecran)
+
 clock = time.Clock()
 gestionnaire_evenements = Evenement()
 maj = Maj()
 affichage = Affichage()
-
-balle = Balle()
 
 
 while 1:
@@ -30,6 +30,6 @@ while 1:
     delta = clock.tick(MAX_IPS) / 1000
     maj.maj(delta)
 
-    ecran.fill(FOND)
+    menu.afficher(ecran)
     affichage.maj(ecran)
     pygame.display.flip()

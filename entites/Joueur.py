@@ -4,6 +4,7 @@ from gestionnaires.Maj import *
 from gestionnaires.Evenement import *
 from utils.Animation import Animation
 from decorations.Parallax import Parallax
+from interfaces.Ecran import Ecran
 
 
 class Joueur:
@@ -50,6 +51,10 @@ class Joueur:
         self.anim_active.ajouter_temps(delta)
         self.rect = self.rect.move(self.vitesse * self.deplacement[0] * delta,
                                    self.vitesse * self.deplacement[1] * delta)
+
+        droite = self.rect.left + self.TAILLE_IMAGE[0]
+        if Ecran.get_droite() - droite < 10:
+            Ecran.deplacement(droite - Ecran.largeur + 10, Ecran.y)
 
         Parallax().deplacement_joueur(self.deplacement[0], delta)
 

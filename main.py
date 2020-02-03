@@ -3,9 +3,9 @@ import sys
 import pygame.time as time
 from gestionnaires.Evenement import *
 from gestionnaires.Maj import *
-from gestionnaires.Affichage import *
 from entites.Joueur import Joueur
 from decorations.Parallax import Parallax
+from interfaces.Ecran import Ecran
 
 from utils.Constantes import *
 
@@ -16,7 +16,7 @@ ecran = pygame.display.set_mode(TAILLE)
 clock = time.Clock()
 gestionnaire_evenements = Evenement()
 maj = Maj()
-affichage = Affichage()
+affichage = Ecran(ecran)
 
 parallax = Parallax()
 joueur = Joueur()
@@ -32,5 +32,5 @@ while 1:
     maj.maj(delta)
 
     ecran.fill(FOND)
-    affichage.maj(ecran)
+    affichage.affichage(ecran)
     pygame.display.flip()

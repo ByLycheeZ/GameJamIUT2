@@ -14,6 +14,9 @@ class Animation:
         self.__loop = loop
         self.__fin = False
 
+    """
+    :return pygame.rect Un rectangle permettant de découper l'image selon la partie de l'animation demandée
+    """
     def recuperer_image(self):
         return False if self.__fin else pygame.Rect((self.__x * self.__largeur) + (self.__image * self.__largeur),
                                                     self.__y, self.__largeur, self.__hauteur)

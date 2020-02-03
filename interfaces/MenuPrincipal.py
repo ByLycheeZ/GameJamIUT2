@@ -15,10 +15,15 @@ class MenuPrincipal:
         self.montrer_menu = True
         self.jouer = False
         self.credits = False
+        # self.creditsImg = pygame.image.load("res/credits.png")
 
     def afficher(self, ecran):
-        ecran.blit(self.background, (-490, 0))
-        ecran.blit(self.titre, (80, 60))
-        self.bouton_jouer.afficher(ecran)
-        self.bouton_quitter.afficher(ecran)
-        self.bouton_credits.afficher(ecran)
+        if not self.jouer and not self.credits:
+            ecran.blit(self.background, (-490, 0))
+            ecran.blit(self.titre, (80, 60))
+            self.bouton_jouer.afficher(ecran)
+            self.bouton_quitter.afficher(ecran)
+            self.bouton_credits.afficher(ecran)
+        elif self.credits:
+            ecran.fill((0, 0, 0))
+            # ecran.blit(self.creditsImg, (200, 300))

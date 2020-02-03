@@ -19,6 +19,7 @@ class Joueur:
         self.anim_attaque = Animation(10, 0, Joueur.TAILLE_IMAGE[0], Joueur.TAILLE_IMAGE[1], 3, 0.2)
         self.anim_degat = Animation(13, 0, Joueur.TAILLE_IMAGE[0], Joueur.TAILLE_IMAGE[1], 4, 0.2)
         self.anim_accroupi = Animation(18, 0, Joueur.TAILLE_IMAGE[0], Joueur.TAILLE_IMAGE[1], 6, 0.2)
+        self.anim_active = self.anim_attente
 
         evenement = Evenement()
         evenement.enregistrer(pygame.KEYDOWN, self)
@@ -39,13 +40,18 @@ class Joueur:
             elif evenement.key == pygame.K_d:
                 self.deplacement[0] -= 1
 
+        if self.deplacement[0] != 0 or self.deplacement[1] != 0:
+            self.anim_active = self.anim_deplacement
+        else:
+            self.anim_active = self.anim_attente
+
     def maj(self, delta):
-        self.anim_deplacement.ajouter_temps(delta)
+        self.anim_active.ajouter_temps(delta)
         self.rect = self.rect.move(self.vitesse * self.deplacement[0] * delta,
                                    self.vitesse * self.deplacement[1] * delta)
 
     def affichage(self, ecran):
-        sous_sprite = self.sprite.subsurface(self.anim_deplacement.recuperer_image())
+        sous_sprite = self.sprite.subsurface(self.anim_active.recuperer_image())
         sous_sprite_rect = sous_sprite.get_rect()
         sous_sprite_rect.x, sous_sprite_rect.y = self.rect.x, self.rect.y
         ecran.blit(pygame.transform.flip(sous_sprite, self.deplacement[0] < 0, False), sous_sprite_rect)

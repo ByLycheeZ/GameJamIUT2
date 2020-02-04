@@ -7,6 +7,8 @@ from interfaces.elements.BoutonCommencer import BoutonCommencer
 
 
 class ChoixPersonnages:
+    DECALAGE = 430
+
     class __Dino:
         def __init__(self, nom, coord=(0, 0), selectionne=False):
             self.surface = pygame.image.load(f'res/img/choix-dino-{nom}.png').convert_alpha()
@@ -61,7 +63,7 @@ class ChoixPersonnages:
                     image = dino.surface.subsurface(pygame.Rect(0, 0, 240, 240))
                 else:
                     image = dino.surface_transparent.subsurface(pygame.Rect(0, 0, 240, 240))
-                ecran.blit(image, (250 * n_ieme, 500))
+                ecran.blit(image, (250 * n_ieme, 70 + self.DECALAGE))
                 n_ieme += 1
 
     def evenement(self, evenement):
@@ -70,14 +72,14 @@ class ChoixPersonnages:
                 if (dino.coord[0] + 30 <= pygame.mouse.get_pos()[0] <= dino.coord[0] + 190) \
                         and (dino.coord[1] + 40 <= pygame.mouse.get_pos()[1] <= dino.coord[1] + 210):
                     if not dino.selectionne:
-                        if not self.__selection_joueur_1 == "":
+                        if self.__selection_joueur_1 != "":
                             self.__dinos.get(self.__selection_joueur_1).selectionne = False
                         self.__selection_joueur_1 = couleur
                         dino.selectionne = True
                 elif (dino.coord[0] + 30 <= pygame.mouse.get_pos()[0] <= dino.coord[0] + 190) \
-                        and (dino.coord[1] + 40 + 430 <= pygame.mouse.get_pos()[1] <= dino.coord[1] + 200 + 430):
+                        and (dino.coord[1] + 40 + self.DECALAGE <= pygame.mouse.get_pos()[1] <= dino.coord[1] + 200 + self.DECALAGE):
                     if not dino.selectionne:
-                        if not self.__selection_joueur_2 == "":
+                        if self.__selection_joueur_2 != "":
                             self.__dinos.get(self.__selection_joueur_2).selectionne = False
                         self.__selection_joueur_2 = couleur
                         dino.selectionne = True

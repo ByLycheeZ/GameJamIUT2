@@ -13,6 +13,7 @@ class Joueur:
     def __init__(self):
         self.sprite = pygame.image.load('res/img/dino-jaune.png')
         self.rect = self.sprite.get_rect()
+        self.vies = 5
         self.vitesse = 300
         self.deplacement = [0, 0]
 
@@ -30,6 +31,9 @@ class Joueur:
         Maj().enregistrer(self)
 
     def evenement(self, evenement):
+        if self.vies <= 0:
+            return
+
         if evenement.type == pygame.KEYDOWN:
             if evenement.key == pygame.K_q:
                 self.deplacement[0] -= 1
@@ -48,17 +52,42 @@ class Joueur:
             self.anim_active = self.anim_attente
 
     def maj(self, delta):
+        if self.vies <= 0:
+            return
+
         self.anim_active.ajouter_temps(delta)
         self.rect = self.rect.move(self.vitesse * self.deplacement[0] * delta,
                                    self.vitesse * self.deplacement[1] * delta)
 
+        self.maj_camera()
+        Parallax().deplacement_joueur(self.deplacement[0], delta)
+
+    def maj_camera(self):
         droite = self.rect.left + self.TAILLE_IMAGE[0]
         if Ecran.get_droite() - droite < 10:
             Ecran.deplacement(droite - Ecran.largeur + 10, Ecran.y)
 
-        Parallax().deplacement_joueur(self.deplacement[0], delta)
+        if Ecran.x > droite:
+            self.retirer_vie()
+            print(f'Il reste {self.vies} vie(s)')
+
+    def retirer_vie(self):
+        self.vies -= 1
+        if self.vies > 0:
+            self.revivre()
+        else:
+            self.mourir()
+
+    def revivre(self):
+        self.rect.x = Ecran.x + Ecran.largeur / 2
+
+    def mourir(self):
+        pass
 
     def affichage(self, ecran):
+        if self.vies <= 0:
+            return
+
         sous_sprite = self.sprite.subsurface(self.anim_active.recuperer_image())
         sous_sprite_rect = sous_sprite.get_rect()
         sous_sprite_rect.x, sous_sprite_rect.y = self.rect.x, self.rect.y

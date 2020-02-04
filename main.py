@@ -11,11 +11,11 @@ from utils.Constantes import *
 pygame.init()
 
 ecran = pygame.display.set_mode(TAILLE)
-icon = pygame.image.load("res/icon.png")
 pygame.display.set_caption("Dino Tempest")
+icon = pygame.image.load("res/img/icon2.png")
 pygame.display.set_icon(icon)
 
-menu = MenuPrincipal(ecran)
+menu = MenuPrincipal()
 
 clock = time.Clock()
 gestionnaire_evenements = Evenement()
@@ -33,6 +33,6 @@ while 1:
     delta = clock.tick(MAX_IPS) / 1000
     maj.maj(delta)
 
-    menu.afficher(ecran)
+    menu.affichage(ecran)
     affichage.maj(ecran)
     pygame.display.flip()

@@ -4,6 +4,8 @@ from gestionnaires.Maj import *
 from gestionnaires.Evenement import *
 from utils.Animation import Animation
 from utils.Constantes import *
+from decorations.Parallax import Parallax
+from interfaces.Ecran import Ecran
 
 
 class Joueur:
@@ -30,7 +32,7 @@ class Joueur:
         evenement = Evenement()
         evenement.enregistrer(pygame.KEYDOWN, self)
         evenement.enregistrer(pygame.KEYUP, self)
-        Affichage().enregistrer(self)
+        Affichage().enregistrer(self, 1)
         Maj().enregistrer(self)
 
     def evenement(self, evenement):
@@ -66,6 +68,12 @@ class Joueur:
             self.deplacement[1] = 0
             self.ajout_saut()
 
+        droite = self.rect.left + self.TAILLE_IMAGE[0]
+        if Ecran.get_droite() - droite < 10:
+            Ecran.deplacement(droite - Ecran.largeur + 10, Ecran.y)
+
+        Parallax().deplacement_joueur(self.deplacement[0], delta)
+
     def affichage(self, ecran):
         sous_sprite = self.sprite.subsurface(self.anim_active.recuperer_image())
         sous_sprite_rect = sous_sprite.get_rect()
@@ -83,9 +91,6 @@ class Joueur:
 
     def get_deplacement(self):
         return self.deplacement
-
-    def get_saut(self):
-        return self.saut
 
     def get_nb_saut_restant(self):
         return self.nb_saut_restant

@@ -1,6 +1,7 @@
 import pygame
 
 from gestionnaires.Evenement import Evenement
+from gestionnaires.Jeu import Jeu
 
 from interfaces.elements.Bouton import Bouton
 
@@ -14,9 +15,10 @@ class BoutonCommencer(Bouton):
     def evenement(self, evenement):
         if self._menu.montrer:
             if not self.transparent:
-                if (self._coord[0] <= pygame.mouse.get_pos()[0] <= self._coord[0] + 100) \
+                if (self._coord[0] <= pygame.mouse.get_pos()[0] <= self._coord[0] + 241) \
                         and (self._coord[1] <= pygame.mouse.get_pos()[1] <= self._coord[1] + 30):
-                    print("Commencer")
+                    self._menu.montrer = False
+                    Jeu([self._menu.get_selection_j1(), self._menu.get_selection_j2()])
 
     def affichage(self, ecran):
         nom = self._image

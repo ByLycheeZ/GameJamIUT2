@@ -1,0 +1,4 @@
+Dinosaure : https://arks.itch.io/dino-characters
+Son de mort : https://opengameart.org/content/15-monster-gruntpaindeath-sounds
+Coeurs HUD : https://opengameart.org/content/pixel-hearts
+Son de crash (pour la fin du jeu) : https://opengameart.org/content/crash-collision

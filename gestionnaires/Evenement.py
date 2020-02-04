@@ -3,12 +3,17 @@ class Evenement:
         def __init__(self):
             self.__auditeurs = dict()
 
-        def enregistrer(self, evenement, classe):
+        def enregistrer(self, evenement, objet):
 
             if evenement not in self.__auditeurs.keys():
                 self.__auditeurs[evenement] = list()
 
-            self.__auditeurs[evenement].append(classe)
+            self.__auditeurs[evenement].append(objet)
+
+        def supprimer(self, objet):
+            for evenement in self.__auditeurs.keys():
+                if objet in self.__auditeurs[evenement]:
+                    self.__auditeurs[evenement].remove(objet)
 
         def maj(self, type_evenement, evenement):
             if type_evenement in self.__auditeurs.keys():
@@ -21,8 +26,11 @@ class Evenement:
         if not Evenement.__instance:
             Evenement.__instance = Evenement.__Evenement()
 
-    def enregistrer(self, evenement, classe):
-        Evenement.__instance.enregistrer(evenement, classe)
+    def enregistrer(self, evenement, objet):
+        Evenement.__instance.enregistrer(evenement, objet)
+
+    def supprimer(self, objet):
+        Evenement.__instance.supprimer(objet)
 
     def maj(self, type_evenement, evenement):
         Evenement.__instance.maj(type_evenement, evenement)

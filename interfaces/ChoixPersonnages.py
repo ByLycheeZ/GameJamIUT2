@@ -94,3 +94,9 @@ class ChoixPersonnages:
                 self.__bouton_commencer.transparent = True
                 self.montrer = False
                 self.__menu.montrer = True
+
+    def get_selection_j1(self):
+        return self.__selection_joueur_1
+
+    def get_selection_j2(self):
+        return self.__selection_joueur_2

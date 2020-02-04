@@ -2,10 +2,12 @@ import pygame
 from gestionnaires.Affichage import *
 from gestionnaires.Maj import *
 from gestionnaires.Evenement import *
+from gestionnaires.Sons import Sons
 from utils.Animation import Animation
 from utils.Constantes import *
 from decorations.Parallax import Parallax
 from interfaces.Ecran import Ecran
+from interfaces.hud.HudVie import HudVie
 
 
 class Joueur:
@@ -14,7 +16,9 @@ class Joueur:
     NB_SAUT_MAX = 1
 
     def __init__(self, touches):
+        self.__vies = 5
         self.__sprite = pygame.image.load(self.CHEMIN_SPRITE + 'dino-jaune.png')
+        self.__hud = HudVie(self.__vies, 'jaune')
         self.__rect = self.__sprite.get_rect()
         self.__rect.y = HEIGHT - self.TAILLE_IMAGE[1]
         self.__vitesse = 300
@@ -37,6 +41,9 @@ class Joueur:
         Maj().enregistrer(self)
 
     def evenement(self, evenement):
+        if self.__vies <= 0:
+            return
+
         if evenement.type == pygame.KEYDOWN:
             if evenement.key == self.__touches.get('aller_gauche'):
                 self.__deplacement[0] -= 1
@@ -58,6 +65,9 @@ class Joueur:
             self.__anim_active = self.__anim_attente
 
     def maj(self, delta):
+        if self.__vies <= 0:
+            return
+
         self.__anim_active.ajouter_temps(delta)
         self.__rect = self.__rect.move(self.__vitesse * self.__deplacement[0] * delta,
                                        self.__vitesse * self.__deplacement[1] * delta)
@@ -69,13 +79,36 @@ class Joueur:
             self.__deplacement[1] = 0
             self.ajout_saut()
 
+        self.__maj_camera()
+        Parallax().deplacement_joueur(self.__deplacement[0], delta)
+
+    def __maj_camera(self):
         droite = self.__rect.left + self.TAILLE_IMAGE[0]
         if Ecran.get_droite() - droite < 10:
             Ecran.deplacement(droite - Ecran.largeur + 10, Ecran.y)
 
-        Parallax().deplacement_joueur(self.__deplacement[0], delta)
+        if Ecran.x > droite:
+            self.__retirer_vie()
+
+    def __retirer_vie(self):
+        self.__vies -= 1
+        self.__hud.retirer_pv()
+        Sons().jouer_son('mort')
+        if self.__vies > 0:
+            self.__revivre()
+        else:
+            self.__mourir()
+
+    def __revivre(self):
+        self.__rect.x = Ecran.x + Ecran.largeur / 2
+
+    def __mourir(self):
+        pass
 
     def affichage(self, ecran):
+        if self.__vies <= 0:
+            return
+
         sous_sprite = self.__sprite.subsurface(self.__anim_active.recuperer_image())
         sous_sprite_rect = sous_sprite.get_rect()
         sous_sprite_rect.x, sous_sprite_rect.y = self.__rect.x, self.__rect.y

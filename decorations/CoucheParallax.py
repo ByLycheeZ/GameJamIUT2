@@ -1,6 +1,5 @@
 import pygame
 from gestionnaires.Affichage import *
-from interfaces.Ecran import Ecran
 
 
 class CoucheParallax:
@@ -15,8 +14,8 @@ class CoucheParallax:
         Affichage().enregistrer(self, -nb)
 
     def affichage(self, ecran):
-        ecran.blit(self.__image, (self.__x1 + Ecran.x, 0))
-        ecran.blit(self.__image, (self.__x2 + Ecran.x, 0))
+        ecran.blit_absolu(self.__image, (self.__x1, 0))
+        ecran.blit_absolu(self.__image, (self.__x2, 0))
 
     """
     :param direction La direction dans laquelle le personnage se déplace (1 : droite, -1 : gauche)

@@ -1,6 +1,6 @@
 import pygame
 from gestionnaires.Affichage import Affichage
-from utils.Constantes import COUCHE_HUD, WIDTH, HEIGHT
+from utils.Constantes import COUCHE_HUD, LARGEUR, HAUTEUR
 
 
 class HudVie:
@@ -21,10 +21,10 @@ class HudVie:
 
     def __init__position(self):
         self.__x = self.MARGE_EXTERIEURE if self.__compte % 2 == 0 \
-                   else WIDTH - self.MARGE_EXTERIEURE - self.__max_pv * (self.MARGE_INTERIEURE + self.__coeur.get_width())
+            else LARGEUR - self.MARGE_EXTERIEURE - self.__max_pv * (self.MARGE_INTERIEURE + self.__coeur.get_width())
 
-        self.__y = self.MARGE_EXTERIEURE if self.__compte < 2 \
-                   else HEIGHT - self.MARGE_EXTERIEURE - self.__coeur.get_height()
+        self.__y = self.MARGE_EXTERIEURE if self.__compte < 2 else \
+            HAUTEUR - self.MARGE_EXTERIEURE - self.__coeur.get_height()
 
     def retirer_pv(self):
         self.__pv -= 1

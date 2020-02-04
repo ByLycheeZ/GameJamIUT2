@@ -20,7 +20,7 @@ class Joueur:
         self.__sprite = pygame.image.load(self.CHEMIN_SPRITE + 'dino-jaune.png')
         self.__hud = HudVie(self.__vies, 'jaune')
         self.__rect = self.__sprite.get_rect()
-        self.__rect.y = HEIGHT - self.TAILLE_IMAGE[1]
+        self.__rect.y = HAUTEUR - self.TAILLE_IMAGE[1]
         self.__vitesse = 300
         self.__deplacement = [0, 0]
         self.__velocite_saut, self.vitesse_chute = 2, 4

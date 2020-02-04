@@ -71,7 +71,7 @@ class Bloc:
 
         self.dessiner_partie(direction, 0, self.donnees['debut'])
         for i in range(0, self.taille):
-            self.dessiner_partie(direction, fin_debut + 32 * i, self.donnees['milieu'])
+            self.dessiner_partie(direction, fin_debut + taille_milieu * i, self.donnees['milieu'])
         self.dessiner_partie(direction, fin_milieu, self.donnees['fin'])
 
 

@@ -17,7 +17,7 @@ class Joueur:
         self.rect.y = HEIGHT - self.TAILLE_IMAGE[1]
         self.vitesse = 300
         self.deplacement = [0, 0]
-        self.saut = self.velocite, self.vitesse_chute = 2, 4
+        self.velocite_saut, self.vitesse_chute = 2, 4
         self.nb_saut_restant = 1
 
         self.anim_attente = Animation(0, 0, Joueur.TAILLE_IMAGE[0], Joueur.TAILLE_IMAGE[1], 4, 0.2)
@@ -40,7 +40,7 @@ class Joueur:
             elif evenement.key == pygame.K_d:
                 self.deplacement[0] += 1
             elif evenement.key == pygame.K_SPACE and self.nb_saut_restant > 0:
-                self.deplacement[1] -= self.velocite
+                self.deplacement[1] -= self.velocite_saut
                 self.nb_saut_restant -= 1
 
         else:  # KEYUP
@@ -64,7 +64,7 @@ class Joueur:
         if self.rect.y >= 768 - 120:
             self.rect.y = 768 - 120
             self.deplacement[1] = 0
-            self.ajoutSaut()
+            self.ajout_saut()
 
     def affichage(self, ecran):
         sous_sprite = self.sprite.subsurface(self.anim_active.recuperer_image())
@@ -102,9 +102,12 @@ class Joueur:
     def set_rect(self, rect):
         self.rect = rect
 
-    def set_saut(self, saut):
-        self.saut = saut
+    def set_velocite_saut(self, velocite_saut):
+        self.velocite_saut = velocite_saut
 
-    def ajoutSaut(self, nb=1):
-        if nb <= self.NB_SAUT_MAX and self.nb_saut_restant < self.NB_SAUT_MAX:
-            self.nb_saut_restant += 1
+    def set_vitesse_chute(self, vitesse_chute):
+        self.vitesse_chute = vitesse_chute
+
+    def ajout_saut(self, nb=1):
+        self.nb_saut_restant = min([nb + self.nb_saut_restant, self.NB_SAUT_MAX])
+

@@ -15,6 +15,9 @@ class Sons:
             if musique in self.sons.keys():
                 self.sons[musique].stop()
 
+        def jouer_son(self, son, extension):
+            pygame.mixer.Sound(f'res/sons/sfx/{son}.{extension}').play()
+
     __instance = None
 
     def __init__(self):
@@ -26,3 +29,6 @@ class Sons:
 
     def pause_musique(self, musique):
         self.__instance.arreter_musique(musique)
+
+    def jouer_son(self, son, extension='wav'):
+        self.__instance.jouer_son(son, extension)

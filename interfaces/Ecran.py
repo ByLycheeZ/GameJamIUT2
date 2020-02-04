@@ -36,3 +36,6 @@ class Ecran(pygame.Surface):
     def blit(self, source, dest, area=None, special_flags=0):
         new_dest = (dest[0] - Ecran.x, dest[1] - Ecran.y)
         super(Ecran, self).blit(source, new_dest, area, special_flags)
+
+    def blit_absolu(self, source, dest, area=None, special_flags=0):
+        super(Ecran, self).blit(source, dest, area, special_flags)

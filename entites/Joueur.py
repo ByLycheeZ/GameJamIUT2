@@ -6,6 +6,7 @@ from gestionnaires.Sons import Sons
 from utils.Animation import Animation
 from decorations.Parallax import Parallax
 from interfaces.Ecran import Ecran
+from interfaces.hud.HudVie import HudVie
 
 
 class Joueur:
@@ -15,6 +16,7 @@ class Joueur:
         self.sprite = pygame.image.load('res/img/dino-jaune.png')
         self.rect = self.sprite.get_rect()
         self.__vies = 5
+        self.__hud = HudVie(self.__vies, 'jaune')
         self.vitesse = 300
         self.deplacement = [0, 0]
 
@@ -70,10 +72,10 @@ class Joueur:
 
         if Ecran.x > droite:
             self.retirer_vie()
-            print(f'Il reste {self.__vies} vie(s)')
 
     def retirer_vie(self):
         self.__vies -= 1
+        self.__hud.retirer_pv()
         Sons().jouer_son('mort')
         if self.__vies > 0:
             self.revivre()

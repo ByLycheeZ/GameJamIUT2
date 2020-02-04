@@ -19,7 +19,6 @@ class ChoixPersonnages:
         self.__menu = menu
         self.__selection_joueur_1 = ""
         self.__selection_joueur_2 = ""
-        self.__coord = (100, 100)
         self.__dino_rouge = self.__Dino("rouge", (0, 70))
         self.__dino_bleu = self.__Dino("bleu", (250, 70))
         self.__dino_vert = self.__Dino("vert", (500, 70))
@@ -38,6 +37,9 @@ class ChoixPersonnages:
     def affichage(self, ecran):
         if self.montrer:
             ecran.blit(self.__background, (-490, 0))
+            font = pygame.font.Font("res/fonts/Comfortaa-Bold.ttf", 15)
+            texte = font.render("ESC pour retourner au menu principal", False, (255, 255, 255))
+            ecran.blit(texte, (710, 10))
             n_ieme = 0
             for dino in self.__dinos.values():
                 if self.__selection_joueur_1 == dino.nom:
@@ -57,7 +59,6 @@ class ChoixPersonnages:
             for couleur, dino in self.__dinos.items():
                 if (dino.coord[0] + 30 <= pygame.mouse.get_pos()[0] <= dino.coord[0] + 190) \
                         and (dino.coord[1] + 40 <= pygame.mouse.get_pos()[1] <= dino.coord[1] + 210):
-                    print("test")
                     if not dino.selectionne:
                         if not self.__selection_joueur_1 == "":
                             self.__dinos.get(self.__selection_joueur_1).selectionne = False
@@ -65,7 +66,6 @@ class ChoixPersonnages:
                         dino.selectionne = True
                 elif (dino.coord[0] + 30 <= pygame.mouse.get_pos()[0] <= dino.coord[0] + 190) \
                         and (dino.coord[1] + 40 + 430 <= pygame.mouse.get_pos()[1] <= dino.coord[1] + 200 + 430):
-                    print("test")
                     if not dino.selectionne:
                         if not self.__selection_joueur_2 == "":
                             self.__dinos.get(self.__selection_joueur_2).selectionne = False

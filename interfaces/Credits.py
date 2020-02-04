@@ -25,11 +25,12 @@ class Credits:
                 ecran.blit(texte, (self.__coord[0], self.__coord[1]))
 
     def maj(self, delta):
-        self.__coord = (400, self.__coord[1] - 50 * delta)
-        if self.__coord[1] <= -300:
-            self.montrer = False
-            self.__menu.montrer = True
-            self.__coord = (400, 810)
+        if self.montrer:
+            self.__coord = (400, self.__coord[1] - 50 * delta)
+            if self.__coord[1] <= -300:
+                self.montrer = False
+                self.__menu.montrer = True
+                self.__coord = (400, 810)
 
     def evenement(self, evenement):
         if self.montrer and evenement.key == pygame.K_ESCAPE:

@@ -79,30 +79,30 @@ class Joueur:
             self.__deplacement[1] = 0
             self.ajout_saut()
 
-        self.maj_camera()
+        self.__maj_camera()
         Parallax().deplacement_joueur(self.__deplacement[0], delta)
 
-    def maj_camera(self):
+    def __maj_camera(self):
         droite = self.__rect.left + self.TAILLE_IMAGE[0]
         if Ecran.get_droite() - droite < 10:
             Ecran.deplacement(droite - Ecran.largeur + 10, Ecran.y)
 
         if Ecran.x > droite:
-            self.retirer_vie()
+            self.__retirer_vie()
 
-    def retirer_vie(self):
+    def __retirer_vie(self):
         self.__vies -= 1
         self.__hud.retirer_pv()
         Sons().jouer_son('mort')
         if self.__vies > 0:
-            self.revivre()
+            self.__revivre()
         else:
-            self.mourir()
+            self.__mourir()
 
-    def revivre(self):
+    def __revivre(self):
         self.__rect.x = Ecran.x + Ecran.largeur / 2
 
-    def mourir(self):
+    def __mourir(self):
         pass
 
     def affichage(self, ecran):

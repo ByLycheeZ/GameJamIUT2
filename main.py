@@ -5,6 +5,9 @@ from gestionnaires.Evenement import *
 from gestionnaires.Maj import *
 from gestionnaires.Affichage import *
 from interfaces.MenuPrincipal import MenuPrincipal
+from entites.Joueur import Joueur
+from decorations.Parallax import Parallax
+from interfaces.Ecran import Ecran
 
 from utils.Constantes import *
 
@@ -20,9 +23,11 @@ menu = MenuPrincipal()
 clock = time.Clock()
 gestionnaire_evenements = Evenement()
 maj = Maj()
-affichage = Affichage()
+affichage = Ecran(ecran)
 
-
+parallax = Parallax()
+joueur = Joueur({'aller_gauche': pygame.K_q, 'aller_droite': pygame.K_d, 'sauter': pygame.K_z})
+joueur2 = Joueur({'aller_gauche': pygame.K_LEFT, 'aller_droite': pygame.K_RIGHT, 'sauter': pygame.K_UP})
 while 1:
     for evenement in pygame.event.get():
         if evenement.type == pygame.QUIT:
@@ -35,5 +40,5 @@ while 1:
 
     ecran.fill(FOND)
     menu.affichage(ecran)
-    affichage.maj(ecran)
+    affichage.affichage(ecran)
     pygame.display.flip()

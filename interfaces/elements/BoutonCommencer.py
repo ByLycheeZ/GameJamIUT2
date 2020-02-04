@@ -16,7 +16,7 @@ class BoutonCommencer(Bouton):
         if self._menu.montrer:
             if not self.transparent:
                 if (self._coord[0] <= pygame.mouse.get_pos()[0] <= self._coord[0] + 241) \
-                        and (self._coord[1] <= pygame.mouse.get_pos()[1] <= self._coord[1] + 30):
+                        and (self._coord[1] <= pygame.mouse.get_pos()[1] <= self._coord[1] + 66):
                     self._menu.montrer = False
                     Jeu([self._menu.get_selection_j1(), self._menu.get_selection_j2()])
 

@@ -16,4 +16,5 @@ class BoutonJouer(Bouton):
             self.choisir_personnages()
 
     def choisir_personnages(self):
-        pass
+        self._menu.montrer = False
+        self._menu.choix_personnages.montrer = True

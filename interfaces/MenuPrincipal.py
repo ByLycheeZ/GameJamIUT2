@@ -2,6 +2,7 @@ import pygame
 
 from gestionnaires.Affichage import Affichage
 
+from interfaces.ChoixPersonnages import ChoixPersonnages
 from interfaces.Credits import Credits
 
 from interfaces.elements.BoutonCredits import BoutonCredits
@@ -13,6 +14,7 @@ class MenuPrincipal:
     def __init__(self):
         self.montrer = True
         self.credits = Credits(self)
+        self.choi_personnages = ChoixPersonnages()
         self.__background = pygame.image.load("res/img/accueil-background.png")
         self.__titre = pygame.image.load("res/img/titre.png")
         self.__bouton_jouer = BoutonJouer((350, 400), "bouton-jouer", self)
@@ -27,5 +29,3 @@ class MenuPrincipal:
             self.__bouton_jouer.affichage(ecran)
             self.__bouton_quitter.affichage(ecran)
             self.__bouton_credits.affichage(ecran)
-
-

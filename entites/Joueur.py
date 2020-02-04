@@ -3,7 +3,7 @@ from gestionnaires.Affichage import *
 from gestionnaires.Maj import *
 from gestionnaires.Evenement import *
 from gestionnaires.Sons import Sons
-import gestionnaires.Jeu as jeu
+import gestionnaires.Jeu as Jeu
 from utils.Animation import Animation
 from utils.Constantes import *
 from decorations.Parallax import Parallax
@@ -16,7 +16,10 @@ class Joueur:
     CHEMIN_SPRITE = 'res/img/'
     NB_SAUT_MAX = 1
 
+    __count = 0
+
     def __init__(self, touches, couleur):
+        Joueur.__count += 1
         self.__vies = 5
         self.__sprite = pygame.image.load(f'{self.CHEMIN_SPRITE}dino-{couleur}.png')
         self.__hud = HudVie(self.__vies, couleur)
@@ -69,6 +72,8 @@ class Joueur:
     def maj(self, delta):
         if self.__vies <= 0:
             return
+        elif Joueur.__count == 1:
+            jeu.Jeu().fin(self.__couleur)
 
         self.__anim_active.ajouter_temps(delta)
         self.__rect = self.__rect.move(self.__vitesse * self.__deplacement[0] * delta,
@@ -99,13 +104,10 @@ class Joueur:
         if self.__vies > 0:
             self.__revivre()
         else:
-            self.__mourir()
+            Joueur.__count -= 1
 
     def __revivre(self):
         self.__rect.x = Ecran.x + Ecran.largeur / 2
-
-    def __mourir(self):
-        jeu.Jeu().fin()
 
     def affichage(self, ecran):
         if self.__vies <= 0:

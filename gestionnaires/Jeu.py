@@ -25,6 +25,6 @@ class Jeu:
         if not Jeu.__instance and couleurs_joueurs:
             Jeu.__instance = Jeu.__Jeu(couleurs_joueurs)
 
-    def fin(self):
+    def fin(self, couleur):
         self.__instance.fin()
         Ecran.reinitialiser()

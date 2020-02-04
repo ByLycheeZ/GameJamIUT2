@@ -6,7 +6,6 @@ from gestionnaires.Maj import *
 from interfaces.MenuPrincipal import MenuPrincipal
 from interfaces.Ecran import Ecran
 from utils.Constantes import *
-from gestionnaires.Jeu import Jeu
 
 pygame.init()
 
@@ -21,8 +20,6 @@ clock = time.Clock()
 gestionnaire_evenements = Evenement()
 maj = Maj()
 affichage = Ecran(ecran)
-
-jeu = Jeu(['bleu', 'jaune'])
 
 while 1:
     for evenement in pygame.event.get():

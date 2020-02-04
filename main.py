@@ -1,3 +1,5 @@
+import random
+
 import pygame
 import sys
 import pygame.time as time
@@ -8,6 +10,7 @@ from interfaces.Ecran import Ecran
 from utils.Constantes import *
 
 pygame.init()
+random.seed()
 
 ecran = pygame.display.set_mode(TAILLE)
 pygame.display.set_caption("Dino Tempest")

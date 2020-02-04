@@ -28,7 +28,7 @@ class Credits:
         self.__coord = (400, self.__coord[1] - 50 * delta)
         if self.__coord[1] <= -300:
             self.montrer = False
-            self.__menu.montrer = True
+            #self.__menu.montrer = True
             self.__coord = (400, 810)
 
     def evenement(self, evenement):

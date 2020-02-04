@@ -2,6 +2,7 @@ from entites.Joueur import Joueur
 from decorations.Parallax import Parallax
 from utils.Constantes import TOUCHES
 from interfaces.Ecran import Ecran
+from interfaces.GameOver import GameOver
 
 
 class Jeu:
@@ -28,3 +29,4 @@ class Jeu:
     def fin(self, couleur):
         self.__instance.fin()
         Ecran.reinitialiser()
+        GameOver(couleur)

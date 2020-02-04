@@ -112,9 +112,8 @@ class Joueur:
         if self.__vies <= 0:
             return
 
-        sous_sprite = self.__sprite.subsurface(self.__anim_active.recuperer_image())
-        sous_sprite_rect = sous_sprite.get_rect()
-        sous_sprite_rect.x, sous_sprite_rect.y = self.__rect.x, self.__rect.y
+        sous_sprite, sous_sprite_rect = self.__anim_active.recuperer_sous_sprite(self.__sprite, self.__rect.x,
+                                                                                 self.__rect.y)
         ecran.blit(pygame.transform.flip(sous_sprite, self.__deplacement[0] < 0, False), sous_sprite_rect)
 
     def get_vitesse(self):

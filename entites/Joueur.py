@@ -13,7 +13,7 @@ class Joueur:
     CHEMIN_SPRITE = 'res/img/'
     NB_SAUT_MAX = 1
 
-    def __init__(self):
+    def __init__(self, touches):
         self.__sprite = pygame.image.load(self.CHEMIN_SPRITE + 'dino-jaune.png')
         self.__rect = self.__sprite.get_rect()
         self.__rect.y = HEIGHT - self.TAILLE_IMAGE[1]
@@ -21,6 +21,7 @@ class Joueur:
         self.__deplacement = [0, 0]
         self.__velocite_saut, self.vitesse_chute = 2, 4
         self.__nb_saut_restant = 1
+        self.__touches = touches
 
         self.__anim_attente = Animation(0, 0, Joueur.TAILLE_IMAGE[0], Joueur.TAILLE_IMAGE[1], 4, 0.2)
         self.__anim_deplacement = Animation(4, 0, Joueur.TAILLE_IMAGE[0], Joueur.TAILLE_IMAGE[1], 6, 0.2)
@@ -37,18 +38,18 @@ class Joueur:
 
     def evenement(self, evenement):
         if evenement.type == pygame.KEYDOWN:
-            if evenement.key == pygame.K_q:
+            if evenement.key == self.__touches.get('aller_gauche'):
                 self.__deplacement[0] -= 1
-            elif evenement.key == pygame.K_d:
+            elif evenement.key == self.__touches.get('aller_droite'):
                 self.__deplacement[0] += 1
-            elif evenement.key == pygame.K_SPACE and self.__nb_saut_restant > 0:
+            elif evenement.key == self.__touches.get('sauter') and self.__nb_saut_restant > 0:
                 self.__deplacement[1] -= self.__velocite_saut
                 self.__nb_saut_restant -= 1
 
         else:  # KEYUP
-            if evenement.key == pygame.K_q:
+            if evenement.key == self.__touches.get('aller_gauche'):
                 self.__deplacement[0] += 1
-            elif evenement.key == pygame.K_d:
+            elif evenement.key == self.__touches.get('aller_droite'):
                 self.__deplacement[0] -= 1
 
         if self.__deplacement[0] != 0:

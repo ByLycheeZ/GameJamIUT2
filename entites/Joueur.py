@@ -2,7 +2,7 @@ import pygame
 from gestionnaires.Affichage import *
 from gestionnaires.Maj import *
 from gestionnaires.Evenement import *
-from gestionnaires.Sons import *
+from gestionnaires.Sons import Sons
 from utils.Animation import Animation
 from decorations.Parallax import Parallax
 from interfaces.Ecran import Ecran
@@ -14,7 +14,7 @@ class Joueur:
     def __init__(self):
         self.sprite = pygame.image.load('res/img/dino-jaune.png')
         self.rect = self.sprite.get_rect()
-        self.vies = 5
+        self.__vies = 5
         self.vitesse = 300
         self.deplacement = [0, 0]
 
@@ -32,7 +32,7 @@ class Joueur:
         Maj().enregistrer(self)
 
     def evenement(self, evenement):
-        if self.vies <= 0:
+        if self.__vies <= 0:
             return
 
         if evenement.type == pygame.KEYDOWN:
@@ -53,7 +53,7 @@ class Joueur:
             self.anim_active = self.anim_attente
 
     def maj(self, delta):
-        if self.vies <= 0:
+        if self.__vies <= 0:
             return
 
         self.anim_active.ajouter_temps(delta)
@@ -70,12 +70,12 @@ class Joueur:
 
         if Ecran.x > droite:
             self.retirer_vie()
-            print(f'Il reste {self.vies} vie(s)')
+            print(f'Il reste {self.__vies} vie(s)')
 
     def retirer_vie(self):
-        self.vies -= 1
+        self.__vies -= 1
         Sons().jouer_son('mort')
-        if self.vies > 0:
+        if self.__vies > 0:
             self.revivre()
         else:
             self.mourir()
@@ -87,7 +87,7 @@ class Joueur:
         pass
 
     def affichage(self, ecran):
-        if self.vies <= 0:
+        if self.__vies <= 0:
             return
 
         sous_sprite = self.sprite.subsurface(self.anim_active.recuperer_image())

@@ -73,7 +73,8 @@ class Joueur:
         if self.__vies <= 0:
             return
         elif Joueur.__count == 1:
-            jeu.Jeu().fin(self.__couleur)
+            Jeu.Jeu().fin(self.__couleur)
+            return
 
         self.__anim_active.ajouter_temps(delta)
         self.__rect = self.__rect.move(self.__vitesse * self.__deplacement[0] * delta,

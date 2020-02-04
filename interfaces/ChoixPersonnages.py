@@ -40,9 +40,15 @@ class ChoixPersonnages:
     def affichage(self, ecran):
         if self.montrer:
             ecran.blit(self.__background, (-490, 0))
-            font = pygame.font.Font("res/fonts/Comfortaa-Bold.ttf", 15)
-            texte = font.render("ESC pour retourner au menu principal", False, (255, 255, 255))
-            ecran.blit(texte, (710, 10))
+            image = pygame.image.load("res/img/joueur-1.png")
+            ecran.blit(image, (20, 10))
+            image = pygame.image.load("res/img/joueur-2.png")
+            ecran.blit(image, (35, 435))
+            image = pygame.image.load("res/img/zone-choix.png")
+            ecran.blit(image, (40, 90))
+            ecran.blit(image, (40, 515))
+            image = pygame.image.load("res/img/esc-message.png")
+            ecran.blit(image, (670, 3))
             self.__bouton_commencer.affichage(ecran)
             n_ieme = 0
             for dino in self.__dinos.values():
@@ -75,11 +81,14 @@ class ChoixPersonnages:
                             self.__dinos.get(self.__selection_joueur_2).selectionne = False
                         self.__selection_joueur_2 = couleur
                         dino.selectionne = True
+            if not self.__selection_joueur_1 == "" and not self.__selection_joueur_2 == "":
+                self.__bouton_commencer.transparent = False
         elif evenement.type == pygame.KEYUP:
             if evenement.key == pygame.K_ESCAPE and self.montrer:
                 for dino in self.__dinos.values():
                     dino.selectionne = False
                     self.__selection_joueur_1 = ""
                     self.__selection_joueur_2 = ""
+                self.__bouton_commencer.transparent = True
                 self.montrer = False
                 self.__menu.montrer = True

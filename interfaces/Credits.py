@@ -32,7 +32,7 @@ class Credits:
             self.__coord = (400, 810)
 
     def evenement(self, evenement):
-        if evenement.key == pygame.K_ESCAPE:
+        if self.montrer and evenement.key == pygame.K_ESCAPE:
             self.montrer = False
             self.__menu.montrer = True
             self.__coord = (400, 810)

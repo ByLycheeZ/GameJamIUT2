@@ -5,24 +5,77 @@ from gestionnaires.Evenement import Evenement
 
 
 class ChoixPersonnages:
-    dino_rouge = pygame.image.load("res/img/dino-rouge.png")
-    dino_bleu = pygame.image.load("res/img/dino-bleu.png")
-    dino_vert = pygame.image.load("res/img/dino-vert.png")
-    dino_jaune = pygame.image.load("res/img/dino-jaune.png")
-    dinos = [dino_rouge, dino_bleu, dino_vert, dino_jaune]
-    background = pygame.image.load("res/img/accueil-background.png")
+    class __Dino:
+        def __init__(self, nom, coord=(0, 0), selectionne=False):
+            self.surface = pygame.image.load(f'res/img/choix-dino-{nom}.png').convert_alpha()
+            self.surface_transparent = self.surface.copy()
+            self.surface_transparent.fill((255, 255, 255, 70), None, pygame.BLEND_RGBA_MULT)
+            self.selectionne = selectionne
+            self.coord = coord
+            self.nom = nom
 
-    def __init__(self):
+    def __init__(self, menu):
         self.montrer = False
-        self.__selection = "rouge"
+        self.__menu = menu
+        self.__selection_joueur_1 = ""
+        self.__selection_joueur_2 = ""
         self.__coord = (100, 100)
+        self.__dino_rouge = self.__Dino("rouge", (0, 70))
+        self.__dino_bleu = self.__Dino("bleu", (250, 70))
+        self.__dino_vert = self.__Dino("vert", (500, 70))
+        self.__dino_jaune = self.__Dino("jaune", (750, 70))
+        self.__dinos = {
+            "rouge": self.__dino_rouge,
+            "bleu": self.__dino_bleu,
+            "vert": self.__dino_vert,
+            "jaune": self.__dino_jaune
+        }
+        self.__background = pygame.image.load("res/img/accueil-background.png")
         Affichage().enregistrer(self)
         Evenement().enregistrer(pygame.MOUSEBUTTONUP, self)
+        Evenement().enregistrer(pygame.KEYUP, self)
 
     def affichage(self, ecran):
-        ecran.blit(self.background, (-490, 0))
-        for dino in self.dinos:
-            pass
+        if self.montrer:
+            ecran.blit(self.__background, (-490, 0))
+            n_ieme = 0
+            for dino in self.__dinos.values():
+                if self.__selection_joueur_1 == dino.nom:
+                    image = dino.surface.subsurface(pygame.Rect(0, 0, 240, 240))
+                else:
+                    image = dino.surface_transparent.subsurface(pygame.Rect(0, 0, 240, 240))
+                ecran.blit(image, (250 * n_ieme, 70))
+                if self.__selection_joueur_2 == dino.nom:
+                    image = dino.surface.subsurface(pygame.Rect(0, 0, 240, 240))
+                else:
+                    image = dino.surface_transparent.subsurface(pygame.Rect(0, 0, 240, 240))
+                ecran.blit(image, (250 * n_ieme, 500))
+                n_ieme += 1
 
     def evenement(self, evenement):
-        pass
+        if evenement.type == pygame.MOUSEBUTTONUP:
+            for couleur, dino in self.__dinos.items():
+                if (dino.coord[0] + 30 <= pygame.mouse.get_pos()[0] <= dino.coord[0] + 190) \
+                        and (dino.coord[1] + 40 <= pygame.mouse.get_pos()[1] <= dino.coord[1] + 210):
+                    print("test")
+                    if not dino.selectionne:
+                        if not self.__selection_joueur_1 == "":
+                            self.__dinos.get(self.__selection_joueur_1).selectionne = False
+                        self.__selection_joueur_1 = couleur
+                        dino.selectionne = True
+                elif (dino.coord[0] + 30 <= pygame.mouse.get_pos()[0] <= dino.coord[0] + 190) \
+                        and (dino.coord[1] + 40 + 430 <= pygame.mouse.get_pos()[1] <= dino.coord[1] + 200 + 430):
+                    print("test")
+                    if not dino.selectionne:
+                        if not self.__selection_joueur_2 == "":
+                            self.__dinos.get(self.__selection_joueur_2).selectionne = False
+                        self.__selection_joueur_2 = couleur
+                        dino.selectionne = True
+        elif evenement.type == pygame.KEYUP:
+            if evenement.key == pygame.K_ESCAPE and self.montrer:
+                for dino in self.__dinos.values():
+                    dino.selectionne = False
+                    self.__selection_joueur_1 = ""
+                    self.__selection_joueur_2 = ""
+                self.montrer = False
+                self.__menu.montrer = True

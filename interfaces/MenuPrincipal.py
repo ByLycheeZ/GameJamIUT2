@@ -1,7 +1,6 @@
 import pygame
 
 from gestionnaires.Affichage import Affichage
-from gestionnaires.Evenement import Evenement
 
 from interfaces.ChoixPersonnages import ChoixPersonnages
 from interfaces.Credits import Credits

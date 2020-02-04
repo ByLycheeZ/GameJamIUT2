@@ -3,6 +3,8 @@ import pygame
 from gestionnaires.Affichage import Affichage
 from gestionnaires.Evenement import Evenement
 
+from interfaces.elements.BoutonCommencer import BoutonCommencer
+
 
 class ChoixPersonnages:
     class __Dino:
@@ -17,6 +19,7 @@ class ChoixPersonnages:
     def __init__(self, menu):
         self.montrer = False
         self.__menu = menu
+        self.__bouton_commencer = BoutonCommencer((750, 380), "bouton-commencer", self)
         self.__selection_joueur_1 = ""
         self.__selection_joueur_2 = ""
         self.__dino_rouge = self.__Dino("rouge", (0, 70))
@@ -40,6 +43,7 @@ class ChoixPersonnages:
             font = pygame.font.Font("res/fonts/Comfortaa-Bold.ttf", 15)
             texte = font.render("ESC pour retourner au menu principal", False, (255, 255, 255))
             ecran.blit(texte, (710, 10))
+            self.__bouton_commencer.affichage(ecran)
             n_ieme = 0
             for dino in self.__dinos.values():
                 if self.__selection_joueur_1 == dino.nom:

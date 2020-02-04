@@ -8,7 +8,7 @@ class Credits:
     def __init__(self, menu):
         self.montrer = False
         self.textes = []
-        self.coord = (400, 710)
+        self.coord = (400, 810)
         self.menu = menu
         Affichage().enregistrer(self)
         Maj().enregistrer(self)
@@ -23,7 +23,8 @@ class Credits:
                 ecran.blit(texte, (self.coord[0], self.coord[1]))
 
     def maj(self, delta):
-        self.coord = (400, self.coord[1] - 100 * delta)
+        self.coord = (400, self.coord[1] - 50 * delta)
         if self.coord[1] <= -300:
             self.montrer = False
             self.menu.montrer = True
+            self.coord = (400, 810)

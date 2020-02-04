@@ -33,6 +33,7 @@ while 1:
     delta = clock.tick(MAX_IPS) / 1000
     maj.maj(delta)
 
+    ecran.fill(FOND)
     menu.affichage(ecran)
     affichage.maj(ecran)
     pygame.display.flip()

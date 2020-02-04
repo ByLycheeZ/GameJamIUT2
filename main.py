@@ -19,8 +19,8 @@ maj = Maj()
 affichage = Ecran(ecran)
 
 parallax = Parallax()
-joueur = Joueur()
-
+joueur = Joueur({'aller_gauche': pygame.K_q, 'aller_droite': pygame.K_d, 'sauter': pygame.K_z})
+joueur2 = Joueur({'aller_gauche': pygame.K_LEFT, 'aller_droite': pygame.K_RIGHT, 'sauter': pygame.K_UP})
 while 1:
     for evenement in pygame.event.get():
         if evenement.type == pygame.QUIT:

@@ -39,3 +39,6 @@ class HudVie:
                 ecran.blit_absolu(self.__coeur, (x, self.__y))
             else:
                 ecran.blit_absolu(self.__coeur_vide, (x, self.__y))
+
+    def fin(self):
+        Affichage().supprimer(self)

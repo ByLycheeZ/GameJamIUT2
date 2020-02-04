@@ -3,6 +3,7 @@ from gestionnaires.Affichage import *
 from gestionnaires.Maj import *
 from gestionnaires.Evenement import *
 from gestionnaires.Sons import Sons
+import gestionnaires.Jeu as jeu
 from utils.Animation import Animation
 from utils.Constantes import *
 from decorations.Parallax import Parallax
@@ -15,10 +16,11 @@ class Joueur:
     CHEMIN_SPRITE = 'res/img/'
     NB_SAUT_MAX = 1
 
-    def __init__(self, touches):
+    def __init__(self, touches, couleur):
         self.__vies = 5
-        self.__sprite = pygame.image.load(self.CHEMIN_SPRITE + 'dino-jaune.png')
-        self.__hud = HudVie(self.__vies, 'jaune')
+        self.__sprite = pygame.image.load(f'{self.CHEMIN_SPRITE}dino-{couleur}.png')
+        self.__hud = HudVie(self.__vies, couleur)
+        self.__couleur = couleur
         self.__rect = self.__sprite.get_rect()
         self.__rect.y = HAUTEUR - self.TAILLE_IMAGE[1]
         self.__vitesse = 300
@@ -103,7 +105,7 @@ class Joueur:
         self.__rect.x = Ecran.x + Ecran.largeur / 2
 
     def __mourir(self):
-        pass
+        jeu.Jeu().fin()
 
     def affichage(self, ecran):
         if self.__vies <= 0:
@@ -149,4 +151,10 @@ class Joueur:
 
     def ajout_saut(self, nb=1):
         self.__nb_saut_restant = min([nb + self.__nb_saut_restant, self.NB_SAUT_MAX])
+
+    def fin(self):
+        self.__hud.fin()
+        Evenement().supprimer(self)
+        Affichage().supprimer(self)
+        Maj().supprimer(self)
 

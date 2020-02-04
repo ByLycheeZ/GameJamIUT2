@@ -3,35 +3,38 @@ from gestionnaires.Affichage import *
 from gestionnaires.Maj import *
 from gestionnaires.Evenement import *
 from gestionnaires.Sons import Sons
+import gestionnaires.Jeu as Jeu
 from utils.Animation import Animation
-from utils.Constantes import *
+from utils.Constantes import CHEMIN_SPRITE, HAUTEUR, TAILLE_PERSO
 from decorations.Parallax import Parallax
 from interfaces.Ecran import Ecran
 from interfaces.hud.HudVie import HudVie
 
 
 class Joueur:
-    TAILLE_IMAGE = [120, 120]
-    CHEMIN_SPRITE = 'res/img/'
     NB_SAUT_MAX = 1
 
-    def __init__(self, touches):
+    __count = 0
+
+    def __init__(self, touches, couleur):
+        Joueur.__count += 1
         self.__vies = 5
-        self.__sprite = pygame.image.load(self.CHEMIN_SPRITE + 'dino-jaune.png')
-        self.__hud = HudVie(self.__vies, 'jaune')
+        self.__sprite = pygame.image.load(f'{CHEMIN_SPRITE}dino-{couleur}.png')
+        self.__hud = HudVie(self.__vies, couleur)
+        self.__couleur = couleur
         self.__rect = self.__sprite.get_rect()
-        self.__rect.y = HAUTEUR - self.TAILLE_IMAGE[1]
+        self.__rect.y = HAUTEUR - TAILLE_PERSO[1]
         self.__vitesse = 300
         self.__deplacement = [0, 0]
         self.__velocite_saut, self.vitesse_chute = 2, 4
         self.__nb_saut_restant = 1
         self.__touches = touches
 
-        self.__anim_attente = Animation(0, 0, Joueur.TAILLE_IMAGE[0], Joueur.TAILLE_IMAGE[1], 4, 0.2)
-        self.__anim_deplacement = Animation(4, 0, Joueur.TAILLE_IMAGE[0], Joueur.TAILLE_IMAGE[1], 6, 0.2)
-        self.__anim_attaque = Animation(10, 0, Joueur.TAILLE_IMAGE[0], Joueur.TAILLE_IMAGE[1], 3, 0.2)
-        self.__anim_degat = Animation(13, 0, Joueur.TAILLE_IMAGE[0], Joueur.TAILLE_IMAGE[1], 4, 0.2)
-        self.__anim_accroupi = Animation(18, 0, Joueur.TAILLE_IMAGE[0], Joueur.TAILLE_IMAGE[1], 6, 0.2)
+        self.__anim_attente = Animation(0, 0, TAILLE_PERSO[0], TAILLE_PERSO[1], 4, 0.2)
+        self.__anim_deplacement = Animation(4, 0, TAILLE_PERSO[0], TAILLE_PERSO[1], 6, 0.2)
+        self.__anim_attaque = Animation(10, 0, TAILLE_PERSO[0], TAILLE_PERSO[1], 3, 0.2)
+        self.__anim_degat = Animation(13, 0, TAILLE_PERSO[0], TAILLE_PERSO[1], 4, 0.2)
+        self.__anim_accroupi = Animation(18, 0, TAILLE_PERSO[0], TAILLE_PERSO[1], 6, 0.2)
         self.__anim_active = self.__anim_attente
 
         evenement = Evenement()
@@ -67,6 +70,9 @@ class Joueur:
     def maj(self, delta):
         if self.__vies <= 0:
             return
+        elif Joueur.__count == 1:
+            Jeu.Jeu().fin(self.__couleur)
+            return
 
         self.__anim_active.ajouter_temps(delta)
         self.__rect = self.__rect.move(self.__vitesse * self.__deplacement[0] * delta,
@@ -82,7 +88,7 @@ class Joueur:
         self.__maj_camera(delta)
 
     def __maj_camera(self, delta):
-        droite = self.__rect.left + self.TAILLE_IMAGE[0]
+        droite = self.__rect.left + TAILLE_PERSO[0]
         if Ecran.get_droite() - droite < 10:
             Ecran.deplacement(droite - Ecran.largeur + 10, Ecran.y)
             Parallax().deplacement_joueur(self.__deplacement[0], delta)
@@ -97,21 +103,17 @@ class Joueur:
         if self.__vies > 0:
             self.__revivre()
         else:
-            self.__mourir()
+            Joueur.__count -= 1
 
     def __revivre(self):
         self.__rect.x = Ecran.x + Ecran.largeur / 2
-
-    def __mourir(self):
-        pass
 
     def affichage(self, ecran):
         if self.__vies <= 0:
             return
 
-        sous_sprite = self.__sprite.subsurface(self.__anim_active.recuperer_image())
-        sous_sprite_rect = sous_sprite.get_rect()
-        sous_sprite_rect.x, sous_sprite_rect.y = self.__rect.x, self.__rect.y
+        sous_sprite, sous_sprite_rect = self.__anim_active.recuperer_sous_sprite(self.__sprite, self.__rect.x,
+                                                                                 self.__rect.y)
         ecran.blit(pygame.transform.flip(sous_sprite, self.__deplacement[0] < 0, False), sous_sprite_rect)
 
     def get_vitesse(self):
@@ -136,7 +138,7 @@ class Joueur:
         self.__vitesse = vitesse
 
     def set_sprite(self, nom_fichier):
-        self.__sprite = pygame.image.load(self.CHEMIN_SPRITE + nom_fichier)
+        self.__sprite = pygame.image.load(CHEMIN_SPRITE + nom_fichier)
 
     def set_rect(self, rect):
         self.__rect = rect
@@ -149,4 +151,10 @@ class Joueur:
 
     def ajout_saut(self, nb=1):
         self.__nb_saut_restant = min([nb + self.__nb_saut_restant, self.NB_SAUT_MAX])
+
+    def fin(self):
+        self.__hud.fin()
+        Evenement().supprimer(self)
+        Affichage().supprimer(self)
+        Maj().supprimer(self)
 

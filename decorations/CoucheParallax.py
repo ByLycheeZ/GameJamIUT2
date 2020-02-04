@@ -12,7 +12,7 @@ class CoucheParallax:
         self.__x1 = 0
         self.__x2 = self.__image.get_width()
 
-        Affichage().enregistrer(self)
+        Affichage().enregistrer(self, -nb)
 
     def affichage(self, ecran):
         ecran.blit(self.__image, (self.__x1 + Ecran.x, 0))

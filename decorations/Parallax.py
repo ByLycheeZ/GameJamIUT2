@@ -6,7 +6,7 @@ class Parallax:
         def __init__(self):
             self.parallax = list()
 
-            for i in range(10, 2, -1):
+            for i in range(2, 10):
                 self.parallax.append(CoucheParallax(i, 250 - 20 * i, 1.0))
 
             # self.parallax.append(CoucheParallax(1, 20, 0.7))

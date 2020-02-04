@@ -79,13 +79,13 @@ class Joueur:
             self.__deplacement[1] = 0
             self.ajout_saut()
 
-        self.__maj_camera()
-        Parallax().deplacement_joueur(self.__deplacement[0], delta)
+        self.__maj_camera(delta)
 
-    def __maj_camera(self):
+    def __maj_camera(self, delta):
         droite = self.__rect.left + self.TAILLE_IMAGE[0]
         if Ecran.get_droite() - droite < 10:
             Ecran.deplacement(droite - Ecran.largeur + 10, Ecran.y)
+            Parallax().deplacement_joueur(self.__deplacement[0], delta)
 
         if Ecran.x > droite:
             self.__retirer_vie()

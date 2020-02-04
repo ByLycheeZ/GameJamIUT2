@@ -6,6 +6,7 @@ from gestionnaires.Maj import *
 from gestionnaires.Affichage import *
 from interfaces.MenuPrincipal import MenuPrincipal
 from entites.Joueur import Joueur
+from entites.Tornade import Tornade
 from decorations.Parallax import Parallax
 from interfaces.Ecran import Ecran
 
@@ -28,6 +29,8 @@ affichage = Ecran(ecran)
 parallax = Parallax()
 joueur = Joueur({'aller_gauche': pygame.K_q, 'aller_droite': pygame.K_d, 'sauter': pygame.K_z})
 joueur2 = Joueur({'aller_gauche': pygame.K_LEFT, 'aller_droite': pygame.K_RIGHT, 'sauter': pygame.K_UP})
+tornade = Tornade()
+
 while 1:
     for evenement in pygame.event.get():
         if evenement.type == pygame.QUIT:

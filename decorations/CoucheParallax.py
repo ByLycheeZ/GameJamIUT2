@@ -33,3 +33,6 @@ class CoucheParallax:
         elif x > largeur:
             x -= 2 * largeur
         return x
+
+    def fin(self):
+        Affichage().supprimer(self)

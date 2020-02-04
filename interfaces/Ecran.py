@@ -28,6 +28,10 @@ class Ecran(pygame.Surface):
     def get_bas():
         return Ecran.y + Ecran.hauteur
 
+    @staticmethod
+    def reinitialiser():
+        Ecran.x, Ecran.y = 0, 0
+
     def affichage(self, ecran):
         self.fill(FOND)
         self.__affichage.maj(self)

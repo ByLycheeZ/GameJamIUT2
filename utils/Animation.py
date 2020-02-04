@@ -28,3 +28,9 @@ class Animation:
             self.__image = (self.__image + 1) % self.__nb_images
             if self.__image == 0 and not self.__loop:
                 self.__fin = True
+
+    def recuperer_sous_sprite(self, sprite, x, y):
+        sous_sprite = sprite.subsurface(self.recuperer_image())
+        sous_sprite_rect = sous_sprite.get_rect()
+        sous_sprite_rect.x, sous_sprite_rect.y = x, y
+        return sous_sprite, sous_sprite_rect

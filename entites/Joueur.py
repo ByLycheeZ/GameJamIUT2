@@ -26,7 +26,7 @@ class Joueur:
         evenement = Evenement()
         evenement.enregistrer(pygame.KEYDOWN, self)
         evenement.enregistrer(pygame.KEYUP, self)
-        Affichage().enregistrer(self)
+        Affichage().enregistrer(self, 1)
         Maj().enregistrer(self)
 
     def evenement(self, evenement):

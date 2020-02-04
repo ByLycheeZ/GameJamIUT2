@@ -2,6 +2,7 @@ import pygame
 from gestionnaires.Affichage import *
 from gestionnaires.Maj import *
 from gestionnaires.Evenement import *
+from gestionnaires.Sons import *
 from utils.Animation import Animation
 from decorations.Parallax import Parallax
 from interfaces.Ecran import Ecran
@@ -73,6 +74,7 @@ class Joueur:
 
     def retirer_vie(self):
         self.vies -= 1
+        Sons().jouer_son('mort')
         if self.vies > 0:
             self.revivre()
         else:

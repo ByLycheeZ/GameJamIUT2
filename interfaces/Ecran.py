@@ -1,5 +1,6 @@
 import pygame
 from gestionnaires.Affichage import *
+from utils.Constantes import FOND
 
 
 class Ecran(pygame.Surface):
@@ -28,6 +29,7 @@ class Ecran(pygame.Surface):
         return Ecran.y + Ecran.hauteur
 
     def affichage(self, ecran):
+        self.fill(FOND)
         self.__affichage.maj(self)
         ecran.blit(self, (0, 0))
 

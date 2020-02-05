@@ -81,3 +81,6 @@ class Bloc:
 
     def set_y(self, y):
         self.__y = y
+
+    def get_largeur(self):
+        return self.__dessin.get_width()

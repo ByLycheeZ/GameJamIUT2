@@ -12,11 +12,17 @@ class Plateforme:
 
     def __init__(self, donnees, x, y, taille):
         self.__blocs = []
+        self.__x_max = 0
         for bloc in donnees:
-            self.__blocs.append(Plateforme.__Elem(bloc['source'], bloc['x'] + x, bloc['y'] + y, taille))
+            elem = Plateforme.__Elem(bloc['source'], bloc['x'] + x, bloc['y'] + y, taille)
+            self.__blocs.append(elem)
+            self.__x_max = max([self.__x_max, elem.x + elem.bloc.get_largeur()])
 
     def affichage(self, ecran, x, y):
         for b in self.__blocs:
             b.bloc.set_x(x + b.x)
             b.bloc.set_y(y + b.y)
             b.bloc.affichage(ecran)
+
+    def get_x_max(self):
+        return self.__x_max

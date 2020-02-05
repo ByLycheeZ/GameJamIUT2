@@ -14,10 +14,17 @@ class Chemin:
         self.__donnees = json.load(fichier_json)
 
         self.__plateformes = []
+        self.__x_max = 0
         for plateforme in self.__donnees['disposition']:
-            self.__plateformes.append(Chemin.__Elem(self.__donnees['plateformes'][plateforme['plateforme']],
-                                                    plateforme['x'], plateforme['y'], plateforme['taille']))
+            elem = Chemin.__Elem(self.__donnees['plateformes'][plateforme['plateforme']],
+                                 plateforme['x'], plateforme['y'], plateforme['taille'])
+
+            self.__plateformes.append(elem)
+            self.__x_max = max(self.__x_max, elem.plateforme.get_x_max())
 
     def affichage(self, ecran, x, y):
         for p in self.__plateformes:
             p.plateforme.affichage(ecran, x, y)
+
+    def get_x_max(self):
+        return self.__x_max

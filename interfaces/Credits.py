@@ -29,6 +29,9 @@ class Credits:
                 image = pygame.image.load("res/img/interfaces/credits/credits.png")
             elif self.sources and not self.equipe:
                 image = pygame.image.load("res/img/interfaces/credits/images-sons.png")
+                font = pygame.font.Font("res/fonts/Comfortaa-Bold.ttf", 30)
+                texte = font.render("Equipe", True, (26, 188, 156))
+                ecran.blit(texte, (10, 730))
             else:
                 image = pygame.image.load("res/img/interfaces/fin/fin-jeu.png")
             ecran.blit(image, (0, 0))

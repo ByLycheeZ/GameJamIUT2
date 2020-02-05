@@ -1,6 +1,9 @@
+import pygame
 from entites.Joueur import Joueur
 from decorations.Parallax import Parallax
 from gestionnaires.Carte import Carte
+from gestionnaires.Evenement import Evenement
+from interfaces.Pause import Pause
 from utils.Constantes import TOUCHES
 from interfaces.Ecran import Ecran
 from interfaces.GameOver import GameOver
@@ -17,6 +20,9 @@ class Jeu:
             Maj().enregistrer(self)
             self.__parallax = Parallax()
             self.__carte = Carte()
+
+            Evenement().enregistrer(pygame.KEYUP, self)
+            self.__pause = Pause(self)
 
         def fin(self):
             for joueur in self.__joueurs:
@@ -37,6 +43,11 @@ class Jeu:
                 joueur.set_rect(joueur.get_rect().move(joueur.get_vitesse() * joueur.get_deplacement()[0] * delta * mouvement[0],
                                                        joueur.get_vitesse() * joueur.get_deplacement()[1] * delta * mouvement[1]))
 
+        def evenement(self, evenement):
+            if evenement.key == pygame.K_p:
+                self.__pause.montrer = not self.__pause.montrer
+            elif evenement.key == pygame.K_ESCAPE and self.__pause.montrer:
+                self.__pause.montrer = False
 
     __instance = None
     __konami = False

@@ -42,7 +42,7 @@ class Reglement:
                 font.render("Evitez les obstacles et courez, la caméra se déplace en fonction du joueur en première",
                             True, self.DESCRIPTION), (50, 214))
             ecran.blit(
-                font.render("position. Si vous sortez de l'écran (à gauche) vous perdez une vie et réapparessez au",
+                font.render("position. Si vous sortez de l'écran (à gauche) vous perdez une vie et réapparaissez au",
                             True, self.DESCRIPTION), (50, 241))
             ecran.blit(font.render("centre de l'écran. Vous ne possédez que", True, self.DESCRIPTION), (50, 268))
             ecran.blit(font.render("5 vies", True, (231, 76, 60)), (485, 268))

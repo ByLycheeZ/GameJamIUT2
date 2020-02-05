@@ -8,5 +8,5 @@ class Bouton:
         self._image = image
 
     def affichage(self, ecran):
-        image = pygame.image.load(f'res/img/{self._image}.png')
+        image = pygame.image.load(f'res/img/interfaces/accueil/{self._image}.png')
         ecran.blit(image, self._coord)

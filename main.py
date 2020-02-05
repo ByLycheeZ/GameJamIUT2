@@ -14,7 +14,7 @@ random.seed()
 
 ecran = pygame.display.set_mode(TAILLE)
 pygame.display.set_caption("Dino Tempest")
-icon = pygame.image.load("res/img/icon2.png")
+icon = pygame.image.load("res/img/fenetre/icon2.png")
 pygame.display.set_icon(icon)
 
 menu = MenuPrincipal()

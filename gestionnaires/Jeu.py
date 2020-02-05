@@ -1,4 +1,5 @@
 from entites.Joueur import Joueur
+from entites.JoueurTornade import JoueurTornade
 from decorations.Parallax import Parallax
 from utils.Constantes import TOUCHES
 from interfaces.Ecran import Ecran
@@ -10,7 +11,7 @@ class Jeu:
         def __init__(self, couleurs_joueurs):
             self.__joueurs = []
             for i in range(0, len(couleurs_joueurs)):
-                self.__joueurs.append(Joueur(TOUCHES[i], couleurs_joueurs[i]))
+                self.__joueurs.append(JoueurTornade(TOUCHES[i], couleurs_joueurs[i]))
 
             self.__parallax = Parallax()
 

@@ -21,14 +21,12 @@ class Joueur:
         self.__vies = 5
         self.__sprite = pygame.image.load(f'{CHEMIN_SPRITE}dino-{couleur}.png')
         self.__hud = HudVie(self.__vies, couleur)
-        self.__couleur = couleur
         self.__rect = self.__sprite.get_rect()
         self.__rect.y = HAUTEUR - TAILLE_PERSO[1]
         self.__vitesse = 300
         self.__deplacement = [0, 0]
         self.__velocite_saut, self.vitesse_chute = 2, 4
         self.__nb_saut_restant = 1
-        self.__touches = touches
 
         self.__anim_attente = Animation(0, 0, TAILLE_PERSO[0], TAILLE_PERSO[1], 4, 0.2)
         self.__anim_deplacement = Animation(4, 0, TAILLE_PERSO[0], TAILLE_PERSO[1], 6, 0.2)
@@ -36,6 +34,10 @@ class Joueur:
         self.__anim_degat = Animation(13, 0, TAILLE_PERSO[0], TAILLE_PERSO[1], 4, 0.2)
         self.__anim_accroupi = Animation(18, 0, TAILLE_PERSO[0], TAILLE_PERSO[1], 6, 0.2)
         self.__anim_active = self.__anim_attente
+
+        # Protected
+        self._touches = touches
+        self._couleur = couleur
 
         evenement = Evenement()
         evenement.enregistrer(pygame.KEYDOWN, self)
@@ -48,18 +50,18 @@ class Joueur:
             return
 
         if evenement.type == pygame.KEYDOWN:
-            if evenement.key == self.__touches.get('aller_gauche'):
+            if evenement.key == self._touches.get('aller_gauche'):
                 self.__deplacement[0] -= 1
-            elif evenement.key == self.__touches.get('aller_droite'):
+            elif evenement.key == self._touches.get('aller_droite'):
                 self.__deplacement[0] += 1
-            elif evenement.key == self.__touches.get('sauter') and self.__nb_saut_restant > 0:
+            elif evenement.key == self._touches.get('sauter') and self.__nb_saut_restant > 0:
                 self.__deplacement[1] -= self.__velocite_saut
                 self.__nb_saut_restant -= 1
 
         else:  # KEYUP
-            if evenement.key == self.__touches.get('aller_gauche'):
+            if evenement.key == self._touches.get('aller_gauche'):
                 self.__deplacement[0] += 1
-            elif evenement.key == self.__touches.get('aller_droite'):
+            elif evenement.key == self._touches.get('aller_droite'):
                 self.__deplacement[0] -= 1
 
         if self.__deplacement[0] != 0:
@@ -71,7 +73,7 @@ class Joueur:
         if self.__vies <= 0:
             return
         elif Joueur.__count == 1:
-            Jeu.Jeu().fin(self.__couleur)
+            Jeu.Jeu().fin(self._couleur)
             return
 
         self.__anim_active.ajouter_temps(delta)

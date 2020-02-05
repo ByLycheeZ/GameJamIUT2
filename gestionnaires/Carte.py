@@ -19,3 +19,6 @@ class Carte:
     def affichage(self, ecran):
         for chemin in self.chemins:
             chemin.affichage(ecran, 0, 0)
+
+    def fin(self):
+        Affichage().supprimer(self)

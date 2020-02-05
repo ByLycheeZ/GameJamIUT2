@@ -21,6 +21,7 @@ class Jeu:
                 joueur.fin()
 
             self.__parallax.fin()
+            self.__carte.fin()
 
     __instance = None
 

@@ -157,4 +157,3 @@ class Joueur:
         Evenement().supprimer(self)
         Affichage().supprimer(self)
         Maj().supprimer(self)
-

@@ -9,8 +9,7 @@ class BlocCollision(Bloc):
     def __init__(self, json, x, y):
         Bloc.__init(json, x, y)
 
-
-    def get_Collisions(self, rect):
+    def get_collisions(self, rect):
         this_rect = self.dessin.get_rect()
         collision = [0, 0]
         if self.dessin.get_rect().colliderect(rect):

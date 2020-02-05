@@ -130,6 +130,12 @@ class Joueur:
     def get_rect(self):
         return self.__rect
 
+    def get_rect_collision(self):
+        rect = self.__rect
+        rect.width = TAILLE_PERSO[0]
+        rect.height = TAILLE_PERSO[1]
+        return rect
+
     def get_deplacement(self):
         return self.__deplacement
 
@@ -141,6 +147,9 @@ class Joueur:
 
     def set_vitesse(self, vitesse):
         self.__vitesse = vitesse
+
+    def set_deplacement(self, deplacement):
+        self.__deplacement = deplacement
 
     def set_sprite(self, nom_fichier):
         self.__sprite = pygame.image.load(CHEMIN_SPRITE + nom_fichier)

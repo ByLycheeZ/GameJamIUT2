@@ -50,3 +50,11 @@ class Carte:
     def fin(self):
         Affichage().supprimer(self)
         Maj().supprimer(self)
+
+    def collisions(self, joueur, delta):
+        collision = None
+        for c in self.__carte:
+            collision = c.chemin.collisions(joueur, delta)
+            if collision:
+                break
+        return collision

@@ -26,17 +26,23 @@ class Jeu:
             self.__carte.fin()
 
         def maj(self, delta):
-            mouvement = [0, 0] #a retirer après implementation dans la map
             for joueur in self.__joueurs:
-                #mouvement[0], mouvement[1] = map.collision(joueur, delta)  # sujet a des changement de nom et d'appel  # le delta sert pour le mouvement du courant
-                #il manque le deplacement effectif du joueur
-                #dans map : (max(mouvement[0], -1), max(mouvement[1], -1)
+                collision = self.__carte.collisions(joueur, delta)
 
-                if mouvement[1] != 0:
-                    joueur.set_vitesse([joueur.get_vitesse()[0], 0])
-                joueur.set_rect(joueur.get_rect().move(joueur.get_vitesse() * joueur.get_deplacement()[0] * delta * mouvement[0],
-                                                       joueur.get_vitesse() * joueur.get_deplacement()[1] * delta * mouvement[1]))
-
+                if collision:
+                    d = joueur.get_deplacement()
+                    rect = joueur.get_rect()
+                    if d[1] > 0:
+                        rect.bottom = collision.top
+                        joueur.set_deplacement([joueur.get_deplacement()[0], 0])
+                        joueur.ajout_saut(1)
+                    elif d[0] < 0:
+                        rect.left = collision.right
+                    elif d[0] > 0:
+                        rect.right = collision.left
+                    elif d[1] < 0:
+                        rect.top = collision.bottom
+                    joueur.set_rect(rect)
 
     __instance = None
     __konami = False

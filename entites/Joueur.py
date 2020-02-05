@@ -18,7 +18,7 @@ class Joueur:
 
     def __init__(self, touches, couleur):
         Joueur.__count += 1
-        self.__vies = 5
+        self.__vies = 1
         self.__sprite = pygame.image.load(f'{CHEMIN_SPRITE}dino-{couleur}.png')
         self.__hud = HudVie(self.__vies, couleur)
         self.__couleur = couleur
@@ -159,7 +159,7 @@ class Joueur:
 
     def fin(self):
         self.__hud.fin()
+        Joueur.__count = 0
         Evenement().supprimer(self)
         Affichage().supprimer(self)
         Maj().supprimer(self)
-

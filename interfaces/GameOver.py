@@ -3,6 +3,7 @@ from random import random
 import pygame
 
 from gestionnaires.Sons import Sons
+from interfaces.elements.BoutonRejouer import BoutonRejouer
 from interfaces.elements.FinJeu import FinJeu
 from utils.Animation import Animation
 from utils.Constantes import COULEURS, HAUTEUR, TAILLE_PERSO
@@ -61,4 +62,11 @@ class GameOver:
 
             sons.jouer_son('crash', 'ogg')
 
+            BoutonRejouer(self, 550)
             Maj().supprimer(self)
+
+    def fin(self):
+        aff = Affichage()
+        aff.supprimer(self.__fin_jeu)
+        aff.supprimer(self.__vainqueur)
+        aff.supprimer(self)

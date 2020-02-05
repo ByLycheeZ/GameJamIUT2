@@ -7,7 +7,6 @@ from interfaces.GameOver import GameOver
 from gestionnaires.Maj import Maj
 
 
-
 class Jeu:
     class __Jeu:
         def __init__(self, couleurs_joueurs):
@@ -50,6 +49,7 @@ class Jeu:
         self.__instance.fin()
         Ecran.reinitialiser()
         GameOver(couleur)
+        Jeu.__instance = None
 
     @staticmethod
     def konami():
@@ -58,5 +58,3 @@ class Jeu:
     @staticmethod
     def konami_actif():
         return Jeu.__konami
-
-

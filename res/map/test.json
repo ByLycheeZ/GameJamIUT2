@@ -1,0 +1,46 @@
+{
+  "plateformes": {
+    "herbe": [
+      {
+        "source": "plateforme-bas-herbe",
+        "x": 0,
+        "y": 0,
+        "collision": false
+      },
+      {
+        "source": "plateforme-bas",
+        "x": 0,
+        "y": 32,
+        "collision": true
+      }
+    ],
+    "pierre": [
+      {
+        "source": "plateforme-haut-pierre",
+        "x": 0,
+        "y": 0,
+        "collision": false
+      },
+      {
+        "source": "plateforme-haut",
+        "x": 0,
+        "y": 32,
+        "collision": true
+      }
+    ]
+  },
+  "disposition": [
+    {
+      "plateforme": "herbe",
+      "x": 0,
+      "y": 704,
+      "taille": 10
+    },
+    {
+      "plateforme": "pierre",
+      "x": 70,
+      "y": 500,
+      "taille": 3
+    }
+  ]
+}

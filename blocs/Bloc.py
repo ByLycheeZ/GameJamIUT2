@@ -75,3 +75,12 @@ class Bloc:
 
     def affichage(self, ecran):
         ecran.blit(self.__dessin, (self.__x, self.__y))
+
+    def set_x(self, x):
+        self.__x = x
+
+    def set_y(self, y):
+        self.__y = y
+
+    def get_largeur(self):
+        return self.__dessin.get_width()

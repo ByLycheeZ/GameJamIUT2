@@ -1,5 +1,6 @@
 from entites.Joueur import Joueur
 from decorations.Parallax import Parallax
+from gestionnaires.Carte import Carte
 from utils.Constantes import TOUCHES
 from interfaces.Ecran import Ecran
 from interfaces.GameOver import GameOver
@@ -16,12 +17,14 @@ class Jeu:
 
             Maj().enregistrer(self)
             self.__parallax = Parallax()
+            self.__carte = Carte()
 
         def fin(self):
             for joueur in self.__joueurs:
                 joueur.fin()
 
             self.__parallax.fin()
+            self.__carte.fin()
 
         def maj(self, delta):
             mouvement = [0, 0]

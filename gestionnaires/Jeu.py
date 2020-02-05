@@ -21,6 +21,7 @@ class Jeu:
             self.__parallax.fin()
 
     __instance = None
+    __konami = False
 
     def __init__(self, couleurs_joueurs=None):
         if not Jeu.__instance and couleurs_joueurs:
@@ -30,3 +31,12 @@ class Jeu:
         self.__instance.fin()
         Ecran.reinitialiser()
         GameOver(couleur)
+
+    @staticmethod
+    def konami():
+        Jeu.__konami = True
+
+    @staticmethod
+    def konami_actif():
+        return Jeu.__konami
+

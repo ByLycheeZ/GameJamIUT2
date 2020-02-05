@@ -7,7 +7,7 @@ class Bloc:
     def __init__(self, nom_json, x, y, taille):
         fichier_json = open(f'res/blocs/{nom_json}.json')
         self.__donnees = json.load(fichier_json)
-        self.__sprite = pygame.image.load('res/blocs/Tileset.png')
+        self.__sprite = pygame.image.load('res/img/Tileset.png')
         self.__x = x
         self.__y = y
 

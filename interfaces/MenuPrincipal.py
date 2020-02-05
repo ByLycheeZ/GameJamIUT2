@@ -26,8 +26,8 @@ class MenuPrincipal:
         self.__background = pygame.image.load("res/img/interfaces/accueil/accueil-background.png")
         self.__titre = pygame.image.load("res/img/interfaces/accueil/titre.png")
         self.__bouton_jouer = BoutonJouer((350, 400), "bouton-jouer", self)
-        self.__bouton_quitter = BoutonQuitter((350, 500), "bouton-quitter", self)
-        self.__bouton_reglement = BoutonReglement((350, 600), "bouton-quitter", self)
+        self.__bouton_reglement = BoutonReglement((350, 500), "bouton-regles", self)
+        self.__bouton_quitter = BoutonQuitter((350, 600), "bouton-quitter", self)
         self.__bouton_credits = BoutonCredits((910, 730), "bouton-credits", self)
         self.__konami = []
         Affichage().enregistrer(self)

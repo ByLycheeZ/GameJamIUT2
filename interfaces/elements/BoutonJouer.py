@@ -10,7 +10,7 @@ class BoutonJouer(Bouton):
         Evenement().enregistrer(pygame.MOUSEBUTTONUP, self)
 
     def evenement(self, evenement):
-        if (self._coord[0] <= pygame.mouse.get_pos()[0] <= self._coord[0] + 300) \
+        if self._menu.montrer and (self._coord[0] <= pygame.mouse.get_pos()[0] <= self._coord[0] + 300) \
                 and (self._coord[1] <= pygame.mouse.get_pos()[1] <= self._coord[1] + 76):
             self.choisir_personnages()
 

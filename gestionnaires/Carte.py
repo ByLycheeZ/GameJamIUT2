@@ -20,11 +20,7 @@ class Carte:
             self.fin = x2
 
     def __init__(self):
-        fichiers = [f.split('.')[0] for f in listdir(CHEMIN_MAP) if isfile(join(CHEMIN_MAP, f))]
-
-        self.__chemins = []
-        for nom_chemin in fichiers:
-            self.__chemins.append(Chemin(nom_chemin))
+        self.__chemins = [f.split('.')[0] for f in listdir(CHEMIN_MAP) if isfile(join(CHEMIN_MAP, f))]
 
         self.__max_x = 0
         self.__carte = []
@@ -36,7 +32,7 @@ class Carte:
     def generer_carte(self):
         while self.__max_x < Ecran.x + 2 * LARGEUR:
             index_chemin = randrange(0, len(self.__chemins))
-            chemin = self.__chemins[index_chemin]
+            chemin = Chemin(self.__chemins[index_chemin])
             x1 = self.__max_x
             x2 = x1 + chemin.get_x_max()
             self.__max_x = x2

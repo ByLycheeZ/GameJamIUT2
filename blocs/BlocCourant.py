@@ -8,8 +8,7 @@ class BlocCourant(BlocCollision):
         self.direction = direction
 
     def get_collisions(self, rect):
-        collision = [0, 0]
         if self.dessin.get_rect().colliderect(rect):
             return self.direction
         else:
-            return collision
+            return [0, 0]

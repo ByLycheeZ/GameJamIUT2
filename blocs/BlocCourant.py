@@ -4,8 +4,8 @@ from blocs.BlocCollision import BlocCollision
 class BlocCourant(BlocCollision):
     VITESSE = 200
 
-    def __init__(self, json, x, y, direction):
-        super(BlocCourant, self).__init__(json, x, y)
+    def __init__(self, json, x, y, taille, direction):
+        super(BlocCourant, self).__init__(json, x, y, taille)
         self.direction = direction
 
     def collisions(self, joueur, delta):

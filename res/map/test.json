@@ -27,6 +27,17 @@
         "y": 32,
         "collision": true
       }
+    ],
+    "courant": [
+      {
+        "source": "courant-ascendant",
+        "x": 0,
+        "y": 0,
+        "collision": false,
+        "module": "blocs.BlocCourant",
+        "classe": "BlocCourant",
+        "attributs": [[0, -1]]
+      }
     ]
   },
   "disposition": [
@@ -41,6 +52,12 @@
       "x": 70,
       "y": 500,
       "taille": 3
+    },
+    {
+      "plateforme": "courant",
+      "x": 38,
+      "y": 530,
+      "taille": 0
     }
   ]
 }

@@ -3,6 +3,8 @@ from decorations.Parallax import Parallax
 from utils.Constantes import TOUCHES
 from interfaces.Ecran import Ecran
 from interfaces.GameOver import GameOver
+from gestionnaires.Maj import Maj
+
 
 
 class Jeu:
@@ -12,6 +14,7 @@ class Jeu:
             for i in range(0, len(couleurs_joueurs)):
                 self.__joueurs.append(Joueur(TOUCHES[i], couleurs_joueurs[i]))
 
+            Maj().enregistrer(self)
             self.__parallax = Parallax()
 
         def fin(self):
@@ -30,3 +33,9 @@ class Jeu:
         self.__instance.fin()
         Ecran.reinitialiser()
         GameOver(couleur)
+
+    def maj(self, delta):
+        for joueur in self.__joueurs:
+            map.collision(joueur) #sujet a des changement de nom et d'appel
+
+

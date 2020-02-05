@@ -24,3 +24,11 @@ class Chemin:
 
     def get_x_max(self):
         return self.__x_max
+
+    def collisions(self, joueur, delta):
+        collision = None
+        for plateforme in self.__plateformes:
+            collision = plateforme.collisions(joueur, delta)
+            if collision:
+                break
+        return collision

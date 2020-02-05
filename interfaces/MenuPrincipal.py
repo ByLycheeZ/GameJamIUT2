@@ -6,6 +6,7 @@ from gestionnaires.Jeu import Jeu
 
 from interfaces.ChoixPersonnages import ChoixPersonnages
 from interfaces.Credits import Credits
+from interfaces.Pause import Pause
 from interfaces.Reglement import Reglement
 
 from interfaces.elements.BoutonCredits import BoutonCredits
@@ -23,6 +24,7 @@ class MenuPrincipal:
         self.credits = Credits(self)
         self.choix_personnages = ChoixPersonnages(self)
         self.reglement = Reglement(self)
+        self.pause = Pause(self)
         self.__background = pygame.image.load("res/img/interfaces/accueil/accueil-background.png")
         self.__titre = pygame.image.load("res/img/interfaces/accueil/titre.png")
         self.__bouton_jouer = BoutonJouer((350, 400), "bouton-jouer", self)

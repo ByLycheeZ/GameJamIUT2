@@ -23,6 +23,12 @@ class Jeu:
 
             self.__parallax.fin()
 
+        def maj(self, delta):
+            mouvement = [0, 0]
+            #for joueur in self.__joueurs:
+                #mouvement += map.collision(joueur)  # sujet a des changement de nom et d'appel
+                #il manque le deplacement effectif du joueur
+
     __instance = None
 
     def __init__(self, couleurs_joueurs=None):
@@ -34,8 +40,6 @@ class Jeu:
         Ecran.reinitialiser()
         GameOver(couleur)
 
-    def maj(self, delta):
-        for joueur in self.__joueurs:
-            map.collision(joueur) #sujet a des changement de nom et d'appel
+
 
 

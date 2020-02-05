@@ -67,33 +67,34 @@ class ChoixPersonnages:
                 n_ieme += 1
 
     def evenement(self, evenement):
-        if evenement.type == pygame.MOUSEBUTTONUP:
-            for couleur, dino in self.__dinos.items():
-                if (dino.coord[0] + 30 <= pygame.mouse.get_pos()[0] <= dino.coord[0] + 190) \
-                        and (dino.coord[1] + 40 <= pygame.mouse.get_pos()[1] <= dino.coord[1] + 210):
-                    if not dino.selectionne:
-                        if self.__selection_joueur_1 != "":
-                            self.__dinos.get(self.__selection_joueur_1).selectionne = False
-                        self.__selection_joueur_1 = couleur
-                        dino.selectionne = True
-                elif (dino.coord[0] + 30 <= pygame.mouse.get_pos()[0] <= dino.coord[0] + 190) \
-                        and (dino.coord[1] + 40 + self.DECALAGE <= pygame.mouse.get_pos()[1] <= dino.coord[1] + 200 + self.DECALAGE):
-                    if not dino.selectionne:
-                        if self.__selection_joueur_2 != "":
-                            self.__dinos.get(self.__selection_joueur_2).selectionne = False
-                        self.__selection_joueur_2 = couleur
-                        dino.selectionne = True
-            if not self.__selection_joueur_1 == "" and not self.__selection_joueur_2 == "":
-                self.__bouton_commencer.transparent = False
-        elif evenement.type == pygame.KEYUP:
-            if evenement.key == pygame.K_ESCAPE and self.montrer:
-                for dino in self.__dinos.values():
-                    dino.selectionne = False
-                    self.__selection_joueur_1 = ""
-                    self.__selection_joueur_2 = ""
-                self.__bouton_commencer.transparent = True
-                self.montrer = False
-                self.__menu.montrer = True
+        if self.montrer:
+            if evenement.type == pygame.MOUSEBUTTONUP:
+                for couleur, dino in self.__dinos.items():
+                    if (dino.coord[0] + 30 <= pygame.mouse.get_pos()[0] <= dino.coord[0] + 190) \
+                            and (dino.coord[1] + 40 <= pygame.mouse.get_pos()[1] <= dino.coord[1] + 210):
+                        if not dino.selectionne:
+                            if self.__selection_joueur_1 != "":
+                                self.__dinos.get(self.__selection_joueur_1).selectionne = False
+                            self.__selection_joueur_1 = couleur
+                            dino.selectionne = True
+                    elif (dino.coord[0] + 30 <= pygame.mouse.get_pos()[0] <= dino.coord[0] + 190) \
+                            and (dino.coord[1] + 40 + self.DECALAGE <= pygame.mouse.get_pos()[1] <= dino.coord[1] + 200 + self.DECALAGE):
+                        if not dino.selectionne:
+                            if self.__selection_joueur_2 != "":
+                                self.__dinos.get(self.__selection_joueur_2).selectionne = False
+                            self.__selection_joueur_2 = couleur
+                            dino.selectionne = True
+                if not self.__selection_joueur_1 == "" and not self.__selection_joueur_2 == "":
+                    self.__bouton_commencer.transparent = False
+            elif evenement.type == pygame.KEYUP:
+                if evenement.key == pygame.K_ESCAPE and self.montrer:
+                    for dino in self.__dinos.values():
+                        dino.selectionne = False
+                        self.__selection_joueur_1 = ""
+                        self.__selection_joueur_2 = ""
+                    self.__bouton_commencer.transparent = True
+                    self.montrer = False
+                    self.__menu.montrer = True
 
     def get_selection_j1(self):
         return self.__selection_joueur_1

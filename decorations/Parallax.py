@@ -30,3 +30,4 @@ class Parallax:
 
     def fin(self):
         self.__instance.fin()
+        Parallax.__instance = None

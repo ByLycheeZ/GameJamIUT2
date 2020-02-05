@@ -42,3 +42,4 @@ class HudVie:
 
     def fin(self):
         Affichage().supprimer(self)
+        HudVie.__compte -= 1

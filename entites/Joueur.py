@@ -1,4 +1,5 @@
 import pygame
+import gestionnaires.Jeu as Jeu
 from gestionnaires.Affichage import *
 from gestionnaires.Maj import *
 from gestionnaires.Evenement import *
@@ -68,8 +69,7 @@ class Joueur:
             self.__anim_active = self.__anim_attente
 
     def maj(self, delta):
-        from gestionnaires.Jeu import Jeu
-        jeu = Jeu()
+        jeu = Jeu.Jeu()
         if self.__vies <= 0:
             return
         elif Joueur.__count == 1:
@@ -116,11 +116,10 @@ class Joueur:
             self.__retirer_vie()
 
     def __retirer_vie(self):
-        from gestionnaires.Jeu import Jeu
         self.__vies -= 1
         self.__hud.retirer_pv()
 
-        if Jeu.konami_actif():
+        if Jeu.Jeu.konami_actif():
             Sons().jouer_son('k-mort')
         else:
             Sons().jouer_son('mort')

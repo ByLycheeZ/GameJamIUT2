@@ -28,7 +28,7 @@ class GameOver:
             self.__perdants.append(Dino(coul, (x, y), (1, 0)))
 
         self.__temps_anim = 0
-        self.__fin_jeu = FinJeu(TAILLE_PERSO[1] + y)
+        self.__fin_jeu = FinJeu(couleur, TAILLE_PERSO[1] + y)
 
         Affichage().enregistrer(self, -1)
         Maj().enregistrer(self)

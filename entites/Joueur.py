@@ -99,7 +99,12 @@ class Joueur:
     def __retirer_vie(self):
         self.__vies -= 1
         self.__hud.retirer_pv()
-        Sons().jouer_son('mort')
+
+        if Jeu.Jeu.konami_actif():
+            Sons().jouer_son('k-mort')
+        else:
+            Sons().jouer_son('mort')
+
         if self.__vies > 0:
             self.__revivre()
         else:

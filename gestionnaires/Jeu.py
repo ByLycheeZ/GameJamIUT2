@@ -30,6 +30,7 @@ class Jeu:
                 #il manque le deplacement effectif du joueur
 
     __instance = None
+    __konami = False
 
     def __init__(self, couleurs_joueurs=None):
         if not Jeu.__instance and couleurs_joueurs:
@@ -40,6 +41,12 @@ class Jeu:
         Ecran.reinitialiser()
         GameOver(couleur)
 
+    @staticmethod
+    def konami():
+        Jeu.__konami = True
 
+    @staticmethod
+    def konami_actif():
+        return Jeu.__konami
 
 

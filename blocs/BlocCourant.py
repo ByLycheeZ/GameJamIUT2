@@ -2,7 +2,7 @@ from blocs.BlocCollision import BlocCollision
 
 
 class BlocCourant(BlocCollision):
-    VITESSE = 2
+    VITESSE = 200
     def __init__(self, json, x, y, direction):
         BlocCollision.__init(json, x, y)
         self.direction = direction

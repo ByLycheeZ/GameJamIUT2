@@ -10,12 +10,12 @@ class Tornade:
     TAILLE_IMAGE = [64, 64]
     CHEMIN_SPRITE = 'res/img/competences/'
 
-    def __init__(self, positions, deplacement, vitesse=350, duree=2):
+    def __init__(self, positions, deplacement, couleur_joueur, vitesse=350, duree=2):
+        self.__couleur_joueur = couleur_joueur
         self.__temps_fin = pygame.time.get_ticks() / 1000 + duree
         self.__sprite = pygame.image.load(self.CHEMIN_SPRITE + 'Tornade.png')
         self.__rect = self.__sprite.get_rect()
-        self.__rect.x = positions[0]
-        self.__rect.y = positions[1]
+        self.__rect.x, self.__rect.y = positions
         self.__deplacement = deplacement
         self.__vitesse = vitesse
         self.__animimation = Animation(0, 0, Tornade.TAILLE_IMAGE[0], Tornade.TAILLE_IMAGE[1], 4, duree/12)
@@ -43,3 +43,9 @@ class Tornade:
 
     def set_deplacement(self, deplacement):
         self.__deplacement = deplacement
+
+    def get_rect(self):
+        return self.__rect
+
+    def get_couleur_joueur(self):
+        return self.__couleur_joueur

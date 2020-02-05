@@ -10,7 +10,7 @@ class Tornade:
     TAILLE_IMAGE = [64, 64]
     CHEMIN_SPRITE = 'res/img/competences/'
 
-    def __init__(self, positions, deplacement, couleur_joueur, vitesse=350, duree=2):
+    def __init__(self, positions, deplacement, couleur_joueur, vitesse=400, duree=3):
         self.__couleur_joueur = couleur_joueur
         self.__temps_fin = pygame.time.get_ticks() / 1000 + duree
         self.__sprite = pygame.image.load(self.CHEMIN_SPRITE + 'Tornade.png')

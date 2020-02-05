@@ -26,5 +26,10 @@ class JoueurTornade(Joueur):
 
     def __competence(self):
         rect = self.get_rect()
-        Tornade([rect.x+10, rect.y+10], [1, 0], self._couleur)
+        x = self.get_deplacement()[0]
+        if x < 0:
+            x = -1
+        elif x >= 0:
+            x = 1
+        Tornade([rect.x+10, rect.y+10], [x, 0], self._couleur)
         self.__dernier_lancement = pygame.time.get_ticks() * 1000

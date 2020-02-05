@@ -12,6 +12,6 @@ TAILLE_PERSO = [120, 120]
 COULEURS = ['rouge', 'jaune', 'vert', 'bleu']
 
 TOUCHES = [
-    {'aller_gauche': __pygame.K_q, 'aller_droite': __pygame.K_d, 'sauter': __pygame.K_z},
-    {'aller_gauche': __pygame.K_LEFT, 'aller_droite': __pygame.K_RIGHT, 'sauter': __pygame.K_UP}
+    {'aller_gauche': __pygame.K_q, 'aller_droite': __pygame.K_d, 'sauter': __pygame.K_z, 'competence': __pygame.K_LSHIFT},
+    {'aller_gauche': __pygame.K_LEFT, 'aller_droite': __pygame.K_RIGHT, 'sauter': __pygame.K_UP, 'competence': __pygame.K_RSHIFT}
 ]

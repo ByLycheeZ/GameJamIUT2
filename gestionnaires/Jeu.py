@@ -25,9 +25,14 @@ class Jeu:
 
         def maj(self, delta):
             mouvement = [0, 0]
-            #for joueur in self.__joueurs:
-                #mouvement += map.collision(joueur)  # sujet a des changement de nom et d'appel
+            for joueur in self.__joueurs:
+                #mouvement[0], mouvement[1] += map.collision(joueur, delta)  # sujet a des changement de nom et d'appel  # le delta sert pour le mouvement du courant
                 #il manque le deplacement effectif du joueur
+                if mouvement[1] != 0:
+                    joueur.set_vitesse([joueur.get_vitesse()[0], 0])
+                joueur.set_rect(joueur.get_rect().move(joueur.get_vitesse() * joueur.get_deplacement()[0] * delta * max(mouvement[0], -1),
+                                                       joueur.get_vitesse() * joueur.get_deplacement()[1] * delta * max(mouvement[1], -1)))
+
 
     __instance = None
 

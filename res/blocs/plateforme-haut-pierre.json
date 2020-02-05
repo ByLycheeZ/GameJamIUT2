@@ -1,0 +1,33 @@
+{
+  "direction": "x",
+  "debut": [
+    {
+      "x": 160,
+      "y": 32,
+      "largeur": 32,
+      "hauteur": 32,
+      "dx": 0,
+      "dy": 0
+    }
+  ],
+  "milieu": [
+    {
+      "x": 192,
+      "y": 32,
+      "largeur": 32,
+      "hauteur": 32,
+      "dx": 0,
+      "dy": 0
+    }
+  ],
+  "fin": [
+    {
+      "x": 224,
+      "y": 32,
+      "largeur": 32,
+      "hauteur": 32,
+      "dx": 32,
+      "dy": 0
+    }
+  ]
+}

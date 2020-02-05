@@ -7,6 +7,7 @@ MAX_IPS = 60
 COUCHE_HUD = 2
 
 CHEMIN_SPRITE = 'res/img/entites/'
+CHEMIN_MAP = 'res/map/'
 TAILLE_PERSO = [120, 120]
 COULEURS = ['rouge', 'jaune', 'vert', 'bleu']
 

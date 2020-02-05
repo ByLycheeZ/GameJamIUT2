@@ -1,5 +1,6 @@
 from entites.Joueur import Joueur
 from decorations.Parallax import Parallax
+from gestionnaires.Carte import Carte
 from utils.Constantes import TOUCHES
 from interfaces.Ecran import Ecran
 from interfaces.GameOver import GameOver
@@ -13,6 +14,7 @@ class Jeu:
                 self.__joueurs.append(Joueur(TOUCHES[i], couleurs_joueurs[i]))
 
             self.__parallax = Parallax()
+            self.__carte = Carte()
 
         def fin(self):
             for joueur in self.__joueurs:

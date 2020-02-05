@@ -87,12 +87,6 @@ class Joueur:
         self.__collisions((0, self.__deplacement[1]), jeu.collisions(self, delta))
 
         self.__deplacement[1] += self.vitesse_chute * delta
-        # temporaire ne peut pas tomber dans le vide
-        if self.__rect.y >= 768 - 120:
-            self.__rect.y = 768 - 120
-            self.__deplacement[1] = 0
-            self.ajout_saut()
-
         self.__maj_camera(delta)
 
     def __collisions(self, deplacement, collisions):

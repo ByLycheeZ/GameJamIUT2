@@ -4,6 +4,8 @@ from gestionnaires.Carte import Carte
 from utils.Constantes import TOUCHES
 from interfaces.Ecran import Ecran
 from interfaces.GameOver import GameOver
+from gestionnaires.Maj import Maj
+
 
 
 class Jeu:
@@ -13,6 +15,7 @@ class Jeu:
             for i in range(0, len(couleurs_joueurs)):
                 self.__joueurs.append(Joueur(TOUCHES[i], couleurs_joueurs[i]))
 
+            Maj().enregistrer(self)
             self.__parallax = Parallax()
             self.__carte = Carte()
 
@@ -23,7 +26,14 @@ class Jeu:
             self.__parallax.fin()
             self.__carte.fin()
 
+        def maj(self, delta):
+            mouvement = [0, 0]
+            #for joueur in self.__joueurs:
+                #mouvement += map.collision(joueur)  # sujet a des changement de nom et d'appel
+                #il manque le deplacement effectif du joueur
+
     __instance = None
+    __konami = False
 
     def __init__(self, couleurs_joueurs=None):
         if not Jeu.__instance and couleurs_joueurs:
@@ -33,3 +43,13 @@ class Jeu:
         self.__instance.fin()
         Ecran.reinitialiser()
         GameOver(couleur)
+
+    @staticmethod
+    def konami():
+        Jeu.__konami = True
+
+    @staticmethod
+    def konami_actif():
+        return Jeu.__konami
+
+

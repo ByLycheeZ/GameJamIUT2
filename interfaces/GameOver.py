@@ -51,9 +51,14 @@ class GameOver:
                 dino.fin()
 
             sons = Sons()
-            sons.jouer_son('mort')
-            sons.jouer_son('mort2')
-            sons.jouer_son('mort3')
+            from gestionnaires.Jeu import Jeu
+            if Jeu.konami_actif():
+                sons.jouer_son('k-mort2')
+            else:
+                sons.jouer_son('mort')
+                sons.jouer_son('mort2')
+                sons.jouer_son('mort3')
+
             sons.jouer_son('crash', 'ogg')
 
             Maj().supprimer(self)

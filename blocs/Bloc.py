@@ -4,6 +4,8 @@ import json
 
 
 class Bloc:
+    DESSINS = {}
+
     def __init__(self, nom_json, x, y, taille):
         fichier_json = open(f'res/blocs/{nom_json}.json')
         self.__donnees = json.load(fichier_json)
@@ -46,7 +48,11 @@ class Bloc:
             hauteur = self.__donnees['debut'][0]['hauteur']
 
         self.__taille = taille
-        self.__init_dessin(largeur, hauteur, fin_debut, fin_milieu, taille_milieu)
+        if nom_json not in Bloc.DESSINS:
+            self.__init_dessin(largeur, hauteur, fin_debut, fin_milieu, taille_milieu)
+            Bloc.DESSINS[nom_json] = self.__dessin
+        else:
+            self.__dessin = Bloc.DESSINS[nom_json]
 
         Affichage().enregistrer(self)
 

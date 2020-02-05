@@ -12,6 +12,7 @@ from interfaces.hud.HudVie import HudVie
 
 class Joueur:
     NB_SAUT_MAX = 1
+    RECTANGLE_COLLISION = pygame.Rect(20, 20, 75, 85)
 
     __count = 0
 
@@ -96,18 +97,20 @@ class Joueur:
 
     def __collisions(self, deplacement, collisions):
         if collisions:
+            rect = self.get_rect_collision()
             if deplacement[0] > 0:
-                self.__rect.right = collisions.left
+                rect.right = collisions.left
             elif deplacement[0] < 0:
-                self.__rect.left = collisions.right
+                rect.left = collisions.right
 
             if deplacement[1] < 0:
-                self.__rect.top = collisions.bottom
+                rect.top = collisions.bottom
                 self.__deplacement[1] = 0
             elif deplacement[1] > 0:
-                self.__rect.bottom = collisions.top
+                rect.bottom = collisions.top
                 self.__deplacement[1] = 0
                 self.ajout_saut(1)
+            self.set_rect_collision(rect)
 
     def __maj_camera(self, delta):
         droite = self.__rect.left + TAILLE_PERSO[0]
@@ -154,10 +157,16 @@ class Joueur:
         return self.__rect
 
     def get_rect_collision(self):
-        rect = self.__rect
-        rect.width = TAILLE_PERSO[0]
-        rect.height = TAILLE_PERSO[1]
+        rect = self.__rect.copy()
+        rect.x += self.RECTANGLE_COLLISION.x
+        rect.y += self.RECTANGLE_COLLISION.y
+        rect.width = self.RECTANGLE_COLLISION.width
+        rect.height = self.RECTANGLE_COLLISION.height
         return rect
+
+    def set_rect_collision(self, rect):
+        self.__rect.x = rect.x - self.RECTANGLE_COLLISION.x
+        self.__rect.y = rect.y - self.RECTANGLE_COLLISION.y
 
     def get_deplacement(self):
         return self.__deplacement

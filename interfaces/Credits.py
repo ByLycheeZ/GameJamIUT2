@@ -2,38 +2,40 @@ import pygame
 
 from gestionnaires.Affichage import Affichage
 from gestionnaires.Evenement import Evenement
-from gestionnaires.Maj import Maj
+
+from interfaces.elements.BoutonEquipe import BoutonEquipe
+from interfaces.elements.BoutonSources import BoutonSources
 
 
 class Credits:
     def __init__(self, menu):
         self.montrer = False
+        self.equipe = True
+        self.sources = False
         self.__textes = []
-        self.__coord = (400, 810)
         self.__menu = menu
+        self.__bouton_sources = BoutonSources((880, 730), "", self)
+        self.__bouton_equipe = BoutonEquipe((10, 730), "", self)
         Affichage().enregistrer(self)
-        Maj().enregistrer(self)
         Evenement().enregistrer(pygame.KEYUP, self)
 
     def affichage(self, ecran):
         if self.montrer:
-            ecran.fill((45, 52, 54))
-            font = pygame.font.Font("res/fonts/Comfortaa-Bold.ttf", 40)
-            self.__textes.append("Léo Le Corre")
-            for credit in self.__textes:
-                texte = font.render(credit, False, (255, 255, 255))
-                ecran.blit(texte, (self.__coord[0], self.__coord[1]))
-
-    def maj(self, delta):
-        if self.montrer:
-            self.__coord = (400, self.__coord[1] - 50 * delta)
-            if self.__coord[1] <= -300:
-                self.montrer = False
-                self.__menu.montrer = True
-                self.__coord = (400, 810)
+            background = pygame.image.load("res/img/interfaces/accueil/accueil-background.png")
+            ecran.blit(background, (-490, 0))
+            image = pygame.image.load("res/img/interfaces/selection/esc-message.png")
+            ecran.blit(image, (320, 730))
+            if self.equipe and not self.sources:
+                image = pygame.image.load("res/img/interfaces/credits/credits.png")
+            elif self.sources and not self.equipe:
+                image = pygame.image.load("res/img/interfaces/credits/images-sons.png")
+            else:
+                image = pygame.image.load("res/img/interfaces/fin/fin-jeu.png")
+            ecran.blit(image, (0, 0))
 
     def evenement(self, evenement):
         if self.montrer and evenement.key == pygame.K_ESCAPE:
             self.montrer = False
+            self.equipe = True
+            self.sources = False
             self.__menu.montrer = True
-            self.__coord = (400, 810)

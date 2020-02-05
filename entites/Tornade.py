@@ -1,4 +1,5 @@
 import pygame
+import math
 from gestionnaires.Affichage import *
 from gestionnaires.Maj import *
 from gestionnaires.Sons import Sons
@@ -19,6 +20,7 @@ class Tornade:
         self.__vitesse = vitesse
         self.__animimation = Animation(0, 0, Tornade.TAILLE_IMAGE[0], Tornade.TAILLE_IMAGE[1], 4, duree/12)
 
+        Sons().jouer_son('Tornade', 'wav', math.ceil(duree/3) - 1, duree)  # Avec 3 la duree du sons
         Affichage().enregistrer(self, 1)
         Maj().enregistrer(self)
 

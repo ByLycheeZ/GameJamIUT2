@@ -12,7 +12,7 @@ class Jeu:
             self.__joueurs = []
             for i in range(0, len(couleurs_joueurs)):
                 self.__joueurs.append(Joueur(TOUCHES[i], couleurs_joueurs[i]))
-            Tornade([600, 350], [1, 0])
+            Tornade([0, 350], [1, 0])
             self.__parallax = Parallax()
 
         def fin(self):

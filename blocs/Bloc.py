@@ -109,7 +109,7 @@ class Bloc:
 
     def affichage(self, ecran):
         if self.__animation:
-            for i in range(self.__taille + 1):
+            for i in range(self.__taille):
                 x = self._x + (self.__donnees['largeur'] * i) * self.__direction[0]
                 y = self._y + (self.__donnees['hauteur'] * i) * self.__direction[1]
                 sous_sprite, sous_sprite_rect = self.__animation.recuperer_sous_sprite(self.__sprite, x, y)

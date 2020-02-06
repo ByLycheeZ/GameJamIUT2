@@ -11,7 +11,7 @@ DISTANCE_DEPLACEMENT = 200
 CHEMIN_SPRITE = 'res/img/entites/'
 CHEMIN_MAP = 'res/map/'
 CHEMIN_PLATEFORMES = 'res/plateformes/'
-TAILLE_PERSO = [120, 120]
+TAILLE_PERSO = [100, 100]
 COULEURS = ['rouge', 'jaune', 'vert', 'bleu']
 
 TOUCHES = [

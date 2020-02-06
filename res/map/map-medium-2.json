@@ -1,0 +1,50 @@
+[
+  {
+    "plateforme": "herbe",
+    "x": 0,
+    "y": 704,
+    "taille": 30
+  },
+  {
+    "plateforme": "panneau-droite",
+    "x": 0,
+    "y": 704,
+    "taille": 1
+  },
+  {
+    "plateforme": "pierre",
+    "x": 128,
+    "y": 608,
+    "taille": 10
+  },
+  {
+    "plateforme": "courant-x",
+    "x": 224,
+    "y": 680,
+    "taille": 3
+  },
+  {
+    "plateforme": "pierre",
+    "x": 400,
+    "y": 576,
+    "taille": 2
+  },
+  {
+    "plateforme": "courant-x",
+    "x": 400,
+    "y": 540,
+    "taille": 1
+  },
+  {
+    "plateforme": "pierre",
+    "x": 700,
+    "y": 540,
+    "taille": 3
+  },
+  {
+    "plateforme": "courant",
+    "x": 670,
+    "y": 540,
+    "taille": 2
+  }
+]

@@ -12,6 +12,25 @@ class Bloc:
         self.__sprite = pygame.image.load('res/img/Tileset.png')
         self._x = x
         self._y = y
+        self.__z_debut = list()
+        self.__z_milieu = list()
+        self.__z_fin = list()
+
+        for debut in self.__donnees['debut']:
+            if 'z' in debut:
+                self.__z_debut.append(debut['z'])
+            else:
+                self.__z_debut.append(0)
+        for milieu in self.__donnees['milieu']:
+            if 'z' in debut:
+                self.__z_milieu.append(milieu['z'])
+            else:
+                self.__z_milieu.append(0)
+        for fin in self.__donnees['fin']:
+            if 'z' in debut:
+                self.__z_fin.append(fin['z'])
+            else:
+                self.__z_milieu.append(0)
 
         fin_debut = 0
         fin_milieu = 0

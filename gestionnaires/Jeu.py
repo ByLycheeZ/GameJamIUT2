@@ -46,6 +46,8 @@ class Jeu:
         def evenement(self, evenement):
             if evenement.key == pygame.K_p or evenement.key == pygame.K_ESCAPE:
                 self.__pause.montrer = not self.__pause.montrer
+                Evenement().pause(self.__pause)
+                Maj().pause(self.__pause)
 
     __instance = None
     __konami = False

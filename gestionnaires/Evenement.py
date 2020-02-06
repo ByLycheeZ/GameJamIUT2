@@ -2,9 +2,9 @@ class Evenement:
     class __Evenement:
         def __init__(self):
             self.__auditeurs = dict()
+            self.__pause = None
 
         def enregistrer(self, evenement, objet):
-
             if evenement not in self.__auditeurs.keys():
                 self.__auditeurs[evenement] = list()
 
@@ -16,9 +16,18 @@ class Evenement:
                     self.__auditeurs[evenement].remove(objet)
 
         def maj(self, type_evenement, evenement):
-            if type_evenement in self.__auditeurs.keys():
-                for classe in self.__auditeurs[type_evenement]:
-                    classe.evenement(evenement)
+            if self.__pause:
+                self.__pause.evenement(evenement)
+            else:
+                if type_evenement in self.__auditeurs.keys():
+                    for classe in self.__auditeurs[type_evenement]:
+                        classe.evenement(evenement)
+
+        def pause(self, objet):
+            self.__pause = objet
+
+        def reprendre(self):
+            self.__pause = None
 
     __instance = None
 
@@ -34,3 +43,9 @@ class Evenement:
 
     def maj(self, type_evenement, evenement):
         Evenement.__instance.maj(type_evenement, evenement)
+
+    def pause(self, objet):
+        Evenement.__instance.pause(objet)
+
+    def reprendre(self):
+        Evenement.__instance.reprendre()

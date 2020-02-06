@@ -5,6 +5,7 @@ import gestionnaires.Jeu as Jeu
 
 from gestionnaires.Affichage import Affichage
 from gestionnaires.Evenement import Evenement
+from gestionnaires.Maj import Maj
 from interfaces.Ecran import Ecran
 
 from interfaces.elements.BoutonRetourAccueil import BoutonRetourAccueil
@@ -36,6 +37,17 @@ class Pause:
             font = pygame.font.Font("res/fonts/Comfortaa-Bold.ttf", 40)
             texte = font.render("Quitter la partie", True, self.MENU)
             ecran.blit(texte, (Constantes.LARGEUR/2 - texte.get_width()/2, 460))
+            
+    def evenement(self, evenement):
+        if self.montrer:
+            if evenement.type == pygame.MOUSEBUTTONUP:
+                self.__bouton_retour_jeu.evenement()
+                self.__bouton_retour_accueil.evenement()
+            elif evenement.type == pygame.KEYUP:
+                if evenement.key == pygame.K_p or evenement.key == pygame.K_ESCAPE:
+                    self.montrer = False
+                    Evenement().reprendre()
+                    Maj().reprendre()
 
     def fin(self):
         self.__jeu.fin()

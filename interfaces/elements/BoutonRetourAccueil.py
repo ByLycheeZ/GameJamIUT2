@@ -2,6 +2,7 @@ import pygame
 
 from gestionnaires.Affichage import Affichage
 from gestionnaires.Evenement import Evenement
+from gestionnaires.Maj import Maj
 
 from interfaces.elements.Bouton import Bouton
 
@@ -9,13 +10,14 @@ from interfaces.elements.Bouton import Bouton
 class BoutonRetourAccueil(Bouton):
     def __init__(self, coord, image, menu):
         super().__init__(coord, image, menu)
-        Evenement().enregistrer(pygame.MOUSEBUTTONUP, self)
 
-    def evenement(self, evenement):
+    def evenement(self):
         if self._menu.montrer and (self._coord[0] <= pygame.mouse.get_pos()[0] <= self._coord[0] + 605) \
                 and (self._coord[1] <= pygame.mouse.get_pos()[1] <= self._coord[1] + 76):
             self._menu.montrer = False
             self._menu.fin()
+            Evenement().reprendre()
+            Maj().reprendre()
 
     def affichage(self, ecran):
         if self._image != "":

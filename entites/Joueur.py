@@ -179,6 +179,7 @@ class Joueur:
 
     def __revivre(self):
         self.__rect.x = Ecran.x + Ecran.largeur / 2
+        self.__rect.y = Ecran.y + Ecran.hauteur / 2
 
     def affichage(self, ecran):
         if self.__vies <= 0:
@@ -287,7 +288,9 @@ class Joueur:
     def accroupir(self):
         self.__accroupi = True
         self.__anim_active = self.__anim_accroupi
+        self.__vitesse -= 100
 
     def relever(self):
         self.__accroupi = False
         self.__anim_active = self.__anim_attente
+        self.__vitesse += 100

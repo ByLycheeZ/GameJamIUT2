@@ -44,6 +44,10 @@ class Jeu:
         def get_joueurs(self):
             return self.__joueurs
 
+        def reprendre(self):
+            for joueur in self.__joueurs:
+                joueur.reprendre()
+
     __instance = None
     __konami = False
 
@@ -65,6 +69,9 @@ class Jeu:
         if self.__instance:
             return self.__instance.get_joueurs()
         return None
+
+    def reprendre(self):
+        self.__instance.reprendre()
 
     @staticmethod
     def konami():

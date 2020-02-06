@@ -48,6 +48,7 @@ class Pause:
                     self.montrer = False
                     Evenement().reprendre()
                     Maj().reprendre()
+                    self.__jeu.reprendre()
 
     def fin(self):
         self.__jeu.fin()

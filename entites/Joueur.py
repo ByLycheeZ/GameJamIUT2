@@ -68,6 +68,9 @@ class Joueur:
             elif evenement.key == self._touches.get('aller_droite'):
                 self.__deplacement[0] -= 1
 
+        self.__maj_animation()
+
+    def __maj_animation(self):
         if self.__deplacement[0] != 0:
             self.__anim_active = self.__anim_deplacement
         else:
@@ -235,3 +238,16 @@ class Joueur:
 
     def subit_tornade(self):
         self._subit_tornade = self.TEMPS_SUBIT_TORNADE
+
+    def reprendre(self):
+        key_pressed = pygame.key.get_pressed()
+        if key_pressed[self._touches.get('aller_droite')]:
+            self.__deplacement[0] = 1
+        elif key_pressed[self._touches.get('aller_gauche')]:
+            self.__deplacement[0] = -1
+        else:
+            self.__deplacement[0] = 0
+
+        self.__deplacement[0] += self.__boost
+
+        self.__maj_animation()

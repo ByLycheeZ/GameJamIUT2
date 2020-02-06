@@ -6,6 +6,7 @@ from gestionnaires.Carte import Carte
 from gestionnaires.Evenement import Evenement
 from gestionnaires.Maj import Maj
 from interfaces.Pause import Pause
+from interfaces.hud.HudMeilleurTemps import HudMeilleurTemps
 from interfaces.hud.HudFlecheDirection import HudFlecheDirection
 from utils.Constantes import TOUCHES
 from interfaces.Ecran import Ecran
@@ -28,11 +29,14 @@ class Jeu:
             else:
                 Sons().jouer_musique('fond')
 
+            self.__hud_meilleur_temps = HudMeilleurTemps()
 
             Evenement().enregistrer(pygame.KEYUP, self)
             self.__pause = Pause()
 
         def fin(self):
+            self.__hud_meilleur_temps.fin()
+
             for joueur in self.__joueurs:
                 joueur.fin()
 

@@ -1,0 +1,47 @@
+{
+  "direction": "y",
+  "debut": [
+    {
+      "x": 256,
+      "y": 160,
+      "largeur": 32,
+      "hauteur": 32,
+      "dx": 0,
+      "dy": 0
+    },
+    {
+      "x": 256,
+      "y": 192,
+      "largeur": 32,
+      "hauteur": 32,
+      "dx": 0,
+      "dy": 32
+    },
+    {
+      "x": 256,
+      "y": 224,
+      "largeur": 32,
+      "hauteur": 32,
+      "dx": 0,
+      "dy": 64
+    },
+    {
+      "x": 256,
+      "y": 256,
+      "largeur": 32,
+      "hauteur": 32,
+      "dx": 0,
+      "dy": 96
+    },
+    {
+      "x": 256,
+      "y": 256,
+      "largeur": 32,
+      "hauteur": 32,
+      "dx": 0,
+      "dy": 128
+    }
+  ],
+  "milieu": [],
+  "fin": []
+}

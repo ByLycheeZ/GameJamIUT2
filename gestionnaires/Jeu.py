@@ -14,10 +14,10 @@ from gestionnaires.Sons import Sons
 
 class Jeu:
     class __Jeu:
-        def __init__(self, couleurs_joueurs):
+        def __init__(self, couleurs_joueurs, nb_coeurs):
             self.__joueurs = []
             for i in range(0, len(couleurs_joueurs)):
-                self.__joueurs.append(JoueurTornade(TOUCHES[i], couleurs_joueurs[i]))
+                self.__joueurs.append(JoueurTornade(TOUCHES[i], couleurs_joueurs[i], nb_coeurs))
 
             self.__parallax = Parallax()
             self.__carte = Carte()
@@ -63,9 +63,9 @@ class Jeu:
     __instance = None
     __konami = False
 
-    def __init__(self, couleurs_joueurs=None):
+    def __init__(self, couleurs_joueurs=None, nb_coeurs=3):
         if not Jeu.__instance and couleurs_joueurs:
-            Jeu.__instance = Jeu.__Jeu(couleurs_joueurs)
+            Jeu.__instance = Jeu.__Jeu(couleurs_joueurs, nb_coeurs)
 
     def fin(self, couleur=None):
         self.__instance.fin()

@@ -21,7 +21,7 @@ class BoutonCommencer(Bouton):
                         and (self._coord[1] <= pygame.mouse.get_pos()[1] <= self._coord[1] + 66):
                     self._menu.montrer = False
                     Sons().jouer_son('clique', 'ogg')
-                    Jeu([self._menu.get_selection_j1(), self._menu.get_selection_j2()])
+                    Jeu([self._menu.get_selection_j1(), self._menu.get_selection_j2()], self._menu.get_nb_coeurs())
 
     def affichage(self, ecran):
         nom = self._image

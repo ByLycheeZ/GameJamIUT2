@@ -15,8 +15,8 @@ class Sons:
             if musique in self.sons.keys():
                 self.sons[musique].stop()
 
-        def jouer_son(self, son, extension):
-            pygame.mixer.Sound(f'res/sons/sfx/{son}.{extension}').play()
+        def jouer_son(self, son, extension, loops, maxtime):
+            pygame.mixer.Sound(f'res/sons/sfx/{son}.{extension}').play(loops, maxtime)
 
     __instance = None
 
@@ -30,5 +30,5 @@ class Sons:
     def pause_musique(self, musique):
         self.__instance.arreter_musique(musique)
 
-    def jouer_son(self, son, extension='wav'):
-        self.__instance.jouer_son(son, extension)
+    def jouer_son(self, son, extension='wav', loops=0, maxtime=0):
+        self.__instance.jouer_son(son, extension, loops, maxtime*1000)

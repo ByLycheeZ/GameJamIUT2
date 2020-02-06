@@ -1,5 +1,6 @@
 import pygame
 from entites.Joueur import Joueur
+from entites.JoueurTornade import JoueurTornade
 from decorations.Parallax import Parallax
 from gestionnaires.Carte import Carte
 from gestionnaires.Evenement import Evenement
@@ -15,7 +16,7 @@ class Jeu:
         def __init__(self, couleurs_joueurs):
             self.__joueurs = []
             for i in range(0, len(couleurs_joueurs)):
-                self.__joueurs.append(Joueur(TOUCHES[i], couleurs_joueurs[i]))
+                self.__joueurs.append(JoueurTornade(TOUCHES[i], couleurs_joueurs[i]))
 
             self.__parallax = Parallax()
             self.__carte = Carte()
@@ -39,6 +40,9 @@ class Jeu:
         def collisions(self, joueur, delta):
             return self.__carte.collisions(joueur, delta)
 
+        def get_joueurs(self):
+            return self.__joueurs
+
     __instance = None
     __konami = False
 
@@ -55,6 +59,11 @@ class Jeu:
 
     def collisions(self, joueur, delta):
         return self.__instance.collisions(joueur, delta)
+
+    def get_joueurs(self):
+        if self.__instance:
+            return self.__instance.get_joueurs()
+        return None
 
     @staticmethod
     def konami():

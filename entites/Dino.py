@@ -16,7 +16,7 @@ class Dino:
         self.anim = Animation(18, 0, TAILLE_PERSO[0], TAILLE_PERSO[1], 6, 0.2)
 
         Maj().enregistrer(self)
-        Affichage().enregistrer(self)
+        Affichage().enregistrer(self, 3)
 
     def maj(self, delta):
         self.anim.ajouter_temps(delta)

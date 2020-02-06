@@ -67,11 +67,12 @@ class Bloc:
             hauteur = self.__donnees['debut'][0]['hauteur']
 
         self.__taille = taille
-        if nom_json not in Bloc.DESSINS:
+        nom_cache = f'{nom_json}|{taille}'
+        if nom_cache not in Bloc.DESSINS:
             self.__init_dessin(largeur, hauteur, fin_debut, fin_milieu, taille_milieu)
-            Bloc.DESSINS[nom_json] = self._dessin
+            Bloc.DESSINS[nom_cache] = self._dessin
         else:
-            self._dessin = Bloc.DESSINS[nom_json]
+            self._dessin = Bloc.DESSINS[nom_cache]
 
         Affichage().enregistrer(self)
 

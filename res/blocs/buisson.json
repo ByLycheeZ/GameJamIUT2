@@ -2,9 +2,9 @@
   "direction": "x",
   "debut": [
     {
-      "x": 0,
-      "y": 160,
-      "largeur": 32,
+      "x": 128,
+      "y": 288,
+      "largeur": 64,
       "hauteur": 32,
       "dx": 0,
       "dy": 0

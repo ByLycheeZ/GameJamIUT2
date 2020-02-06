@@ -2,8 +2,8 @@
   "direction": "x",
   "debut": [
     {
-      "x": 0,
-      "y": 160,
+      "x": 480,
+      "y": 224,
       "largeur": 32,
       "hauteur": 32,
       "dx": 0,

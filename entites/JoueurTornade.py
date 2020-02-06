@@ -12,7 +12,7 @@ class JoueurTornade(Joueur):
         self.__cd = 0  # pour la gestions du temps
 
     def evenement(self, evenement):
-        if self.__cd <= 0:
+        if self.__cd <= 0 and self._subit_tornade <= 0:
             if evenement.type == pygame.KEYDOWN:
                 if evenement.key == self._touches.get('competence'):
                     self.__competence()
@@ -33,7 +33,7 @@ class JoueurTornade(Joueur):
         if deplacement_x < 0:
             deplacement_x = -1
             position_x = rect.x - Tornade.TAILLE_IMAGE[0] + 20
-        elif deplacement_x >= 0:
+        else:
             deplacement_x = 1
             position_x = rect.x + TAILLE_PERSO[0] - 20
 

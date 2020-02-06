@@ -12,12 +12,14 @@ from interfaces.hud.HudVie import HudVie
 
 
 class Joueur:
-    NB_SAUT_MAX = 1
+    NB_SAUT_MAX = 2
     RECTANGLE_COLLISION = pygame.Rect(20, 20, 75, 85)
+    TEMPS_SUBIT_TORNADE = 2  # En seconde
 
     __count = 0
 
     def __init__(self, touches, couleur):
+        # Private
         Joueur.__count += 1
         self.__vies = 1
         self.__sprite = pygame.image.load(f'{CHEMIN_SPRITE}dino-{couleur}.png')
@@ -28,7 +30,7 @@ class Joueur:
         self.__deplacement = [0, 0]
         self.__velocite_saut, self.vitesse_chute = 2, 4
         self.__nb_saut_restant = 1
-
+        self._subit_tornade = -1
         self.__anim_attente = Animation(0, 0, TAILLE_PERSO[0], TAILLE_PERSO[1], 4, 0.2)
         self.__anim_deplacement = Animation(4, 0, TAILLE_PERSO[0], TAILLE_PERSO[1], 6, 0.2)
         self.__anim_attaque = Animation(10, 0, TAILLE_PERSO[0], TAILLE_PERSO[1], 3, 0.2)
@@ -78,17 +80,22 @@ class Joueur:
             jeu.fin(self._couleur)
             return
 
-        self.__anim_active.ajouter_temps(delta)
+        if self._subit_tornade <= 0:
+            self.__anim_active.ajouter_temps(delta)
 
-        # Mouvement X
-        self.__rect = self.__rect.move(self.__vitesse * self.__deplacement[0] * delta, 0)
-        self.__collisions((self.__deplacement[0], 0), jeu.collisions(self, 0))
+            # Mouvement X
+            self.__rect = self.__rect.move(self.__vitesse * self.__deplacement[0] * delta, 0)
+            self.__collisions((self.__deplacement[0], 0), jeu.collisions(self, 0))
 
-        # Mouvement Y
-        self.__rect = self.__rect.move(0, self.__vitesse * self.__deplacement[1] * delta)
-        self.__collisions((0, self.__deplacement[1]), jeu.collisions(self, delta))
+            # Mouvement Y
+            self.__rect = self.__rect.move(0, self.__vitesse * self.__deplacement[1] * delta)
+            self.__collisions((0, self.__deplacement[1]), jeu.collisions(self, delta))
 
-        self.__deplacement[1] += self.vitesse_chute * delta
+            self.__deplacement[1] += self.vitesse_chute * delta
+        else:
+            # gere temps de stun
+            self._subit_tornade -= delta
+
         self.__maj_camera(delta)
 
     def __collisions(self, deplacement, collisions):
@@ -199,3 +206,6 @@ class Joueur:
         Evenement().supprimer(self)
         Affichage().supprimer(self)
         Maj().supprimer(self)
+
+    def subit_tornade(self):
+        self._subit_tornade = self.TEMPS_SUBIT_TORNADE

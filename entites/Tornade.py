@@ -49,3 +49,9 @@ class Tornade:
 
     def get_couleur_joueur(self):
         return self.__couleur_joueur
+
+    def collisions(self, joueur, delta):
+        this_rect = self._dessin.get_rect()
+        this_rect.x, this_rect.y = self._x, self._y
+        j_rect = joueur.get_rect_collision()
+        return this_rect if this_rect.colliderect(j_rect) else None

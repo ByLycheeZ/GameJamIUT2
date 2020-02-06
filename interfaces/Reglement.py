@@ -70,6 +70,7 @@ class Reglement:
             ecran.blit(font.render(self.nom_touche(Constantes.TOUCHES[0]['sauter']), True, self.TOUCHE), (390, 425))  # Haut
             # ecran.blit(font.render(pygame.key.name(Constantes.TOUCHES[0]['']), True, self.TOUCHE), (370, 505))  # Bas
             ecran.blit(font.render(self.nom_touche(Constantes.TOUCHES[0]['aller_gauche']), True, self.TOUCHE), (307, 495))  # Gauche
+            ecran.blit(font.render(self.nom_touche(Constantes.TOUCHES[0]['accroupir']), True, self.TOUCHE), (390, 500))  # Accroupir
             ecran.blit(font.render(self.nom_touche(Constantes.TOUCHES[0]['aller_droite']), True, self.TOUCHE), (470, 500))  # Droite
             ecran.blit(font.render(self.nom_touche(Constantes.TOUCHES[0]['competence']), True, self.TOUCHE), (377, 630))  # Compétence
 
@@ -82,6 +83,7 @@ class Reglement:
             ecran.blit(font.render(self.nom_touche(Constantes.TOUCHES[1]['sauter']), True, self.TOUCHE), (785, 425))  # Haut
             # ecran.blit(font.render(pygame.key.name(Constantes.TOUCHES[0]['']), True, self.TOUCHE), (370, 505))  # Bas
             ecran.blit(font.render(self.nom_touche(Constantes.TOUCHES[1]['aller_gauche']), True, self.TOUCHE), (700, 500))  # Gauche
+            ecran.blit(font.render(self.nom_touche(Constantes.TOUCHES[1]['accroupir']), True, self.TOUCHE), (785, 500))  # Accroupir
             ecran.blit(font.render(self.nom_touche(Constantes.TOUCHES[1]['aller_droite']), True, self.TOUCHE), (865, 500))  # Droite
             ecran.blit(font.render(self.nom_touche(Constantes.TOUCHES[1]['competence']), True, self.TOUCHE), (773, 627))  # Compétence
 

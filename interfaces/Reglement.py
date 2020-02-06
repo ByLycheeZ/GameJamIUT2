@@ -2,6 +2,7 @@ import pygame
 
 from gestionnaires.Affichage import Affichage
 from gestionnaires.Evenement import Evenement
+from gestionnaires.Images import Images
 
 from utils import Constantes
 
@@ -15,7 +16,7 @@ class Reglement:
     def __init__(self, menu):
         self.montrer = False
         self.__menu = menu
-        self.__background = pygame.image.load("res/img/interfaces/accueil/accueil-background.png")
+        self.__background = Images().charger_image("res/img/interfaces/accueil/accueil-background.png")
         Affichage().enregistrer(self)
         Evenement().enregistrer(pygame.KEYUP, self)
 
@@ -57,7 +58,7 @@ class Reglement:
             font = pygame.font.Font("res/fonts/Comfortaa-Bold.ttf", 22)
             ecran.blit(font.render("Déplacements", True, self.DESCRIPTION), (50, 480))
             ecran.blit(font.render("Compétence", True, self.DESCRIPTION), (50, 650))
-            touche = pygame.image.load("res/img/interfaces/regles/touche.png")
+            touche = Images().charger_image("res/img/interfaces/regles/touche.png")
             font = pygame.font.Font("res/fonts/NotoSansJP-Bold.otf", 45)
 
             # Joueur 1

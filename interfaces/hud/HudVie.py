@@ -1,5 +1,6 @@
 import pygame
 from gestionnaires.Affichage import Affichage
+from gestionnaires.Images import Images
 from utils.Constantes import COUCHE_HUD, LARGEUR, HAUTEUR
 
 
@@ -11,8 +12,8 @@ class HudVie:
     def __init__(self, pv, couleur):
         self.__max_pv = pv
         self.__pv = pv
-        self.__coeur = pygame.image.load(f'res/img/hud/coeur-{couleur}.bmp')
-        self.__coeur_vide = pygame.image.load('res/img/hud/coeur_perdu.bmp')
+        self.__coeur = Images().charger_image(f'res/img/hud/coeur-{couleur}.bmp')
+        self.__coeur_vide = Images().charger_image('res/img/hud/coeur_perdu.bmp')
 
         self.__init__position()
         HudVie.__compte += 1

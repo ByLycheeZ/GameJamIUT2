@@ -2,6 +2,7 @@ import pygame
 import math
 import gestionnaires.Jeu as Jeu
 from gestionnaires.Affichage import *
+from gestionnaires.Images import Images
 from gestionnaires.Maj import *
 from gestionnaires.Sons import Sons
 from utils.Animation import Animation
@@ -15,7 +16,7 @@ class Tornade:
     def __init__(self, positions, deplacement, couleur_joueur, vitesse=400, duree=3):
         self.__couleur_joueur = couleur_joueur
         self.__temps_fin = pygame.time.get_ticks() / 1000 + duree
-        self.__sprite = pygame.image.load(self.CHEMIN_SPRITE + 'Tornade.png')
+        self.__sprite = Images().charger_image(self.CHEMIN_SPRITE + 'Tornade.png')
         self.__rect = self.__sprite.get_rect()
         self.__rect.x, self.__rect.y = positions
         self.__deplacement = deplacement

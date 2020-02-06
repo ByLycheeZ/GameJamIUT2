@@ -1,6 +1,7 @@
 import pygame
 
 from gestionnaires.Evenement import Evenement
+from gestionnaires.Images import Images
 from gestionnaires.Sons import Sons
 from interfaces.elements.Bouton import Bouton
 
@@ -23,5 +24,5 @@ class BoutonReglement(Bouton):
 
     def affichage(self, ecran):
         if self._image != "":
-            image = pygame.image.load(f'res/img/interfaces/regles/{self._image}.png')
+            image = Images().charger_image(f'res/img/interfaces/regles/{self._image}.png')
             ecran.blit(image, self._coord)

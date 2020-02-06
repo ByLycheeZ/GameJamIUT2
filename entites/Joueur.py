@@ -1,6 +1,7 @@
 import pygame
 import gestionnaires.Jeu as Jeu
 from gestionnaires.Affichage import *
+from gestionnaires.Images import Images
 from gestionnaires.Maj import *
 from gestionnaires.Evenement import *
 from gestionnaires.Sons import Sons
@@ -22,7 +23,7 @@ class Joueur:
         # Private
         Joueur.__count += 1
         self.__vies = 1
-        self.__sprite = pygame.image.load(f'{CHEMIN_SPRITE}dino-{couleur}.png')
+        self.__sprite = Images().charger_image(f'{CHEMIN_SPRITE}dino-{couleur}.png')
         self.__hud = HudVie(self.__vies, couleur)
         self.__rect = self.__sprite.get_rect()
         self.__rect.y = HAUTEUR - TAILLE_PERSO[1]
@@ -212,7 +213,7 @@ class Joueur:
         self.__deplacement[1] += y
 
     def set_sprite(self, nom_fichier):
-        self.__sprite = pygame.image.load(CHEMIN_SPRITE + nom_fichier)
+        self.__sprite = Images().charger_image(CHEMIN_SPRITE + nom_fichier)
 
     def set_rect(self, rect):
         self.__rect = rect

@@ -4,6 +4,7 @@ import pygame
 import sys
 import pygame.time as time
 from gestionnaires.Evenement import *
+from gestionnaires.Images import Images
 from gestionnaires.Maj import *
 from interfaces.Intro import Intro
 from interfaces.MenuPrincipal import MenuPrincipal
@@ -15,7 +16,7 @@ random.seed()
 
 ecran = pygame.display.set_mode(TAILLE)
 pygame.display.set_caption("Dino Tempest")
-icon = pygame.image.load("res/img/fenetre/icon2.png")
+icon = Images().charger_image("res/img/fenetre/icon2.png")
 pygame.display.set_icon(icon)
 
 # menu = MenuPrincipal()

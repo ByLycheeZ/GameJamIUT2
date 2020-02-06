@@ -1,5 +1,6 @@
 import pygame
 from gestionnaires.Affichage import *
+from gestionnaires.Images import Images
 from gestionnaires.Maj import *
 import json
 
@@ -12,7 +13,7 @@ class Bloc:
     def __init__(self, nom_json, x, y, taille):
         fichier_json = open(f'res/blocs/{nom_json}.json')
         self.__donnees = json.load(fichier_json)
-        self.__sprite = pygame.image.load('res/img/Tileset.png')
+        self.__sprite = Images().charger_image('res/img/Tileset.png')
         self._x = x
         self._y = y
         self.__z = self.__donnees['z'] if 'z' in self.__donnees.keys() else 0

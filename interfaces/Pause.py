@@ -48,6 +48,7 @@ class Pause:
                     self.montrer = False
                     Evenement().reprendre()
                     Maj().reprendre()
+                    self.__jeu.reprendre()
 
     def fin(self):
         self.__jeu.fin()
@@ -55,5 +56,4 @@ class Pause:
         MenuPrincipal.MenuPrincipal()
         self.__jeu = None
         Affichage().supprimer(self)
-        Evenement().supprimer(self.__bouton_retour_accueil)
-        Evenement().supprimer(self.__bouton_retour_jeu)
+        Evenement().supprimer(self)

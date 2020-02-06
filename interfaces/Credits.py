@@ -90,11 +90,11 @@ class Credits:
 
                 ecran.blit(font.render("Musique", True, self.NOM), (self.NOM_X, 360))
                 ecran.blit(font.render("Musique alternative", True, self.NOM), (self.NOM_X, 390))
-                ecran.blit(font.render("Son de vent", True, self.NOM), (self.NOM_X, 420))
-                ecran.blit(font.render("Son de fin", True, self.NOM), (self.NOM_X, 450))
-                ecran.blit(font.render("Son de fin alternatif", True, self.NOM), (self.NOM_X, 480))
-                ecran.blit(font.render("Son de mort", True, self.NOM), (self.NOM_X, 510))
-                ecran.blit(font.render("Son de mort alternatif", True, self.NOM), (self.NOM_X, 540))
+                ecran.blit(font.render("Son de vent", True, self.NOM), (self.NOM_X, 450))
+                ecran.blit(font.render("Son de fin", True, self.NOM), (self.NOM_X, 480))
+                ecran.blit(font.render("Son de fin alternatif", True, self.NOM), (self.NOM_X, 510))
+                ecran.blit(font.render("Son de mort", True, self.NOM), (self.NOM_X, 540))
+                ecran.blit(font.render("Son de mort alternatif", True, self.NOM), (self.NOM_X, 570))
 
                 # Liens
                 font = pygame.font.Font("res/fonts/Comfortaa-Bold.ttf", 15)
@@ -105,12 +105,13 @@ class Credits:
                 ecran.blit(font.render("https://opengameart.org/content/spells-and-company", True, self.DESCRIPTION), (self.DESC_X, 273))
 
                 ecran.blit(font.render("https://www.fesliyanstudios.com/royalty-free-music/download/retro-platforming/454", True, self.DESCRIPTION), (self.DESC_X, 363))
-                ecran.blit(font.render("https://freemusicarchive.org/music/sawsquarenoise/Towel_Defence_OST/Towel_Defence_Ingame", True, self.DESCRIPTION), (self.DESC_X - 100, 393))
-                ecran.blit(font.render("https://lasonotheque.org/detail-0595-vent.html", True, self.DESCRIPTION), (self.DESC_X, 423))
-                ecran.blit(font.render("https://opengameart.org/content/crash-collision", True, self.DESCRIPTION), (self.DESC_X, 453))
-                ecran.blit(font.render("https://opengameart.org/content/15-monster-gruntpaindeath-sounds", True, self.DESCRIPTION), (self.DESC_X, 483))
-                ecran.blit(font.render("http://soundbible.com/1569-I-Will-Kill-You.html", True, self.DESCRIPTION), (self.DESC_X, 513))
-                ecran.blit(font.render("http://soundbible.com/1459-Psycho-Scream.html", True, self.DESCRIPTION), (self.DESC_X, 543))
+                ecran.blit(font.render("https://freemusicarchive.org/music/sawsquarenoise/Towel_Defence_OST/", True, self.DESCRIPTION), (self.DESC_X, 393))
+                ecran.blit(font.render("Towel_Defence_Ingame", True, self.DESCRIPTION), (self.DESC_X, 410))
+                ecran.blit(font.render("https://lasonotheque.org/detail-0595-vent.html", True, self.DESCRIPTION), (self.DESC_X, 453))
+                ecran.blit(font.render("https://opengameart.org/content/crash-collision", True, self.DESCRIPTION), (self.DESC_X, 483))
+                ecran.blit(font.render("https://opengameart.org/content/15-monster-gruntpaindeath-sounds", True, self.DESCRIPTION), (self.DESC_X, 513))
+                ecran.blit(font.render("http://soundbible.com/1569-I-Will-Kill-You.html", True, self.DESCRIPTION), (self.DESC_X, 543))
+                ecran.blit(font.render("http://soundbible.com/1459-Psycho-Scream.html", True, self.DESCRIPTION), (self.DESC_X, 573))
 
             # Instruction ESC
             font = pygame.font.Font("res/fonts/Comfortaa-Bold.ttf", 20)

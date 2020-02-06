@@ -36,7 +36,7 @@
         "collision": false,
         "module": "blocs.BlocCourant",
         "classe": "BlocCourant",
-        "attributs": [[0, -1]]
+        "attributs": [[0, -1], 5]
       }
     ],
     "courant-x": [
@@ -47,7 +47,7 @@
         "collision": false,
         "module": "blocs.BlocCourant",
         "classe": "BlocCourant",
-        "attributs": [[1, 0]]
+        "attributs": [[1, 0], 3]
       }
     ]
   },

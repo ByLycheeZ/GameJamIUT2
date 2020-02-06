@@ -5,6 +5,7 @@ from gestionnaires.Evenement import Evenement
 from gestionnaires.Images import Images
 
 from interfaces.elements.BoutonCommencer import BoutonCommencer
+from utils.Constantes import LARGEUR, HAUTEUR
 
 
 class ChoixPersonnages:
@@ -18,6 +19,21 @@ class ChoixPersonnages:
             self.selectionne = selectionne
             self.coord = coord
             self.nom = nom
+
+    class __Coeur:
+        def __init__(self, i, coord=(0, 0), selectionne=False):
+            self.surface = Images().charger_image('res/img/hud/coeur-rouge.bmp').convert_alpha()
+            self.surface_transparent = self.surface.copy()
+            self.surface_transparent.fill((255, 255, 255, 70), None, pygame.BLEND_RGBA_MULT)
+            self.selectionne = selectionne
+            self.coord = coord
+            self.index = i + 1
+
+        def collision(self, point):
+            rect = self.surface.get_rect()
+            rect.x, rect.y = self.coord
+
+            return rect.collidepoint(point)
 
     def __init__(self, menu):
         self.montrer = False
@@ -35,6 +51,16 @@ class ChoixPersonnages:
             "vert": self.__dino_vert,
             "jaune": self.__dino_jaune
         }
+
+        font = pygame.font.Font('res/fonts/Comfortaa-Bold.ttf', 30)
+        self.__difficulte = font.render('Niveau de difficulté : ', True, (255, 255, 255))
+
+        self.__coeurs = []
+        for i in range(3):
+            self.__coeurs.append(self.__Coeur(i, (LARGEUR / 2 - 50 + i * 40, HAUTEUR / 2 - 30), True))
+        for i in range(3, 5):
+            self.__coeurs.append(self.__Coeur(i, (LARGEUR / 2 - 50 + i * 40, HAUTEUR / 2 - 30)))
+
         self.__background = Images().charger_image("res/img/interfaces/accueil/accueil-background.png")
         Affichage().enregistrer(self)
         Evenement().enregistrer(pygame.MOUSEBUTTONUP, self)
@@ -66,6 +92,12 @@ class ChoixPersonnages:
                     image = dino.surface_transparent.subsurface(pygame.Rect(0, 0, 240, 240))
                 ecran.blit(image, (250 * n_ieme, 70 + self.DECALAGE))
                 n_ieme += 1
+            ecran.blit_absolu(self.__difficulte, (80, HAUTEUR / 2 - 30))
+            for coeur in self.__coeurs:
+                if coeur.selectionne:
+                    ecran.blit_absolu(coeur.surface, coeur.coord)
+                else:
+                    ecran.blit_absolu(coeur.surface_transparent, coeur.coord)
 
     def evenement(self, evenement):
         if self.montrer:
@@ -85,6 +117,12 @@ class ChoixPersonnages:
                                 self.__dinos.get(self.__selection_joueur_2).selectionne = False
                             self.__selection_joueur_2 = couleur
                             dino.selectionne = True
+                for coeur in self.__coeurs:
+                    if coeur.collision(pygame.mouse.get_pos()):
+                        for i in range(0, coeur.index):
+                            self.__coeurs[i].selectionne = True
+                        for i in range(coeur.index, len(self.__coeurs)):
+                            self.__coeurs[i].selectionne = False
                 if not self.__selection_joueur_1 == "" and not self.__selection_joueur_2 == "":
                     self.__bouton_commencer.transparent = False
             elif evenement.type == pygame.KEYUP:
@@ -102,3 +140,10 @@ class ChoixPersonnages:
 
     def get_selection_j2(self):
         return self.__selection_joueur_2
+
+    def get_nb_coeurs(self):
+        i = 0
+        while i < len(self.__coeurs) and self.__coeurs[i].selectionne:
+            i += 1
+
+        return i

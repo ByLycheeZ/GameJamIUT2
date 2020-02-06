@@ -4,12 +4,14 @@ import json
 
 
 class Bloc:
+    DESSINS = {}
+
     def __init__(self, nom_json, x, y, taille):
         fichier_json = open(f'res/blocs/{nom_json}.json')
         self.__donnees = json.load(fichier_json)
         self.__sprite = pygame.image.load('res/img/Tileset.png')
-        self.__x = x
-        self.__y = y
+        self._x = x
+        self._y = y
 
         fin_debut = 0
         fin_milieu = 0
@@ -46,7 +48,11 @@ class Bloc:
             hauteur = self.__donnees['debut'][0]['hauteur']
 
         self.__taille = taille
-        self.__init_dessin(largeur, hauteur, fin_debut, fin_milieu, taille_milieu)
+        if nom_json not in Bloc.DESSINS:
+            self.__init_dessin(largeur, hauteur, fin_debut, fin_milieu, taille_milieu)
+            Bloc.DESSINS[nom_json] = self._dessin
+        else:
+            self._dessin = Bloc.DESSINS[nom_json]
 
         Affichage().enregistrer(self)
 
@@ -56,11 +62,11 @@ class Bloc:
                 pygame.Rect(element['x'], element['y'], element['largeur'], element['hauteur']))
             x_element = element['dx'] + direction[0] * decalage
             y_element = element['dy'] + direction[1] * decalage
-            self.__dessin.blit(sprite, (x_element, y_element))
+            self._dessin.blit(sprite, (x_element, y_element))
 
     def __init_dessin(self, largeur, hauteur, fin_debut, fin_milieu, taille_milieu):
-        self.__dessin = pygame.Surface((largeur, hauteur)).convert_alpha()
-        self.__dessin.fill((0, 0, 0, 0))
+        self._dessin = pygame.Surface((largeur, hauteur)).convert_alpha()
+        self._dessin.fill((0, 0, 0, 0))
 
         direction = [0, 0]
         if self.__donnees['direction'] == 'x':
@@ -74,13 +80,19 @@ class Bloc:
         self.dessiner_partie(direction, fin_milieu, self.__donnees['fin'])
 
     def affichage(self, ecran):
-        ecran.blit(self.__dessin, (self.__x, self.__y))
+        ecran.blit(self._dessin, (self._x, self._y))
 
     def set_x(self, x):
-        self.__x = x
+        self._x = x
 
     def set_y(self, y):
-        self.__y = y
+        self._y = y
 
     def get_largeur(self):
-        return self.__dessin.get_width()
+        return self._dessin.get_width()
+
+    def get_rect(self):
+        return self._dessin.get_rect()
+
+    def collisions(self, joueur, delta):
+        return None

@@ -11,9 +11,8 @@ class Chemin:
 
         self.__plateformes = []
         self.__x_max = 0
-        for plateforme in self.__donnees['disposition']:
-            elem = Plateforme(self.__donnees['plateformes'][plateforme['plateforme']],
-                              plateforme['x'], plateforme['y'], plateforme['taille'])
+        for plateforme in self.__donnees:
+            elem = Plateforme(plateforme['plateforme'], plateforme['x'], plateforme['y'], plateforme['taille'])
 
             self.__plateformes.append(elem)
             self.__x_max = max(self.__x_max, elem.get_x_max())
@@ -24,3 +23,11 @@ class Chemin:
 
     def get_x_max(self):
         return self.__x_max
+
+    def collisions(self, joueur, delta):
+        collision = None
+        for plateforme in self.__plateformes:
+            collision = plateforme.collisions(joueur, delta)
+            if collision:
+                break
+        return collision

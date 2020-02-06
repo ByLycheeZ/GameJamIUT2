@@ -33,10 +33,10 @@ class Pause:
             self.__bouton_retour_accueil.affichage(ecran)
             font = pygame.font.Font("res/fonts/Comfortaa-Bold.ttf", 60)
             texte = font.render("Retour au jeu", True, self.RETOUR)
-            ecran.blit(texte, (Constantes.LARGEUR/2 - texte.get_width()/2, 300))
+            ecran.blit_absolu(texte, (Constantes.LARGEUR/2 - texte.get_width()/2, 300))
             font = pygame.font.Font("res/fonts/Comfortaa-Bold.ttf", 40)
             texte = font.render("Quitter la partie", True, self.MENU)
-            ecran.blit(texte, (Constantes.LARGEUR/2 - texte.get_width()/2, 460))
+            ecran.blit_absolu(texte, (Constantes.LARGEUR/2 - texte.get_width()/2, 460))
             
     def evenement(self, evenement):
         if self.montrer:

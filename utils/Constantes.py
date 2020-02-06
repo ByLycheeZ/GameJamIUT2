@@ -8,6 +8,7 @@ COUCHE_HUD = 2
 
 CHEMIN_SPRITE = 'res/img/entites/'
 CHEMIN_MAP = 'res/map/'
+CHEMIN_PLATEFORMES = 'res/plateformes/'
 TAILLE_PERSO = [120, 120]
 COULEURS = ['rouge', 'jaune', 'vert', 'bleu']
 

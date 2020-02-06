@@ -2,14 +2,17 @@ from blocs.BlocCollision import BlocCollision
 
 
 class BlocCourant(BlocCollision):
-    VITESSE = 200
-    def __init__(self, json, x, y, direction):
-        BlocCollision.__init(json, x, y)
-        self.direction = direction
 
-    def get_collisions(self, joueur, delta):
-        if self.dessin.get_rect().colliderect(joueur.get_rect()):
-            joueur.get_rect().move(self.VITESSE * self.direction[0] * delta,
-                                   self.VITESSE * self.direction[1] * delta)
+    def __init__(self, json, x, y, taille, direction, vitesse):
+        super(BlocCourant, self).__init__(json, x, y, taille)
+        self.__direction = direction
+        self.__vitesse = vitesse
 
-        return [0, 0]
+    def collisions(self, joueur, delta):
+        this_rect = self._dessin.get_rect()
+        this_rect.x, this_rect.y = self._x, self._y
+
+        if this_rect.colliderect(joueur.get_rect_collision()):
+            joueur.ajouter_boost(*[self.__vitesse * delta * x for x in self.__direction])
+
+        return None

@@ -6,13 +6,8 @@ class BlocCollision(Bloc):
     def __init__(self, json, x, y, taille=1):
         super(BlocCollision, self).__init__(json, x, y, taille)
 
-    def get_collisions(self, rect):
-        this_rect = self.__dessin.get_rect()
-        collision = [0, 0]
-        if this_rect.colliderect(rect):
-            if (this_rect.left < rect.left and this_rect.right > rect.right) or (this_rect.left > rect.left and this_rect.right > rect.right):
-                collision[0] = -1
-            if (this_rect.top < rect.top and this_rect.bottom > rect.bottom) or (this_rect.top > rect.top and this_rect.bottom < rect.bottom):
-                collision[1] = -1
-        return collision
-
+    def collisions(self, joueur, delta):
+        this_rect = self._dessin.get_rect()
+        this_rect.x, this_rect.y = self._x, self._y
+        j_rect = joueur.get_rect_collision()
+        return this_rect if this_rect.colliderect(j_rect) else None

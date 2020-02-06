@@ -1,0 +1,33 @@
+[
+  {
+    "plateforme": "herbe",
+    "x": 0,
+    "y": 704,
+    "taille": 20
+  },
+  {
+    "plateforme": "pierre",
+    "x": 128,
+    "y": 544,
+    "taille": 15
+  },
+  {
+    "plateforme": "courant",
+    "x": 32,
+    "y": 576,
+    "taille": 1
+  },
+  {
+    "plateforme": "panneau-droite",
+    "x": 0,
+    "y": 704,
+    "taille": 1
+  },
+  {
+    "plateforme": "courant-x",
+    "x": 572,
+    "y": 672,
+    "taille": 2
+  }
+
+]

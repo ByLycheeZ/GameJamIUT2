@@ -15,6 +15,7 @@ from interfaces.hud.HudVie import HudVie
 class Joueur:
     NB_SAUT_MAX = 1
     RECTANGLE_COLLISION = pygame.Rect(16, 16, 62, 70)
+    RECTANGLE_COLLISION_ACCROUPI = pygame.Rect(24, 25, 76, 61)
     TEMPS_SUBIT_TORNADE = 2  # En seconde
 
     __count = 0
@@ -22,7 +23,7 @@ class Joueur:
     def __init__(self, touches, couleur):
         # Private
         Joueur.__count += 1
-        self.__vies = 1
+        self.__vies = 3
         self.__sprite = Images().charger_image(f'{CHEMIN_SPRITE}dino-{couleur}.png')
         self.__hud = HudVie(self.__vies, couleur)
         self.__rect = self.__sprite.get_rect()
@@ -33,8 +34,9 @@ class Joueur:
         self.__velocite_saut, self.vitesse_chute = 2, 4
         self.__nb_saut_restant = 1
         self._subit_tornade = -1
+        self.__accroupi = False
         self.__anim_attente = Animation(0, 0, TAILLE_PERSO[0], TAILLE_PERSO[1], 4, 0.2)
-        self.__anim_deplacement = Animation(4, 0, TAILLE_PERSO[0], TAILLE_PERSO[1], 6, 0.2)
+        self.__anim_deplacement = Animation(4, 0, TAILLE_PERSO[0], TAILLE_PERSO[1], 6, 0.13)
         self.__anim_attaque = Animation(10, 0, TAILLE_PERSO[0], TAILLE_PERSO[1], 3, 0.2)
         self.__anim_degat = Animation(13, 0, TAILLE_PERSO[0], TAILLE_PERSO[1], 4, 0.2)
         self.__anim_accroupi = Animation(18, 0, TAILLE_PERSO[0], TAILLE_PERSO[1], 6, 0.2)
@@ -63,20 +65,25 @@ class Joueur:
                 self.__deplacement[1] -= self.__velocite_saut
                 self.__nb_saut_restant -= 1
                 Sons().jouer_son('saut')
+            elif evenement.key == self._touches.get('accroupir'):
+                self.accroupir()
 
         else:  # KEYUP
             if evenement.key == self._touches.get('aller_gauche'):
                 self.__deplacement[0] += 1
             elif evenement.key == self._touches.get('aller_droite'):
                 self.__deplacement[0] -= 1
+            elif evenement.key == self._touches.get('accroupir'):
+                self.relever()
 
         self.__maj_animation()
 
     def __maj_animation(self):
-        if self.__deplacement[0] != 0:
-            self.__anim_active = self.__anim_deplacement
-        else:
-            self.__anim_active = self.__anim_attente
+        if not self.__accroupi:
+            if self.__deplacement[0] != 0:
+                self.__anim_active = self.__anim_deplacement
+            else:
+                self.__anim_active = self.__anim_attente
 
     def __reset_boost(self):
         self.__deplacement[0] -= self.__boost
@@ -96,9 +103,10 @@ class Joueur:
             return
 
         if self._subit_tornade <= 0:
-            self.__anim_active.ajouter_temps(delta)
-
-            self.__anim_active.ajouter_temps(delta)
+            if self.__deplacement[0] or not self.__accroupi:
+                self.__anim_active.ajouter_temps(delta)
+            else:
+                self.__anim_active.reinitialiser(1)
             self.__correction_direction()
             ancien_boost = self.__boost
 
@@ -187,16 +195,26 @@ class Joueur:
         return self.__rect
 
     def get_rect_collision(self):
+        if self.__accroupi:
+            rect_collision = self.RECTANGLE_COLLISION_ACCROUPI
+        else:
+            rect_collision = self.RECTANGLE_COLLISION
+
         rect = self.__rect.copy()
-        rect.x += self.RECTANGLE_COLLISION.x
-        rect.y += self.RECTANGLE_COLLISION.y
-        rect.width = self.RECTANGLE_COLLISION.width
-        rect.height = self.RECTANGLE_COLLISION.height
+        rect.x += rect_collision.x
+        rect.y += rect_collision.y
+        rect.width = rect_collision.width
+        rect.height = rect_collision.height
         return rect
 
     def set_rect_collision(self, rect):
-        self.__rect.x = rect.x - self.RECTANGLE_COLLISION.x
-        self.__rect.y = rect.y - self.RECTANGLE_COLLISION.y
+        if self.__accroupi:
+            rect_collision = self.RECTANGLE_COLLISION_ACCROUPI
+        else:
+            rect_collision = self.RECTANGLE_COLLISION
+
+        self.__rect.x = rect.x - rect_collision.x
+        self.__rect.y = rect.y - rect_collision.y
 
     def get_deplacement(self):
         return self.__deplacement
@@ -255,3 +273,11 @@ class Joueur:
         self.__deplacement[0] += self.__boost
 
         self.__maj_animation()
+
+    def accroupir(self):
+        self.__accroupi = True
+        self.__anim_active = self.__anim_accroupi
+
+    def relever(self):
+        self.__accroupi = False
+        self.__anim_active = self.__anim_attente

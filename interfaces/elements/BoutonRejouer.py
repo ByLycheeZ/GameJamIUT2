@@ -2,6 +2,7 @@ import pygame
 
 from gestionnaires.Evenement import Evenement
 from gestionnaires.Affichage import Affichage
+from gestionnaires.Sons import Sons
 from utils.Constantes import LARGEUR
 
 
@@ -18,6 +19,7 @@ class BoutonRejouer:
         from interfaces.MenuPrincipal import MenuPrincipal
         if (self.__coord[0] <= pygame.mouse.get_pos()[0] <= self.__coord[0] + 300) \
                 and (self.__coord[1] <= pygame.mouse.get_pos()[1] <= self.__coord[1] + 76):
+            Sons().jouer_son('clique', 'ogg')
             Evenement().supprimer(self)
             Affichage().supprimer(self)
             self.__parent.fin()

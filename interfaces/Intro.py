@@ -2,6 +2,7 @@ import pygame, math, time
 
 from gestionnaires.Affichage import Affichage
 from gestionnaires.Maj import Maj
+from gestionnaires.Sons import Sons
 from interfaces.MenuPrincipal import MenuPrincipal
 from utils.Constantes import *
 
@@ -24,6 +25,8 @@ class Intro:
             ecran.fill(self.__couleur)
             for i in range(min(30, self.__compteur)):
                 ecran.blit(self.__image, (LARGEUR/2 - 126, HAUTEUR/2 - 230))
+            if self.__timeur == 300:
+                Sons().jouer_son('intro', 'ogg')
             if self.__timeur == 1300:
                 self.montrer = False
                 self.__timeur = 0

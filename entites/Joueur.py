@@ -179,6 +179,7 @@ class Joueur:
 
     def __revivre(self):
         self.__rect.x = Ecran.x + Ecran.largeur / 2
+        self.__rect.y = Ecran.y + Ecran.hauteur / 2
 
     def affichage(self, ecran):
         if self.__vies <= 0:

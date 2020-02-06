@@ -32,8 +32,6 @@ class Credits:
             background = Images().charger_image("res/img/interfaces/accueil/accueil-background.png")
             ecran.blit(background, (0, 0))
             if self.equipe and not self.sources:
-                image = Images().charger_image("res/img/interfaces/credits/credits.png")
-
                 # Titre
                 font = pygame.font.Font("res/fonts/Comfortaa-Bold.ttf", 80)
                 texte = font.render("Equipe", True, self.TITRE)
@@ -70,8 +68,6 @@ class Credits:
                 ecran.blit(font.render("Sources", True, self.TITRE), (880, 720))
 
             elif self.sources and not self.equipe:
-                image = Images().charger_image("res/img/interfaces/credits/images-sons.png")
-
                 # Titre
                 font = pygame.font.Font("res/fonts/Comfortaa-Bold.ttf", 80)
                 texte = font.render("Sources", True, self.TITRE)

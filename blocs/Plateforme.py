@@ -1,24 +1,43 @@
+import importlib
+import json
+
 from blocs.Bloc import Bloc
 from blocs.BlocCollision import BlocCollision
 from gestionnaires.Affichage import Affichage
+from utils.Constantes import CHEMIN_PLATEFORMES
 
 
 class Plateforme:
     class __Elem:
-        def __init__(self, nom, x, y, taille, collision):
-            if collision:
-                self.bloc = BlocCollision(nom, 0, 0, taille)
+        def __init__(self, nom, x, y, taille, collision, nom_module, nom_classe, attrs):
+            if nom_module and nom_classe and attrs:
+                module = importlib.import_module(nom_module)
+                classe = getattr(module, nom_classe)
+                self.bloc = classe(nom, 0, 0, taille, *attrs)
             else:
-                self.bloc = Bloc(nom, 0, 0, taille)
+                if collision:
+                    self.bloc = BlocCollision(nom, 0, 0, taille)
+                else:
+                    self.bloc = Bloc(nom, 0, 0, taille)
             Affichage().supprimer(self.bloc)
             self.x = x
             self.y = y
 
-    def __init__(self, donnees, x, y, taille):
+    def __init__(self, nom, x, y, taille):
+        fichier_json = open(f'{CHEMIN_PLATEFORMES}/{nom}.json')
+        self.__donnees = json.load(fichier_json)
+
         self.__blocs = []
         self.__x_max = 0
-        for bloc in donnees:
-            elem = Plateforme.__Elem(bloc['source'], bloc['x'] + x, bloc['y'] + y, taille, bloc['collision'])
+        for bloc in self.__donnees:
+            module, classe, attr = None, None, []
+            if all(cle in bloc for cle in ['module', 'classe', 'attributs']):
+                module = bloc['module']
+                classe = bloc['classe']
+                attr = bloc['attributs']
+
+            elem = Plateforme.__Elem(bloc['source'], bloc['x'] + x, bloc['y'] + y, taille, bloc['collision'],
+                                     module, classe, attr)
             self.__blocs.append(elem)
             self.__x_max = max([self.__x_max, elem.x + elem.bloc.get_largeur()])
 

@@ -6,6 +6,7 @@ from gestionnaires.Jeu import Jeu
 
 from interfaces.ChoixPersonnages import ChoixPersonnages
 from interfaces.Credits import Credits
+from interfaces.Pause import Pause
 from interfaces.Reglement import Reglement
 
 from interfaces.elements.BoutonCredits import BoutonCredits

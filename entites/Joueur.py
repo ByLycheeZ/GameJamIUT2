@@ -28,6 +28,7 @@ class Joueur:
         self.__rect.y = HAUTEUR - TAILLE_PERSO[1]
         self.__vitesse = 300
         self.__deplacement = [0, 0]
+        self.__boost = 0
         self.__velocite_saut, self.vitesse_chute = 2, 4
         self.__nb_saut_restant = 1
         self._subit_tornade = -1
@@ -72,6 +73,15 @@ class Joueur:
         else:
             self.__anim_active = self.__anim_attente
 
+    def __reset_boost(self):
+        self.__deplacement[0] -= self.__boost
+        self.__boost = 0
+
+    def __correction_direction(self):
+        precision = 10
+        self.__deplacement[0] = round(self.__deplacement[0] * 10**precision) / 10**precision
+        self.__deplacement[1] = round(self.__deplacement[1] * 10**precision) / 10**precision
+
     def maj(self, delta):
         jeu = Jeu.Jeu()
         if self.__vies <= 0:
@@ -83,13 +93,19 @@ class Joueur:
         if self._subit_tornade <= 0:
             self.__anim_active.ajouter_temps(delta)
 
+            self.__anim_active.ajouter_temps(delta)
+            self.__correction_direction()
+            ancien_boost = self.__boost
+
             # Mouvement X
             self.__rect = self.__rect.move(self.__vitesse * self.__deplacement[0] * delta, 0)
-            self.__collisions((self.__deplacement[0], 0), jeu.collisions(self, 0))
+            self.__collisions((self.__deplacement[0], 0), jeu.collisions(self, delta))
 
             # Mouvement Y
             self.__rect = self.__rect.move(0, self.__vitesse * self.__deplacement[1] * delta)
             self.__collisions((0, self.__deplacement[1]), jeu.collisions(self, delta))
+            if self.__boost == ancien_boost:
+                self.__reset_boost()
 
             self.__deplacement[1] += self.vitesse_chute * delta
         else:
@@ -103,8 +119,10 @@ class Joueur:
             rect = self.get_rect_collision()
             if deplacement[0] > 0:
                 rect.right = collisions.left
+                self.__reset_boost()
             elif deplacement[0] < 0:
                 rect.left = collisions.right
+                self.__reset_boost()
 
             if deplacement[1] < 0:
                 rect.top = collisions.bottom
@@ -187,6 +205,11 @@ class Joueur:
 
     def set_deplacement(self, deplacement):
         self.__deplacement = deplacement
+
+    def ajouter_boost(self, x, y):
+        self.__boost += x
+        self.__deplacement[0] += x
+        self.__deplacement[1] += y
 
     def set_sprite(self, nom_fichier):
         self.__sprite = pygame.image.load(CHEMIN_SPRITE + nom_fichier)

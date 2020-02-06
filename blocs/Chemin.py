@@ -11,9 +11,8 @@ class Chemin:
 
         self.__plateformes = []
         self.__x_max = 0
-        for plateforme in self.__donnees['disposition']:
-            elem = Plateforme(self.__donnees['plateformes'][plateforme['plateforme']],
-                              plateforme['x'], plateforme['y'], plateforme['taille'])
+        for plateforme in self.__donnees:
+            elem = Plateforme(plateforme['plateforme'], plateforme['x'], plateforme['y'], plateforme['taille'])
 
             self.__plateformes.append(elem)
             self.__x_max = max(self.__x_max, elem.get_x_max())

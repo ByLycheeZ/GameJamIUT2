@@ -22,3 +22,4 @@ class BoutonRetourJeu(Bouton):
         if self._image != "":
             image = pygame.image.load(f'res/img/interfaces/pause/{self._image}.png')
             ecran.blit(image, self._coord)
+            

@@ -19,7 +19,6 @@ pygame.display.set_caption("Dino Tempest")
 icon = Images().charger_image("res/img/fenetre/icon2.png")
 pygame.display.set_icon(icon)
 
-# menu = MenuPrincipal()
 intro = Intro()
 
 clock = time.Clock()

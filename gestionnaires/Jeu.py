@@ -27,6 +27,9 @@ class Jeu:
         def collisions(self, joueur, delta):
             return self.__carte.collisions(joueur, delta)
 
+        def get_joueurs(self):
+            return self.__joueurs
+
     __instance = None
     __konami = False
 
@@ -42,6 +45,9 @@ class Jeu:
 
     def collisions(self, joueur, delta):
         return self.__instance.collisions(joueur, delta)
+
+    def get_joueurs(self):
+        return self.__instance.get_joueurs()
 
     @staticmethod
     def konami():

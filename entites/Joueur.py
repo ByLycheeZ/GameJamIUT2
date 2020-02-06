@@ -149,6 +149,9 @@ class Joueur:
                                                                                  self.__rect.y)
         ecran.blit(pygame.transform.flip(sous_sprite, self.__deplacement[0] < 0, False), sous_sprite_rect)
 
+    def get_couleur(self):
+        return self._couleur
+
     def get_vitesse(self):
         return self.__vitesse
 

@@ -1,5 +1,6 @@
 import pygame
 import math
+import gestionnaires.Jeu as Jeu
 from gestionnaires.Affichage import *
 from gestionnaires.Maj import *
 from gestionnaires.Sons import Sons
@@ -9,6 +10,7 @@ from utils.Animation import Animation
 class Tornade:
     TAILLE_IMAGE = [64, 64]
     CHEMIN_SPRITE = 'res/img/competences/'
+    RECTANGLE_COLLISION = pygame.Rect(9, 0, 45, 60)
 
     def __init__(self, positions, deplacement, couleur_joueur, vitesse=400, duree=3):
         self.__couleur_joueur = couleur_joueur
@@ -25,6 +27,7 @@ class Tornade:
         Maj().enregistrer(self)
 
     def maj(self, delta):
+        self.gerer_collisions()
         if pygame.time.get_ticks() / 1000 <= self.__temps_fin:
             self.__animimation.ajouter_temps(delta)
             self.__rect = self.__rect.move(self.__vitesse * self.__deplacement[0] * delta,
@@ -50,8 +53,19 @@ class Tornade:
     def get_couleur_joueur(self):
         return self.__couleur_joueur
 
-    def collisions(self, joueur, delta):
-        this_rect = self._dessin.get_rect()
-        this_rect.x, this_rect.y = self._x, self._y
-        j_rect = joueur.get_rect_collision()
-        return this_rect if this_rect.colliderect(j_rect) else None
+    def get_rect_collision(self):
+        rect = self.__rect.copy()
+        rect.x += self.RECTANGLE_COLLISION.x
+        rect.y += self.RECTANGLE_COLLISION.y
+        rect.width = self.RECTANGLE_COLLISION.width
+        rect.height = self.RECTANGLE_COLLISION.height
+        return rect
+
+    def gerer_collisions(self):
+        joueurs = Jeu.Jeu().get_joueurs()
+        for joueur in joueurs:
+            if joueur.get_rect_collision().colliderect(self.get_rect_collision()) and self.get_couleur_joueur() != joueur.get_couleur():
+                joueur.subit_tornade()
+
+
+

@@ -38,7 +38,7 @@ class Joueur:
         self.__anim_attente = Animation(0, 0, TAILLE_PERSO[0], TAILLE_PERSO[1], 4, 0.2)
         self.__anim_deplacement = Animation(4, 0, TAILLE_PERSO[0], TAILLE_PERSO[1], 6, 0.13)
         self.__anim_attaque = Animation(10, 0, TAILLE_PERSO[0], TAILLE_PERSO[1], 3, 0.2)
-        self.__anim_degat = Animation(13, 0, TAILLE_PERSO[0], TAILLE_PERSO[1], 4, 0.2)
+        self.__anim_degat = Animation(13, 0, TAILLE_PERSO[0], TAILLE_PERSO[1], 4, 0.2, False, 0.5)
         self.__anim_accroupi = Animation(18, 0, TAILLE_PERSO[0], TAILLE_PERSO[1], 6, 0.2)
         self.__anim_active = self.__anim_attente
 
@@ -76,7 +76,8 @@ class Joueur:
             elif evenement.key == self._touches.get('accroupir'):
                 self.relever()
 
-        self.__maj_animation()
+        if not self._subit_tornade:
+            self.__maj_animation()
 
     def __maj_animation(self):
         if not self.__accroupi:
@@ -124,6 +125,10 @@ class Joueur:
         else:
             # gere temps de stun
             self._subit_tornade -= delta
+            self.__anim_active.ajouter_temps(delta)
+            if self.__anim_active.est_finie():
+                self.__anim_active.reinitialiser()
+                self.__anim_active = self.__anim_attente
 
         self.__maj_camera(delta)
 
@@ -180,7 +185,9 @@ class Joueur:
 
         sous_sprite, sous_sprite_rect = self.__anim_active.recuperer_sous_sprite(self.__sprite, self.__rect.x,
                                                                                  self.__rect.y)
-        ecran.blit(pygame.transform.flip(sous_sprite, self.__deplacement[0] < 0, False), sous_sprite_rect)
+        miroir = (self._subit_tornade < 0 and self.__deplacement[0] < 0) or \
+                 (self._subit_tornade > 0 and self._subit_tornade % 0.2 > 0.1)
+        ecran.blit(pygame.transform.flip(sous_sprite, miroir, False), sous_sprite_rect)
 
     def get_couleur(self):
         return self._couleur
@@ -260,6 +267,7 @@ class Joueur:
 
     def subit_tornade(self):
         self._subit_tornade = self.TEMPS_SUBIT_TORNADE
+        self.__anim_active = self.__anim_degat
 
     def reprendre(self):
         key_pressed = pygame.key.get_pressed()

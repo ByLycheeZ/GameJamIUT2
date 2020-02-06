@@ -20,7 +20,7 @@ class Tornade:
         self.__rect.x, self.__rect.y = positions
         self.__deplacement = deplacement
         self.__vitesse = vitesse
-        self.__animimation = Animation(0, 0, Tornade.TAILLE_IMAGE[0], Tornade.TAILLE_IMAGE[1], 4, duree/12)
+        self.__animation = Animation(0, 0, Tornade.TAILLE_IMAGE[0], Tornade.TAILLE_IMAGE[1], 4, duree / 12)
 
         Sons().jouer_son('Tornade', 'wav', math.ceil(duree/3) - 1, duree)  # Avec 3 la duree du sons
         Affichage().enregistrer(self, 1)
@@ -29,7 +29,7 @@ class Tornade:
     def maj(self, delta):
         self.gerer_collisions()
         if pygame.time.get_ticks() / 1000 <= self.__temps_fin:
-            self.__animimation.ajouter_temps(delta)
+            self.__animation.ajouter_temps(delta)
             self.__rect = self.__rect.move(self.__vitesse * self.__deplacement[0] * delta,
                                            self.__vitesse * self.__deplacement[1] * delta)
         else:
@@ -37,7 +37,7 @@ class Tornade:
 
     def affichage(self, ecran):
         if pygame.time.get_ticks() / 1000 <= self.__temps_fin:
-            sous_sprite = self.__sprite.subsurface(self.__animimation.recuperer_image())
+            sous_sprite = self.__sprite.subsurface(self.__animation.recuperer_image())
             sous_sprite_rect = sous_sprite.get_rect()
             sous_sprite_rect.x, sous_sprite_rect.y = self.__rect.x, self.__rect.y
             ecran.blit(pygame.transform.flip(sous_sprite, self.__deplacement[0] < 0, False), sous_sprite_rect)

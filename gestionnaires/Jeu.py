@@ -30,6 +30,7 @@ class Jeu:
 
             self.__parallax.fin()
             self.__carte.fin()
+            Evenement().supprimer(self)
 
         def evenement(self, evenement):
             if evenement.key == pygame.K_p or evenement.key == pygame.K_ESCAPE:

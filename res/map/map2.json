@@ -1,0 +1,80 @@
+[
+  {
+    "plateforme": "herbe",
+    "x": 0,
+    "y": 704,
+    "taille": 20
+  },
+  {
+    "plateforme": "herbe",
+    "x": 128,
+    "y": 672,
+    "taille": 0
+  },
+  {
+    "plateforme": "herbe",
+    "x": 448,
+    "y": 672,
+    "taille": 0
+  },
+  {
+    "plateforme": "pierre",
+    "x": 288,
+    "y": 576,
+    "taille": 0
+  },
+  {
+    "plateforme": "pierre",
+    "x": 128,
+    "y": 544,
+    "taille": 15
+  },
+  {
+    "plateforme": "pierre",
+    "x": 288,
+    "y": 512,
+    "taille": 0
+  },
+  {
+    "plateforme": "pierre",
+    "x": 288,
+    "y": 480,
+    "taille": 0
+  },
+  {
+    "plateforme": "pierre",
+    "x": 128,
+    "y": 320,
+    "taille": 3
+  },
+  {
+    "plateforme": "pierre",
+    "x": 256,
+    "y": 288,
+    "taille": 0
+  },
+  {
+    "plateforme": "pierre",
+    "x": 288,
+    "y": 256,
+    "taille": 5
+  },
+  {
+    "plateforme": "courant-x",
+    "x": 384,
+    "y": 320,
+    "taille": 5
+  },
+  {
+    "plateforme": "courant",
+    "x": 64,
+    "y": 544,
+    "taille": 0
+  },
+  {
+    "plateforme": "courant-x",
+    "x": 544,
+    "y": 672,
+    "taille": 0
+  }
+]

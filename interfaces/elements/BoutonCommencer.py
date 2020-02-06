@@ -23,7 +23,7 @@ class BoutonCommencer(Bouton):
     def affichage(self, ecran):
         nom = self._image
         if self.transparent:
-            image = pygame.image.load(f'res/img/{nom}-desactive.png')
+            image = pygame.image.load(f'res/img/interfaces/selection/{nom}-desactive.png')
         else:
-            image = pygame.image.load(f'res/img/{nom}.png')
+            image = pygame.image.load(f'res/img/interfaces/selection/{nom}.png')
         ecran.blit(image, self._coord)

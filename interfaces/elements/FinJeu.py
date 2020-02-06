@@ -6,8 +6,8 @@ from utils.Constantes import LARGEUR
 
 
 class FinJeu:
-    def __init__(self, y_fin):
-        self.__texte = pygame.image.load('res/img/interfaces/fin-jeu.png').convert_alpha()
+    def __init__(self, couleur, y_fin):
+        self.__texte = pygame.image.load(f'res/img/interfaces/fin/victoire-{couleur}.png').convert_alpha()
         self.__rect_texte = self.__texte.get_rect()
         self.__rect_texte.x = LARGEUR / 2 - self.__rect_texte.width / 2
         self.__rect_texte.y = -self.__rect_texte.height * 2

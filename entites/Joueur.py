@@ -1,9 +1,9 @@
 import pygame
+import gestionnaires.Jeu as Jeu
 from gestionnaires.Affichage import *
 from gestionnaires.Maj import *
 from gestionnaires.Evenement import *
 from gestionnaires.Sons import Sons
-import gestionnaires.Jeu as Jeu
 from utils.Animation import Animation
 from utils.Constantes import CHEMIN_SPRITE, HAUTEUR, TAILLE_PERSO
 from decorations.Parallax import Parallax
@@ -13,12 +13,13 @@ from interfaces.hud.HudVie import HudVie
 
 class Joueur:
     NB_SAUT_MAX = 1
+    RECTANGLE_COLLISION = pygame.Rect(20, 20, 75, 85)
 
     __count = 0
 
     def __init__(self, touches, couleur):
         Joueur.__count += 1
-        self.__vies = 5
+        self.__vies = 1
         self.__sprite = pygame.image.load(f'{CHEMIN_SPRITE}dino-{couleur}.png')
         self.__hud = HudVie(self.__vies, couleur)
         self.__rect = self.__sprite.get_rect()
@@ -70,24 +71,42 @@ class Joueur:
             self.__anim_active = self.__anim_attente
 
     def maj(self, delta):
+        jeu = Jeu.Jeu()
         if self.__vies <= 0:
             return
         elif Joueur.__count == 1:
-            Jeu.Jeu().fin(self._couleur)
+            jeu.fin(self._couleur)
             return
 
         self.__anim_active.ajouter_temps(delta)
-        self.__rect = self.__rect.move(self.__vitesse * self.__deplacement[0] * delta,
-                                       self.__vitesse * self.__deplacement[1] * delta)
+
+        # Mouvement X
+        self.__rect = self.__rect.move(self.__vitesse * self.__deplacement[0] * delta, 0)
+        self.__collisions((self.__deplacement[0], 0), jeu.collisions(self, 0))
+
+        # Mouvement Y
+        self.__rect = self.__rect.move(0, self.__vitesse * self.__deplacement[1] * delta)
+        self.__collisions((0, self.__deplacement[1]), jeu.collisions(self, delta))
 
         self.__deplacement[1] += self.vitesse_chute * delta
-        # temporaire ne peut pas tomber dans le vide
-        if self.__rect.y >= 768 - 120:
-            self.__rect.y = 768 - 120
-            self.__deplacement[1] = 0
-            self.ajout_saut()
-
         self.__maj_camera(delta)
+
+    def __collisions(self, deplacement, collisions):
+        if collisions:
+            rect = self.get_rect_collision()
+            if deplacement[0] > 0:
+                rect.right = collisions.left
+            elif deplacement[0] < 0:
+                rect.left = collisions.right
+
+            if deplacement[1] < 0:
+                rect.top = collisions.bottom
+                self.__deplacement[1] = 0
+            elif deplacement[1] > 0:
+                rect.bottom = collisions.top
+                self.__deplacement[1] = 0
+                self.ajout_saut(1)
+            self.set_rect_collision(rect)
 
     def __maj_camera(self, delta):
         droite = self.__rect.left + TAILLE_PERSO[0]
@@ -101,7 +120,12 @@ class Joueur:
     def __retirer_vie(self):
         self.__vies -= 1
         self.__hud.retirer_pv()
-        Sons().jouer_son('mort')
+
+        if Jeu.Jeu.konami_actif():
+            Sons().jouer_son('k-mort')
+        else:
+            Sons().jouer_son('mort')
+
         if self.__vies > 0:
             self.__revivre()
         else:
@@ -127,6 +151,18 @@ class Joueur:
     def get_rect(self):
         return self.__rect
 
+    def get_rect_collision(self):
+        rect = self.__rect.copy()
+        rect.x += self.RECTANGLE_COLLISION.x
+        rect.y += self.RECTANGLE_COLLISION.y
+        rect.width = self.RECTANGLE_COLLISION.width
+        rect.height = self.RECTANGLE_COLLISION.height
+        return rect
+
+    def set_rect_collision(self, rect):
+        self.__rect.x = rect.x - self.RECTANGLE_COLLISION.x
+        self.__rect.y = rect.y - self.RECTANGLE_COLLISION.y
+
     def get_deplacement(self):
         return self.__deplacement
 
@@ -138,6 +174,9 @@ class Joueur:
 
     def set_vitesse(self, vitesse):
         self.__vitesse = vitesse
+
+    def set_deplacement(self, deplacement):
+        self.__deplacement = deplacement
 
     def set_sprite(self, nom_fichier):
         self.__sprite = pygame.image.load(CHEMIN_SPRITE + nom_fichier)
@@ -156,6 +195,7 @@ class Joueur:
 
     def fin(self):
         self.__hud.fin()
+        Joueur.__count = 0
         Evenement().supprimer(self)
         Affichage().supprimer(self)
         Maj().supprimer(self)

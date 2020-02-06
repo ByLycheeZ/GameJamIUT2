@@ -3,6 +3,7 @@ from random import random
 import pygame
 
 from gestionnaires.Sons import Sons
+from interfaces.elements.BoutonRejouer import BoutonRejouer
 from interfaces.elements.FinJeu import FinJeu
 from utils.Animation import Animation
 from utils.Constantes import COULEURS, HAUTEUR, TAILLE_PERSO
@@ -28,7 +29,7 @@ class GameOver:
             self.__perdants.append(Dino(coul, (x, y), (1, 0)))
 
         self.__temps_anim = 0
-        self.__fin_jeu = FinJeu(TAILLE_PERSO[1] + y)
+        self.__fin_jeu = FinJeu(couleur, TAILLE_PERSO[1] + y)
 
         Affichage().enregistrer(self, -1)
         Maj().enregistrer(self)
@@ -51,9 +52,21 @@ class GameOver:
                 dino.fin()
 
             sons = Sons()
-            sons.jouer_son('mort')
-            sons.jouer_son('mort2')
-            sons.jouer_son('mort3')
+            from gestionnaires.Jeu import Jeu
+            if Jeu.konami_actif():
+                sons.jouer_son('k-mort2')
+            else:
+                sons.jouer_son('mort')
+                sons.jouer_son('mort2')
+                sons.jouer_son('mort3')
+
             sons.jouer_son('crash', 'ogg')
 
+            BoutonRejouer(self, 550)
             Maj().supprimer(self)
+
+    def fin(self):
+        aff = Affichage()
+        aff.supprimer(self.__fin_jeu)
+        aff.supprimer(self.__vainqueur)
+        aff.supprimer(self)

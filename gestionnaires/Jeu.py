@@ -4,6 +4,7 @@ from gestionnaires.Carte import Carte
 from utils.Constantes import TOUCHES
 from interfaces.Ecran import Ecran
 from interfaces.GameOver import GameOver
+from gestionnaires.Sons import Sons
 
 
 class Jeu:
@@ -15,6 +16,11 @@ class Jeu:
 
             self.__parallax = Parallax()
             self.__carte = Carte()
+            if Jeu().konami_actif():
+                Sons().jouer_musique('fond-konami')
+            else:
+                Sons().jouer_musique('fond')
+
 
         def fin(self):
             for joueur in self.__joueurs:
@@ -22,6 +28,10 @@ class Jeu:
 
             self.__parallax.fin()
             self.__carte.fin()
+            if Jeu().konami_actif():
+                Sons().pause_musique('fond-konami')
+            else:
+                Sons().pause_musique('fond')
 
         def collisions(self, joueur, delta):
             return self.__carte.collisions(joueur, delta)

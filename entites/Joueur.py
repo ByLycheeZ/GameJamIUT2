@@ -5,7 +5,7 @@ from gestionnaires.Maj import *
 from gestionnaires.Evenement import *
 from gestionnaires.Sons import Sons
 from utils.Animation import Animation
-from utils.Constantes import CHEMIN_SPRITE, HAUTEUR, TAILLE_PERSO
+from utils.Constantes import CHEMIN_SPRITE, HAUTEUR, TAILLE_PERSO, DISTANCE_DEPLACEMENT
 from decorations.Parallax import Parallax
 from interfaces.Ecran import Ecran
 from interfaces.hud.HudVie import HudVie
@@ -138,8 +138,8 @@ class Joueur:
 
     def __maj_camera(self, delta):
         droite = self.__rect.left + TAILLE_PERSO[0]
-        if Ecran.get_droite() - droite < 10:
-            Ecran.deplacement(droite - Ecran.largeur + 10, Ecran.y)
+        if Ecran.get_droite() - droite < DISTANCE_DEPLACEMENT:
+            Ecran.deplacement(droite - Ecran.largeur + DISTANCE_DEPLACEMENT, Ecran.y)
             Parallax().deplacement_joueur(self.__deplacement[0], delta)
 
         if Ecran.x > droite:

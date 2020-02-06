@@ -6,6 +6,8 @@ FOND = 255, 255, 255
 MAX_IPS = 60
 COUCHE_HUD = 2
 
+DISTANCE_DEPLACEMENT = 200
+
 CHEMIN_SPRITE = 'res/img/entites/'
 CHEMIN_MAP = 'res/map/'
 CHEMIN_PLATEFORMES = 'res/plateformes/'

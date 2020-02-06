@@ -38,6 +38,17 @@
         "classe": "BlocCourant",
         "attributs": [[0, -1]]
       }
+    ],
+    "courant-x": [
+      {
+        "source": "courant-droite",
+        "x": 0,
+        "y": 0,
+        "collision": false,
+        "module": "blocs.BlocCourant",
+        "classe": "BlocCourant",
+        "attributs": [[1, 0]]
+      }
     ]
   },
   "disposition": [
@@ -56,7 +67,13 @@
     {
       "plateforme": "courant",
       "x": 38,
-      "y": 530,
+      "y": 550,
+      "taille": 0
+    },
+    {
+      "plateforme": "courant-x",
+      "x": 70,
+      "y": 480,
       "taille": 0
     }
   ]

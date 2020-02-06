@@ -73,6 +73,11 @@ class Joueur:
         self.__deplacement[0] -= self.__boost
         self.__boost = 0
 
+    def __correction_direction(self):
+        precision = 10
+        self.__deplacement[0] = round(self.__deplacement[0] * 10**precision) / 10**precision
+        self.__deplacement[1] = round(self.__deplacement[1] * 10**precision) / 10**precision
+
     def maj(self, delta):
         jeu = Jeu.Jeu()
         if self.__vies <= 0:
@@ -82,14 +87,15 @@ class Joueur:
             return
 
         self.__anim_active.ajouter_temps(delta)
+        self.__correction_direction()
+        ancien_boost = self.__boost
 
         # Mouvement X
         self.__rect = self.__rect.move(self.__vitesse * self.__deplacement[0] * delta, 0)
-        self.__collisions((self.__deplacement[0], 0), jeu.collisions(self, 0))
+        self.__collisions((self.__deplacement[0], 0), jeu.collisions(self, delta))
 
         # Mouvement Y
         self.__rect = self.__rect.move(0, self.__vitesse * self.__deplacement[1] * delta)
-        ancien_boost = self.__boost
         self.__collisions((0, self.__deplacement[1]), jeu.collisions(self, delta))
         if self.__boost == ancien_boost:
             self.__reset_boost()
@@ -212,3 +218,6 @@ class Joueur:
         Evenement().supprimer(self)
         Affichage().supprimer(self)
         Maj().supprimer(self)
+
+    def get_couleur(self):
+        return self.__couleur

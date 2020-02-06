@@ -117,10 +117,6 @@ class Bloc:
         else:
             ecran.blit(self._dessin, (self._x, self._y))
 
-        this_rect = self.get_rect()
-        this_rect.x, this_rect.y = self._x, self._y
-        pygame.draw.rect(ecran, (0, 0, 0), this_rect, 2)
-
     def set_x(self, x):
         self._x = x
 

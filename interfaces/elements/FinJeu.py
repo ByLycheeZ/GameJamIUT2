@@ -16,7 +16,7 @@ class FinJeu:
         self.debut = False
         self.fin = False
 
-        Affichage().enregistrer(self, 2)
+        Affichage().enregistrer(self, 4)
         Maj().enregistrer(self)
 
     def affichage(self, ecran):

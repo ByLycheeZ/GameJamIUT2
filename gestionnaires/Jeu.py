@@ -47,7 +47,9 @@ class Jeu:
         return self.__instance.collisions(joueur, delta)
 
     def get_joueurs(self):
-        return self.__instance.get_joueurs()
+        if self.__instance:
+            return self.__instance.get_joueurs()
+        return None
 
     @staticmethod
     def konami():

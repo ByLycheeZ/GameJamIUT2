@@ -63,9 +63,10 @@ class Tornade:
 
     def gerer_collisions(self):
         joueurs = Jeu.Jeu().get_joueurs()
-        for joueur in joueurs:
-            if joueur.get_rect_collision().colliderect(self.get_rect_collision()) and self.get_couleur_joueur() != joueur.get_couleur():
-                joueur.subit_tornade()
+        if joueurs:
+            for joueur in joueurs:
+                if joueur.get_rect_collision().colliderect(self.get_rect_collision()) and self.get_couleur_joueur() != joueur.get_couleur():
+                    joueur.subit_tornade()
 
 
 

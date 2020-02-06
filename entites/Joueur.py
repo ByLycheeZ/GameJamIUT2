@@ -12,7 +12,7 @@ from interfaces.hud.HudVie import HudVie
 
 
 class Joueur:
-    NB_SAUT_MAX = 2
+    NB_SAUT_MAX = 1
     RECTANGLE_COLLISION = pygame.Rect(20, 20, 75, 85)
     TEMPS_SUBIT_TORNADE = 2  # En seconde
 

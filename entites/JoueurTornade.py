@@ -28,7 +28,7 @@ class JoueurTornade(Joueur):
         rect = self.get_rect()
         deplacement_x = self.get_deplacement()[0]
 
-        position_y = rect.y + (TAILLE_PERSO[1] - Tornade.TAILLE_IMAGE[1])
+        position_y = rect.y + (TAILLE_PERSO[1] - Tornade.TAILLE_IMAGE[1]) / 2
 
         if deplacement_x < 0:
             deplacement_x = -1

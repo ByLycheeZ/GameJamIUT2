@@ -287,7 +287,9 @@ class Joueur:
     def accroupir(self):
         self.__accroupi = True
         self.__anim_active = self.__anim_accroupi
+        self.__vitesse -= 100
 
     def relever(self):
         self.__accroupi = False
         self.__anim_active = self.__anim_attente
+        self.__vitesse += 100

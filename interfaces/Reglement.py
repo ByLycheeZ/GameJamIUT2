@@ -45,8 +45,8 @@ class Reglement:
             ecran.blit(
                 font.render("position. Si vous sortez de l'écran (à gauche) vous perdez une vie et réapparaissez au",
                             True, self.DESCRIPTION), (50, 241))
-            ecran.blit(font.render("centre de l'écran. Vous ne possédez que", True, self.DESCRIPTION), (50, 268))
-            ecran.blit(font.render("3 vies", True, (231, 76, 60)), (485, 268))
+            ecran.blit(font.render("centre de l'écran. Vous possédez jusqu'à", True, self.DESCRIPTION), (50, 268))
+            ecran.blit(font.render("5 vies", True, (231, 76, 60)), (485, 268))
             ecran.blit(font.render(".", True, self.DESCRIPTION), (550, 268))
 
             # Commandes

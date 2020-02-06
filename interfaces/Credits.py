@@ -11,8 +11,8 @@ from utils.Constantes import *
 
 
 class Credits:
-    TITRE = (26, 188, 156)  # Turquoise
-    NOM = (41, 128, 185)  # Bleu
+    TITRE = (48, 51, 107)  # Bleu marine
+    NOM = (249, 202, 36)  # Jaune
     DESCRIPTION = (255, 255, 255)  # Blanc
     NOM_X = 30
     DESC_X = 350

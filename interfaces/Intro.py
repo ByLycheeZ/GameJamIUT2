@@ -28,7 +28,7 @@ class Intro:
                 ecran.blit(self.__image, (LARGEUR/2 - 126, HAUTEUR/2 - 230))
             if self.__timeur == 300:
                 Sons().jouer_son('intro', 'ogg')
-            if self.__timeur == 1300:
+            if self.__timeur == 550:
                 self.montrer = False
                 self.__timeur = 0
                 MenuPrincipal()

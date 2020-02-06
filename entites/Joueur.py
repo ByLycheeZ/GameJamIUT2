@@ -139,12 +139,14 @@ class Joueur:
             self.set_rect_collision(rect)
 
     def __maj_camera(self, delta):
-        droite = self.__rect.left + TAILLE_PERSO[0]
+        rect = self.get_rect()
+        droite = rect.x + self.RECTANGLE_COLLISION.right
+        haut = rect.y + self.RECTANGLE_COLLISION.top
         if Ecran.get_droite() - droite < DISTANCE_DEPLACEMENT:
             Ecran.deplacement(droite - Ecran.largeur + DISTANCE_DEPLACEMENT, Ecran.y)
             Parallax().deplacement_joueur(self.__deplacement[0], delta)
 
-        if Ecran.x > droite:
+        if Ecran.x > droite or Ecran.y + Ecran.hauteur < haut:
             self.__retirer_vie()
 
     def __retirer_vie(self):

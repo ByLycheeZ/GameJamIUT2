@@ -32,9 +32,9 @@ class JoueurTornade(Joueur):
 
         if deplacement_x < 0:
             deplacement_x = -1
-            position_x = rect.x - TAILLE_PERSO[0]
+            position_x = rect.x - Tornade.TAILLE_IMAGE[0] + 20
         elif deplacement_x >= 0:
             deplacement_x = 1
-            position_x = rect.x + TAILLE_PERSO[0]
+            position_x = rect.x + TAILLE_PERSO[0] - 20
 
         Tornade([position_x, position_y], [deplacement_x, 0], self._couleur)

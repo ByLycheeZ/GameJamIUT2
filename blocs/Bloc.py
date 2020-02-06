@@ -109,13 +109,17 @@ class Bloc:
 
     def affichage(self, ecran):
         if self.__animation:
-            for i in range(self.__taille + 1):
+            for i in range(self.__taille):
                 x = self._x + (self.__donnees['largeur'] * i) * self.__direction[0]
                 y = self._y + (self.__donnees['hauteur'] * i) * self.__direction[1]
                 sous_sprite, sous_sprite_rect = self.__animation.recuperer_sous_sprite(self.__sprite, x, y)
                 ecran.blit(sous_sprite, sous_sprite_rect)
         else:
             ecran.blit(self._dessin, (self._x, self._y))
+
+        this_rect = self.get_rect()
+        this_rect.x, this_rect.y = self._x, self._y
+        pygame.draw.rect(ecran, (0, 0, 0), this_rect, 2)
 
     def set_x(self, x):
         self._x = x

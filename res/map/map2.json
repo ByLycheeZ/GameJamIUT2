@@ -63,18 +63,18 @@
     "plateforme": "courant-x",
     "x": 384,
     "y": 320,
-    "taille": 5
+    "taille": 4
   },
   {
     "plateforme": "courant",
     "x": 64,
     "y": 544,
-    "taille": 0
+    "taille": 1
   },
   {
     "plateforme": "courant-x",
     "x": 544,
     "y": 672,
-    "taille": 0
+    "taille": 2
   }
 ]

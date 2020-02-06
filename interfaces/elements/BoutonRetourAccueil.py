@@ -27,3 +27,4 @@ class BoutonRetourAccueil(Bouton):
     def retour_menu_principal(self):
         aff = Affichage()
         aff.supprimer(self._menu)
+        

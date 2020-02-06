@@ -3,6 +3,7 @@ import pygame
 from gestionnaires.Affichage import Affichage
 from gestionnaires.Evenement import Evenement
 from gestionnaires.Maj import Maj
+from gestionnaires.Sons import Sons
 
 from interfaces.elements.Bouton import Bouton
 
@@ -14,6 +15,7 @@ class BoutonRetourAccueil(Bouton):
     def evenement(self):
         if self._menu.montrer and (self._coord[0] <= pygame.mouse.get_pos()[0] <= self._coord[0] + 605) \
                 and (self._coord[1] <= pygame.mouse.get_pos()[1] <= self._coord[1] + 76):
+            Sons().jouer_son('clique', 'ogg')
             self._menu.montrer = False
             self._menu.fin()
             Evenement().reprendre()

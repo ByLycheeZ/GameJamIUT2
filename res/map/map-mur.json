@@ -57,13 +57,13 @@
     "plateforme": "courant",
     "x": 416,
     "y": 320,
-    "taille": 0
+    "taille": 1
   },
   {
     "plateforme": "courant-desc",
     "x": 720,
     "y": 32,
-    "taille": 9
+    "taille": 10
   },
   {
     "plateforme": "courant-x",

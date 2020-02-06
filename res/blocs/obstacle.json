@@ -10,24 +10,6 @@
       "dy": 0
     }
   ],
-  "milieu": [
-    {
-      "x": 0,
-      "y": 0,
-      "largeur": 0,
-      "hauteur": 32,
-      "dx": 0,
-      "dy": 0
-    }
-  ],
-  "fin": [
-    {
-      "x": 0,
-      "y": 0,
-      "largeur": 0,
-      "hauteur": 32,
-      "dx": 0,
-      "dy": 0
-    }
-  ]
+  "milieu": [],
+  "fin": []
 }

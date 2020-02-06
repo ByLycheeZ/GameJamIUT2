@@ -1,0 +1,14 @@
+[
+  {
+    "source": "mur-haut-pierre",
+    "x": 0,
+    "y": 0,
+    "collision": false
+  },
+  {
+    "source": "mur-pierre",
+    "x": 0,
+    "y": 32,
+    "collision": true
+  }
+]

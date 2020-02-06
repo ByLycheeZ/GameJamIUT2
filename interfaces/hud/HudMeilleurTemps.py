@@ -23,8 +23,10 @@ class HudMeilleurTemps:
 
     def fin(self):
         temps = timedelta(milliseconds=pygame.time.get_ticks() - self.__debut)
-        t = datetime.strptime(self.__temps, "%H:%M:%S.%f")
-        delta = timedelta(hours=t.hour, minutes=t.minute, seconds=t.second)
+        delta = timedelta(milliseconds=0)
+        if self.__temps:
+            t = datetime.strptime(self.__temps, "%H:%M:%S.%f")
+            delta = timedelta(hours=t.hour, minutes=t.minute, seconds=t.second)
         if temps > delta:
             f = open(self.CHEMIN_FICHIER, 'w')
             f.write(str(temps))

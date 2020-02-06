@@ -6,6 +6,7 @@ from gestionnaires.Carte import Carte
 from gestionnaires.Evenement import Evenement
 from gestionnaires.Maj import Maj
 from interfaces.Pause import Pause
+from interfaces.hud.HudFlecheDirection import HudFlecheDirection
 from utils.Constantes import TOUCHES
 from interfaces.Ecran import Ecran
 from interfaces.GameOver import GameOver
@@ -21,6 +22,7 @@ class Jeu:
 
             self.__parallax = Parallax()
             self.__carte = Carte()
+            self.__fleche = HudFlecheDirection()
             if Jeu().konami_actif():
                 Sons().jouer_musique('fond-konami')
             else:
@@ -36,6 +38,7 @@ class Jeu:
 
             self.__parallax.fin()
             self.__carte.fin()
+            self.__fleche.fin()
             
             Evenement().supprimer(self)
 

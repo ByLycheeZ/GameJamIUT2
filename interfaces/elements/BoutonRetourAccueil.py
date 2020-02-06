@@ -2,6 +2,7 @@ import pygame
 
 from gestionnaires.Affichage import Affichage
 from gestionnaires.Evenement import Evenement
+from gestionnaires.Images import Images
 from gestionnaires.Maj import Maj
 from gestionnaires.Sons import Sons
 
@@ -23,7 +24,7 @@ class BoutonRetourAccueil(Bouton):
 
     def affichage(self, ecran):
         if self._image != "":
-            image = pygame.image.load(f'res/img/interfaces/pause/{self._image}.png')
+            image = Images().charger_image(f'res/img/interfaces/pause/{self._image}.png')
             ecran.blit(image, self._coord)
 
     def retour_menu_principal(self):

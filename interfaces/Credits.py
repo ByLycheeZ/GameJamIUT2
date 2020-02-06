@@ -2,6 +2,7 @@ import pygame
 
 from gestionnaires.Affichage import Affichage
 from gestionnaires.Evenement import Evenement
+from gestionnaires.Images import Images
 
 from interfaces.elements.BoutonEquipe import BoutonEquipe
 from interfaces.elements.BoutonSources import BoutonSources
@@ -28,10 +29,10 @@ class Credits:
 
     def affichage(self, ecran):
         if self.montrer:
-            background = pygame.image.load("res/img/interfaces/accueil/accueil-background.png")
+            background = Images().charger_image("res/img/interfaces/accueil/accueil-background.png")
             ecran.blit(background, (-490, 0))
             if self.equipe and not self.sources:
-                image = pygame.image.load("res/img/interfaces/credits/credits.png")
+                image = Images().charger_image("res/img/interfaces/credits/credits.png")
 
                 # Titre
                 font = pygame.font.Font("res/fonts/Comfortaa-Bold.ttf", 80)
@@ -69,7 +70,7 @@ class Credits:
                 ecran.blit(font.render("Sources", True, self.TITRE), (880, 720))
 
             elif self.sources and not self.equipe:
-                image = pygame.image.load("res/img/interfaces/credits/images-sons.png")
+                image = Images().charger_image("res/img/interfaces/credits/images-sons.png")
 
                 # Titre
                 font = pygame.font.Font("res/fonts/Comfortaa-Bold.ttf", 80)

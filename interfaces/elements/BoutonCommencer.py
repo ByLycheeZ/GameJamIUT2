@@ -1,6 +1,7 @@
 import pygame
 
 from gestionnaires.Evenement import Evenement
+from gestionnaires.Images import Images
 from gestionnaires.Jeu import Jeu
 from gestionnaires.Sons import Sons
 
@@ -25,7 +26,7 @@ class BoutonCommencer(Bouton):
     def affichage(self, ecran):
         nom = self._image
         if self.transparent:
-            image = pygame.image.load(f'res/img/interfaces/selection/{nom}-desactive.png')
+            image = Images().charger_image(f'res/img/interfaces/selection/{nom}-desactive.png')
         else:
-            image = pygame.image.load(f'res/img/interfaces/selection/{nom}.png')
+            image = Images().charger_image(f'res/img/interfaces/selection/{nom}.png')
         ecran.blit(image, self._coord)

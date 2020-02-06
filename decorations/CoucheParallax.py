@@ -1,11 +1,12 @@
 import pygame
 from gestionnaires.Affichage import *
+from gestionnaires.Images import Images
 from interfaces.Ecran import Ecran
 
 
 class CoucheParallax:
     def __init__(self, nb, vitesse, opacite=1.0):
-        self.__image = pygame.image.load(f'res/img/parallax/{nb}.png').convert_alpha()
+        self.__image = Images().charger_image(f'res/img/parallax/{nb}.png').convert_alpha()
         self.__image.fill((255, 255, 255, int(opacite * 255)), None, pygame.BLEND_RGBA_MULT)
         self.__vitesse = vitesse
 

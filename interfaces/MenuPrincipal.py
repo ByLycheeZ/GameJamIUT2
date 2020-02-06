@@ -2,6 +2,7 @@ import pygame
 
 from gestionnaires.Affichage import Affichage
 from gestionnaires.Evenement import Evenement
+from gestionnaires.Images import Images
 from gestionnaires.Jeu import Jeu
 
 from interfaces.ChoixPersonnages import ChoixPersonnages
@@ -24,8 +25,8 @@ class MenuPrincipal:
         self.credits = Credits(self)
         self.choix_personnages = ChoixPersonnages(self)
         self.reglement = Reglement(self)
-        self.__background = pygame.image.load("res/img/interfaces/accueil/accueil-background.png")
-        self.__titre = pygame.image.load("res/img/interfaces/accueil/titre.png")
+        self.__background = Images().charger_image("res/img/interfaces/accueil/accueil-background.png")
+        self.__titre = Images().charger_image("res/img/interfaces/accueil/titre.png")
         self.__bouton_jouer = BoutonJouer((350, 400), "bouton-jouer", self)
         self.__bouton_reglement = BoutonReglement((350, 500), "bouton-regles", self)
         self.__bouton_quitter = BoutonQuitter((350, 600), "bouton-quitter", self)

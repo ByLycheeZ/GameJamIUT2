@@ -1,6 +1,7 @@
 import pygame, math, time
 
 from gestionnaires.Affichage import Affichage
+from gestionnaires.Images import Images
 from gestionnaires.Maj import Maj
 from gestionnaires.Sons import Sons
 from interfaces.MenuPrincipal import MenuPrincipal
@@ -15,7 +16,7 @@ class Intro:
         self.__timeur = 0
         self.__temps = 0
         self.__compteur = 0
-        self.__image = pygame.image.load("res/img/interfaces/intro/carryboo.png").convert_alpha()
+        self.__image = Images().charger_image("res/img/interfaces/intro/carryboo.png").convert_alpha()
         self.__image.fill((255, 255, 255, 15), None, pygame.BLEND_RGBA_MULT)
         Affichage().enregistrer(self)
         Maj().enregistrer(self)

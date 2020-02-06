@@ -9,6 +9,7 @@ from interfaces.Pause import Pause
 from utils.Constantes import TOUCHES
 from interfaces.Ecran import Ecran
 from interfaces.GameOver import GameOver
+from gestionnaires.Sons import Sons
 
 
 class Jeu:
@@ -20,6 +21,11 @@ class Jeu:
 
             self.__parallax = Parallax()
             self.__carte = Carte()
+            if Jeu().konami_actif():
+                Sons().jouer_musique('fond-konami')
+            else:
+                Sons().jouer_musique('fond')
+
 
             Evenement().enregistrer(pygame.KEYUP, self)
             self.__pause = Pause()
@@ -30,7 +36,13 @@ class Jeu:
 
             self.__parallax.fin()
             self.__carte.fin()
+            
             Evenement().supprimer(self)
+
+            if Jeu().konami_actif():
+                Sons().pause_musique('fond-konami')
+            else:
+                Sons().pause_musique('fond')
 
         def evenement(self, evenement):
             if evenement.key == pygame.K_p or evenement.key == pygame.K_ESCAPE:

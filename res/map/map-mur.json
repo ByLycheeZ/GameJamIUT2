@@ -3,7 +3,7 @@
     "plateforme": "terre-herbe",
     "x": 0,
     "y": 704,
-    "taille": 25
+    "taille": 30
   },
   {
     "plateforme": "panneau-droite",
@@ -48,9 +48,27 @@
     "taille": 17
   },
   {
+    "plateforme": "mur-pierre",
+    "x": 800,
+    "y": -32,
+    "taille": 18
+  },
+  {
     "plateforme": "courant",
     "x": 416,
     "y": 320,
     "taille": 0
+  },
+  {
+    "plateforme": "courant-desc",
+    "x": 720,
+    "y": 32,
+    "taille": 9
+  },
+  {
+    "plateforme": "courant-x",
+    "x": 720,
+    "y": 672,
+    "taille": 3
   }
 ]

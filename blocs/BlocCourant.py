@@ -9,7 +9,7 @@ class BlocCourant(BlocCollision):
         self.__vitesse = vitesse
 
     def collisions(self, joueur, delta):
-        this_rect = self._dessin.get_rect()
+        this_rect = self.get_rect()
         this_rect.x, this_rect.y = self._x, self._y
 
         if this_rect.colliderect(joueur.get_rect_collision()):

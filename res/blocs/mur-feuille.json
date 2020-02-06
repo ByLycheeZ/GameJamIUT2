@@ -1,0 +1,36 @@
+{
+  "direction": "y",
+  "debut": [
+    {
+      "x": 768,
+      "y": 160,
+      "largeur": 32,
+      "hauteur": 32,
+      "dx": 0,
+      "dy": 0,
+      "z" : 2
+    }
+  ],
+  "milieu": [
+    {
+      "x": 768,
+      "y": 160,
+      "largeur": 32,
+      "hauteur": 32,
+      "dx": 0,
+      "dy": 0,
+      "z" : 2
+    }
+  ],
+  "fin": [
+    {
+      "x": 768,
+      "y": 160,
+      "largeur": 32,
+      "hauteur": 32,
+      "dx": 0,
+      "dy": 0,
+      "z" : 2
+    }
+  ]
+}

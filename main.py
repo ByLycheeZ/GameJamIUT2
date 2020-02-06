@@ -7,7 +7,6 @@ from gestionnaires.Evenement import *
 from gestionnaires.Images import Images
 from gestionnaires.Maj import *
 from interfaces.Intro import Intro
-from interfaces.MenuPrincipal import MenuPrincipal
 from interfaces.Ecran import Ecran
 from utils.Constantes import *
 

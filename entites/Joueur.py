@@ -61,6 +61,7 @@ class Joueur:
             elif evenement.key == self._touches.get('sauter') and self.__nb_saut_restant > 0:
                 self.__deplacement[1] -= self.__velocite_saut
                 self.__nb_saut_restant -= 1
+                Sons().jouer_son('saut')
 
         else:  # KEYUP
             if evenement.key == self._touches.get('aller_gauche'):

@@ -1,0 +1,11 @@
+[
+  {
+    "source": "courant-ascendant",
+    "x": 0,
+    "y": 0,
+    "collision": false,
+    "module": "blocs.BlocCourant",
+    "classe": "BlocCourant",
+    "attributs": [ [0, -1], 5 ]
+  }
+]

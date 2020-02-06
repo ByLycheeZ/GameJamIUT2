@@ -1,7 +1,10 @@
 import importlib
+import json
+
 from blocs.Bloc import Bloc
 from blocs.BlocCollision import BlocCollision
 from gestionnaires.Affichage import Affichage
+from utils.Constantes import CHEMIN_PLATEFORMES
 
 
 class Plateforme:
@@ -20,10 +23,13 @@ class Plateforme:
             self.x = x
             self.y = y
 
-    def __init__(self, donnees, x, y, taille):
+    def __init__(self, nom, x, y, taille):
+        fichier_json = open(f'{CHEMIN_PLATEFORMES}/{nom}.json')
+        self.__donnees = json.load(fichier_json)
+
         self.__blocs = []
         self.__x_max = 0
-        for bloc in donnees:
+        for bloc in self.__donnees:
             module, classe, attr = None, None, []
             if all(cle in bloc for cle in ['module', 'classe', 'attributs']):
                 module = bloc['module']

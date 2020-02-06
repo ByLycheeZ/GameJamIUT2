@@ -13,9 +13,9 @@
   },
   {
     "plateforme": "courant",
-    "x": 38,
+    "x": 6,
     "y": 550,
-    "taille": 0
+    "taille": 6
   },
   {
     "plateforme": "panneau-droite",
@@ -27,7 +27,7 @@
     "plateforme": "courant-x",
     "x": 70,
     "y": 480,
-    "taille": 0
+    "taille": 3
   }
 
 ]

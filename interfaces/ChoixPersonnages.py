@@ -10,6 +10,13 @@ from utils.Constantes import LARGEUR, HAUTEUR
 
 class ChoixPersonnages:
     DECALAGE = 430
+    COULEURS = {
+        "rouge": (214, 48, 49),
+        "bleu": (48, 51, 107),
+        "vert": (106, 176, 76),
+        "jaune": (249, 202, 36),
+        "": (0, 0, 0)
+    }
 
     class __Dino:
         def __init__(self, nom, coord=(0, 0), selectionne=False):
@@ -68,16 +75,18 @@ class ChoixPersonnages:
 
     def affichage(self, ecran):
         if self.montrer:
-            ecran.blit(self.__background, (-490, 0))
-            image = Images().charger_image("res/img/interfaces/selection/joueur-1.png")
-            ecran.blit(image, (20, 10))
-            image = Images().charger_image("res/img/interfaces/selection/joueur-2.png")
-            ecran.blit(image, (35, 435))
-            image = Images().charger_image("res/img/interfaces/selection/zone-choix.png")
-            ecran.blit(image, (40, 90))
-            ecran.blit(image, (40, 515))
-            image = Images().charger_image("res/img/interfaces/selection/esc-message.png")
-            ecran.blit(image, (670, 3))
+            ecran.blit(self.__background, (0, 0))
+            font = pygame.font.Font("res/fonts/Comfortaa-Bold.ttf", 60)
+            # Joueur 1
+            ecran.blit(font.render('Joueur 1', True, self.COULEURS[self.__selection_joueur_1]), (35, 10))
+            pygame.draw.rect(ecran, self.COULEURS[self.__selection_joueur_1], ((40, 90), (940, 210)), 3)
+
+            # Joueur 2
+            ecran.blit(font.render('Joueur 2', True, self.COULEURS[self.__selection_joueur_2]), (35, 435))
+            pygame.draw.rect(ecran, self.COULEURS[self.__selection_joueur_2], ((40, 515), (940, 210)), 3)
+
+            font = pygame.font.Font("res/fonts/Comfortaa-Bold.ttf", 20)
+            ecran.blit(font.render('ESC pour retourner au menu principal', True, (48, 51, 107)), (600, 3))
             self.__bouton_commencer.affichage(ecran)
             n_ieme = 0
             for dino in self.__dinos.values():

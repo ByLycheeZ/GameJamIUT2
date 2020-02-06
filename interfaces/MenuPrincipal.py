@@ -37,8 +37,8 @@ class MenuPrincipal:
 
     def affichage(self, ecran):
         if self.montrer:
-            ecran.blit(self.__background, (-490, 0))
-            ecran.blit(self.__titre, (80, 60))
+            ecran.blit(self.__background, (0, 0))
+            ecran.blit(self.__titre, (80, 150))
             self.__bouton_jouer.affichage(ecran)
             self.__bouton_quitter.affichage(ecran)
             self.__bouton_reglement.affichage(ecran)

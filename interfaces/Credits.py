@@ -30,7 +30,7 @@ class Credits:
     def affichage(self, ecran):
         if self.montrer:
             background = Images().charger_image("res/img/interfaces/accueil/accueil-background.png")
-            ecran.blit(background, (-490, 0))
+            ecran.blit(background, (0, 0))
             if self.equipe and not self.sources:
                 image = Images().charger_image("res/img/interfaces/credits/credits.png")
 

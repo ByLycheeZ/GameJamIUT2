@@ -6,10 +6,8 @@ class Parallax:
         def __init__(self):
             self.__parallax = list()
 
-            for i in range(2, 10):
-                self.__parallax.append(CoucheParallax(i, 250 - 20 * i, 1.0))
-
-            # self.parallax.append(CoucheParallax(1, 20, 0.7))
+            for i in range(1, 5):
+                self.__parallax.append(CoucheParallax(i, 250 - 50 * i, 1.0))
 
         def deplacement_joueur(self, direction, delta):
             for parallax in self.__parallax:

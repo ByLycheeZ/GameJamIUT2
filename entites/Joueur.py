@@ -23,7 +23,7 @@ class Joueur:
     def __init__(self, touches, couleur):
         # Private
         Joueur.__count += 1
-        self.__vies = 1
+        self.__vies = 3
         self.__sprite = Images().charger_image(f'{CHEMIN_SPRITE}dino-{couleur}.png')
         self.__hud = HudVie(self.__vies, couleur)
         self.__rect = self.__sprite.get_rect()

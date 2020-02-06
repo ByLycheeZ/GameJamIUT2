@@ -34,3 +34,7 @@ class Animation:
         sous_sprite_rect = sous_sprite.get_rect()
         sous_sprite_rect.x, sous_sprite_rect.y = x, y
         return sous_sprite, sous_sprite_rect
+
+    def reinitialiser(self, img=0):
+        self.__image = img
+        self.__temps = 0

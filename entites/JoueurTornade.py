@@ -5,31 +5,36 @@ from entites.Tornade import Tornade
 
 
 class JoueurTornade(Joueur):
-    RECHARGEMENT = 10  # En seconde
+    RECHARGEMENT = 1  # En seconde
 
     def __init__(self, touches, couleur):
         super().__init__(touches, couleur)
-        self.__dernier_lancement = pygame.time.get_ticks() * 1000
+        self.__cd = 0  # pour la gestions du temps
 
     def evenement(self, evenement):
-        # if self.__vies <= 0:
-        #     return
-        #if (self.__dernier_lancement + JoueurTornade.RECHARGEMENT) > (pygame.time.get_ticks() * 1000):
-        if evenement.type == pygame.KEYDOWN:
-            if evenement.key == self._touches.get('competence'):
-                self.__competence()
+        if self.__cd <= 0:
+            if evenement.type == pygame.KEYDOWN:
+                if evenement.key == self._touches.get('competence'):
+                    self.__competence()
+                    self.__cd = self.RECHARGEMENT
 
         super(JoueurTornade, self).evenement(evenement)
 
     def maj(self, delta):
         super(JoueurTornade, self).maj(delta)
+        self.__cd -= delta
 
     def __competence(self):
         rect = self.get_rect()
-        x = self.get_deplacement()[0]
-        if x < 0:
-            x = -1
-        elif x >= 0:
-            x = 1
-        Tornade([rect.x+10, rect.y+10], [x, 0], self._couleur)
-        self.__dernier_lancement = pygame.time.get_ticks() * 1000
+        deplacement_x = self.get_deplacement()[0]
+
+        position_y = rect.y + (TAILLE_PERSO[1] - Tornade.TAILLE_IMAGE[1])
+
+        if deplacement_x < 0:
+            deplacement_x = -1
+            position_x = rect.x - TAILLE_PERSO[0]
+        elif deplacement_x >= 0:
+            deplacement_x = 1
+            position_x = rect.x + TAILLE_PERSO[0]
+
+        Tornade([position_x, position_y], [deplacement_x, 0], self._couleur)

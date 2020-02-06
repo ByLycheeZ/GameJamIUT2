@@ -15,6 +15,7 @@ from interfaces.hud.HudVie import HudVie
 class Joueur:
     NB_SAUT_MAX = 1
     RECTANGLE_COLLISION = pygame.Rect(16, 16, 62, 70)
+    RECTANGLE_COLLISION_ACCROUPI = pygame.Rect(24, 25, 76, 61)
     TEMPS_SUBIT_TORNADE = 2  # En seconde
 
     __count = 0
@@ -192,16 +193,26 @@ class Joueur:
         return self.__rect
 
     def get_rect_collision(self):
+        if self.__accroupi:
+            rect_collision = self.RECTANGLE_COLLISION_ACCROUPI
+        else:
+            rect_collision = self.RECTANGLE_COLLISION
+
         rect = self.__rect.copy()
-        rect.x += self.RECTANGLE_COLLISION.x
-        rect.y += self.RECTANGLE_COLLISION.y
-        rect.width = self.RECTANGLE_COLLISION.width
-        rect.height = self.RECTANGLE_COLLISION.height
+        rect.x += rect_collision.x
+        rect.y += rect_collision.y
+        rect.width = rect_collision.width
+        rect.height = rect_collision.height
         return rect
 
     def set_rect_collision(self, rect):
-        self.__rect.x = rect.x - self.RECTANGLE_COLLISION.x
-        self.__rect.y = rect.y - self.RECTANGLE_COLLISION.y
+        if self.__accroupi:
+            rect_collision = self.RECTANGLE_COLLISION_ACCROUPI
+        else:
+            rect_collision = self.RECTANGLE_COLLISION
+
+        self.__rect.x = rect.x - rect_collision.x
+        self.__rect.y = rect.y - rect_collision.y
 
     def get_deplacement(self):
         return self.__deplacement

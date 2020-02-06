@@ -8,10 +8,10 @@ from utils import Constantes
 
 
 class Reglement:
-    TITRE = (26, 188, 156)  # Turquoise
-    SOUS_TITRE = (41, 128, 185)  # Bleu
+    TITRE = (48, 51, 107)  # Bleu marine
+    SOUS_TITRE = (249, 202, 36)  # Jaune
     DESCRIPTION = (255, 255, 255)  # Blanc
-    TOUCHE = (0, 0, 0)  # Noir
+    TOUCHE = (48, 51, 107)  # Bleu marine comme le titre
 
     def __init__(self, menu):
         self.montrer = False
@@ -22,7 +22,7 @@ class Reglement:
 
     def affichage(self, ecran):
         if self.montrer:
-            ecran.blit(self.__background, (-490, 0))
+            ecran.blit(self.__background, (0, 0))
 
             # Titre
             font = pygame.font.Font("res/fonts/Comfortaa-Bold.ttf", 60)
@@ -34,11 +34,11 @@ class Reglement:
             ecran.blit(font.render("Objectif", True, self.SOUS_TITRE), (50, 110))
             font = pygame.font.Font("res/fonts/Comfortaa-Bold.ttf", 20)
             ecran.blit(font.render("Soyez le dernier en vie en utilisant les", True, self.DESCRIPTION), (50, 160))
-            ecran.blit(font.render("courants ascendants et descendants", True, (155, 89, 182)), (455, 160))
+            ecran.blit(font.render("courants ascendants et descendants", True, (95, 39, 205)), (455, 160))
             ecran.blit(font.render("pour changer", True, self.DESCRIPTION), (860, 160))
             ecran.blit(font.render("d'étages. Vous disposez également d'une", True, self.DESCRIPTION), (50, 187))
-            ecran.blit(font.render("compétence unique", True, (230, 126, 34)), (490, 187))
-            ecran.blit(font.render(", propre à chaque dinosaure.", True, self.DESCRIPTION), (705, 187))
+            ecran.blit(font.render("compétence", True, (255, 165, 2)), (490, 187))
+            ecran.blit(font.render("pour rééquilibrer le duel.", True, self.DESCRIPTION), (625, 187))
             ecran.blit(
                 font.render("Evitez les obstacles et courez, la caméra se déplace en fonction du joueur en première",
                             True, self.DESCRIPTION), (50, 214))

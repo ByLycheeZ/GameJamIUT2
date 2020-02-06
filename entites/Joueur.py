@@ -115,13 +115,8 @@ class Joueur:
             self.__rect = self.__rect.move(self.__vitesse * self.__deplacement[0] * delta, 0)
             self.__collisions((self.__deplacement[0], 0), jeu.collisions(self, delta))
 
-            # Mouvement Y
-            self.__rect = self.__rect.move(0, self.__vitesse * self.__deplacement[1] * delta)
-            self.__collisions((0, self.__deplacement[1]), jeu.collisions(self, delta))
             if self.__boost == ancien_boost:
                 self.__reset_boost()
-
-            self.__deplacement[1] += self.vitesse_chute * delta
         else:
             # gere temps de stun
             self._subit_tornade -= delta
@@ -129,6 +124,12 @@ class Joueur:
             if self.__anim_active.est_finie():
                 self.__anim_active.reinitialiser()
                 self.__anim_active = self.__anim_attente
+
+        # Mouvement Y
+        self.__rect = self.__rect.move(0, self.__vitesse * self.__deplacement[1] * delta)
+        self.__collisions((0, self.__deplacement[1]), jeu.collisions(self, delta))
+
+        self.__deplacement[1] += self.vitesse_chute * delta
 
         self.__maj_camera(delta)
 
@@ -268,6 +269,7 @@ class Joueur:
     def subit_tornade(self):
         self._subit_tornade = self.TEMPS_SUBIT_TORNADE
         self.__anim_active = self.__anim_degat
+        self.__deplacement[1] = -1
 
     def reprendre(self):
         key_pressed = pygame.key.get_pressed()

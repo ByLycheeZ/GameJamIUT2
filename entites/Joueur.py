@@ -76,7 +76,7 @@ class Joueur:
             elif evenement.key == self._touches.get('accroupir'):
                 self.relever()
 
-        if not self._subit_tornade:
+        if self._subit_tornade <= 0:
             self.__maj_animation()
 
     def __maj_animation(self):

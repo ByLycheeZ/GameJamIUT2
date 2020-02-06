@@ -1,8 +1,10 @@
 import pygame
 
-import interfaces.MenuPrincipal as menuPrincipal
+import interfaces.MenuPrincipal as MenuPrincipal
+import gestionnaires.Jeu as Jeu
 
 from gestionnaires.Affichage import Affichage
+from gestionnaires.Evenement import Evenement
 from interfaces.Ecran import Ecran
 
 from interfaces.elements.BoutonRetourAccueil import BoutonRetourAccueil
@@ -14,10 +16,11 @@ class Pause:
     BACKGROUND = (99, 110, 114, 128)  # Gris transparent
     RETOUR = (255, 255, 255)  # Blanc
     MENU = (231, 76, 60)  # Rouge
+    MESSAGE = (255, 255, 255)  # Blanc
 
-    def __init__(self, jeu):
+    def __init__(self):
         self.montrer = False
-        self.__jeu = jeu
+        self.__jeu = Jeu.Jeu()
         self.__bouton_retour_jeu = BoutonRetourJeu((Constantes.LARGEUR/2 - 212, 300), "", self)
         self.__bouton_retour_accueil = BoutonRetourAccueil((Constantes.LARGEUR/2 - 300, 460), "", self)
         Affichage().enregistrer(self, 2)
@@ -37,5 +40,8 @@ class Pause:
     def fin(self):
         self.__jeu.fin()
         Ecran.reinitialiser()
-        menuPrincipal.MenuPrincipal()
+        MenuPrincipal.MenuPrincipal()
         self.__jeu = None
+        Affichage().supprimer(self)
+        Evenement().supprimer(self.__bouton_retour_accueil)
+        Evenement().supprimer(self.__bouton_retour_jeu)

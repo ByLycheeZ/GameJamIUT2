@@ -22,7 +22,7 @@ class Jeu:
             self.__carte = Carte()
 
             Evenement().enregistrer(pygame.KEYUP, self)
-            self.__pause = Pause(self)
+            self.__pause = Pause()
 
         def fin(self):
             for joueur in self.__joueurs:
@@ -44,10 +44,8 @@ class Jeu:
                                                        joueur.get_vitesse() * joueur.get_deplacement()[1] * delta * mouvement[1]))
 
         def evenement(self, evenement):
-            if evenement.key == pygame.K_p:
+            if evenement.key == pygame.K_p or evenement.key == pygame.K_ESCAPE:
                 self.__pause.montrer = not self.__pause.montrer
-            elif evenement.key == pygame.K_ESCAPE and self.__pause.montrer:
-                self.__pause.montrer = False
 
     __instance = None
     __konami = False
@@ -56,10 +54,11 @@ class Jeu:
         if not Jeu.__instance and couleurs_joueurs:
             Jeu.__instance = Jeu.__Jeu(couleurs_joueurs)
 
-    def fin(self, couleur):
+    def fin(self, couleur=None):
         self.__instance.fin()
         Ecran.reinitialiser()
-        GameOver(couleur)
+        if couleur:
+            GameOver(couleur)
         Jeu.__instance = None
 
     @staticmethod

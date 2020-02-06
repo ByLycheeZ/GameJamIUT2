@@ -33,6 +33,7 @@ class Joueur:
         self.__velocite_saut, self.vitesse_chute = 2, 4
         self.__nb_saut_restant = 1
         self._subit_tornade = -1
+        self.__accroupi = False
         self.__anim_attente = Animation(0, 0, TAILLE_PERSO[0], TAILLE_PERSO[1], 4, 0.2)
         self.__anim_deplacement = Animation(4, 0, TAILLE_PERSO[0], TAILLE_PERSO[1], 6, 0.13)
         self.__anim_attaque = Animation(10, 0, TAILLE_PERSO[0], TAILLE_PERSO[1], 3, 0.2)
@@ -63,20 +64,25 @@ class Joueur:
                 self.__deplacement[1] -= self.__velocite_saut
                 self.__nb_saut_restant -= 1
                 Sons().jouer_son('saut')
+            elif evenement.key == self._touches.get('accroupir'):
+                self.accroupir()
 
         else:  # KEYUP
             if evenement.key == self._touches.get('aller_gauche'):
                 self.__deplacement[0] += 1
             elif evenement.key == self._touches.get('aller_droite'):
                 self.__deplacement[0] -= 1
+            elif evenement.key == self._touches.get('accroupir'):
+                self.relever()
 
         self.__maj_animation()
 
     def __maj_animation(self):
-        if self.__deplacement[0] != 0:
-            self.__anim_active = self.__anim_deplacement
-        else:
-            self.__anim_active = self.__anim_attente
+        if not self.__accroupi:
+            if self.__deplacement[0] != 0:
+                self.__anim_active = self.__anim_deplacement
+            else:
+                self.__anim_active = self.__anim_attente
 
     def __reset_boost(self):
         self.__deplacement[0] -= self.__boost
@@ -96,9 +102,10 @@ class Joueur:
             return
 
         if self._subit_tornade <= 0:
-            self.__anim_active.ajouter_temps(delta)
-
-            self.__anim_active.ajouter_temps(delta)
+            if self.__deplacement[0] or not self.__accroupi:
+                self.__anim_active.ajouter_temps(delta)
+            else:
+                self.__anim_active.reinitialiser(1)
             self.__correction_direction()
             ancien_boost = self.__boost
 
@@ -253,3 +260,11 @@ class Joueur:
         self.__deplacement[0] += self.__boost
 
         self.__maj_animation()
+
+    def accroupir(self):
+        self.__accroupi = True
+        self.__anim_active = self.__anim_accroupi
+
+    def relever(self):
+        self.__accroupi = False
+        self.__anim_active = self.__anim_attente

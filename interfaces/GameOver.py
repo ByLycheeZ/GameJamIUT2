@@ -31,7 +31,7 @@ class GameOver:
         self.__temps_anim = 0
         self.__fin_jeu = FinJeu(couleur, TAILLE_PERSO[1] + y)
 
-        Affichage().enregistrer(self, -1)
+        Affichage().enregistrer(self, 2)
         Maj().enregistrer(self)
 
     def affichage(self, ecran):

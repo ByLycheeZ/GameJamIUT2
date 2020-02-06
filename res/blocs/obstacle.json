@@ -1,0 +1,15 @@
+{
+  "direction": "x",
+  "debut": [
+    {
+      "x": 480,
+      "y": 224,
+      "largeur": 32,
+      "hauteur": 32,
+      "dx": 0,
+      "dy": 0
+    }
+  ],
+  "milieu": [],
+  "fin": []
+}

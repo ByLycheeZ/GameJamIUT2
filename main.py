@@ -5,6 +5,7 @@ import sys
 import pygame.time as time
 from gestionnaires.Evenement import *
 from gestionnaires.Maj import *
+from interfaces.Intro import Intro
 from interfaces.MenuPrincipal import MenuPrincipal
 from interfaces.Ecran import Ecran
 from utils.Constantes import *
@@ -17,7 +18,8 @@ pygame.display.set_caption("Dino Tempest")
 icon = pygame.image.load("res/img/fenetre/icon2.png")
 pygame.display.set_icon(icon)
 
-menu = MenuPrincipal()
+# menu = MenuPrincipal()
+intro = Intro()
 
 clock = time.Clock()
 gestionnaire_evenements = Evenement()

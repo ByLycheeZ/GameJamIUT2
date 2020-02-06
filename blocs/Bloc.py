@@ -15,6 +15,7 @@ class Bloc:
         self.__sprite = pygame.image.load('res/img/Tileset.png')
         self._x = x
         self._y = y
+        self.__z = self.__donnees['z'] if 'z' in self.__donnees.keys() else 0
         self.__taille = taille
         self._dessin = None
         self.__animation = None
@@ -68,14 +69,16 @@ class Bloc:
                 largeur = self.__donnees['debut'][0]['largeur']
                 hauteur = self.__donnees['debut'][0]['hauteur']
 
-            if nom_json not in Bloc.DESSINS:
+            self.__taille = taille
+            nom_cache = f'{nom_json}|{taille}'
+            if nom_cache not in Bloc.DESSINS:
                 self.__init_dessin(largeur, hauteur, fin_debut, fin_milieu, taille_milieu)
-                Bloc.DESSINS[nom_json] = self._dessin
+                Bloc.DESSINS[nom_cache] = self._dessin
             else:
-                self._dessin = Bloc.DESSINS[nom_json]
+                self._dessin = Bloc.DESSINS[nom_cache]
             self.__largeur = self._dessin.get_width()
 
-        Affichage().enregistrer(self)
+        Affichage().enregistrer(self, self.__z)
 
     def dessiner_partie(self, direction, decalage, partie):
         for element in partie:

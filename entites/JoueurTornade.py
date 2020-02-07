@@ -5,7 +5,7 @@ from entites.Tornade import Tornade
 
 
 class JoueurTornade(Joueur):
-    RECHARGEMENT = 1  # En seconde
+    RECHARGEMENT = 3  # En seconde
 
     def __init__(self, touches, couleur, nb_coeurs):
         super().__init__(touches, couleur, nb_coeurs)

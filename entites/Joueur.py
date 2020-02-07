@@ -15,7 +15,7 @@ from interfaces.hud.HudVie import HudVie
 class Joueur:
     NB_SAUT_MAX = 1
     RECTANGLE_COLLISION = pygame.Rect(16, 16, 62, 70)
-    RECTANGLE_COLLISION_ACCROUPI = pygame.Rect(24, 25, 76, 61)
+    RECTANGLE_COLLISION_ACCROUPI = pygame.Rect(24, 25, 54, 61)
     TEMPS_SUBIT_TORNADE = 2  # En seconde
 
     __count = 0
@@ -23,6 +23,7 @@ class Joueur:
     def __init__(self, touches, couleur, nb_coeurs):
         # Private
         Joueur.__count += 1
+        self.__attente_releve = False
         self.__vies = nb_coeurs
         self.__sprite = Images().charger_image(f'{CHEMIN_SPRITE}dino-{couleur}.png')
         self.__hud = HudVie(self.__vies, couleur)
@@ -95,6 +96,16 @@ class Joueur:
         self.__deplacement[0] = round(self.__deplacement[0] * 10**precision) / 10**precision
         self.__deplacement[1] = round(self.__deplacement[1] * 10**precision) / 10**precision
 
+    def __gestion_releve(self):
+        self.__accroupi = False
+
+        if Jeu.Jeu().collisions(self, 0):
+            self.__accroupi = True
+        else:
+            self.__anim_active = self.__anim_attente
+            self.__vitesse += 100
+            self.__attente_releve = False
+
     def maj(self, delta):
         jeu = Jeu.Jeu()
         if self.__vies <= 0:
@@ -102,6 +113,9 @@ class Joueur:
         elif Joueur.__count == 1:
             jeu.fin(self._couleur)
             return
+
+        if self.__attente_releve:
+            self.__gestion_releve()
 
         if self._subit_tornade <= 0:
             if self.__deplacement[0] or not self.__accroupi:
@@ -286,11 +300,10 @@ class Joueur:
         self.__maj_animation()
 
     def accroupir(self):
-        self.__accroupi = True
-        self.__anim_active = self.__anim_accroupi
-        self.__vitesse -= 100
+        if not self.__accroupi:
+            self.__accroupi = True
+            self.__anim_active = self.__anim_accroupi
+            self.__vitesse -= 100
 
     def relever(self):
-        self.__accroupi = False
-        self.__anim_active = self.__anim_attente
-        self.__vitesse += 100
+        self.__attente_releve = True

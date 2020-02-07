@@ -137,7 +137,10 @@ class Joueur:
             self.__anim_active.ajouter_temps(delta)
             if self.__anim_active.est_finie():
                 self.__anim_active.reinitialiser()
-                self.__anim_active = self.__anim_attente
+                if self.__accroupi:
+                    self.__anim_active = self.__anim_accroupi
+                else:
+                    self.__anim_active = self.__anim_attente
 
         # Mouvement Y
         self.__rect = self.__rect.move(0, self.__vitesse * self.__deplacement[1] * delta)
